@@ -5,7 +5,10 @@ class DoneTasks extends Component {
 	render() {
 		return (
 			<div className='done-tasks'>
-				<Menu />
+				<Menu
+					updateMenuState={this.props.updateMenuState}
+					menuOpen={this.props.menuOpen}
+				/>
 				<h1>DoneTasks</h1>
 			</div>
 		);

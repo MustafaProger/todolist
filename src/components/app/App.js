@@ -5,28 +5,54 @@ import DoneTasks from "../../pages/doneTasks/DoneTasks";
 import AboutAuthor from "../../pages/aboutAuthor/AboutAuthor";
 
 import "./App.css";
+import { Component } from "react";
 
-function App() {
-	return (
-		<div className='App'>
-			<BrowserRouter>
-				<Routes>
-					<Route
-						path='/'
-						element={<Tasks />}
-					/>
-					<Route
-						path='/donetasks'
-						element={<DoneTasks />}
-					/>
-					<Route
-						path='/about-author'
-						element={<AboutAuthor />}
-					/>
-				</Routes>
-			</BrowserRouter>
-		</div>
-	);
+class App extends Component {
+	state = {
+		menuOpen: false,
+	};
+
+	updateMenuState = (bool) => {
+		return this.setState({ menuOpen: bool });
+	};
+
+	render() {
+		return (
+			<div className='App'>
+				<BrowserRouter>
+					<Routes>
+						<Route
+							path='/'
+							element={
+								<Tasks
+									updateMenuState={this.updateMenuState}
+									menuOpen={this.state.menuOpen}
+								/>
+							}
+						/>
+						<Route
+							path='/donetasks'
+							element={
+								<DoneTasks
+									updateMenuState={this.updateMenuState}
+									menuOpen={this.state.menuOpen}
+								/>
+							}
+						/>
+						<Route
+							path='/about-author'
+							element={
+								<AboutAuthor
+									updateMenuState={this.updateMenuState}
+									menuOpen={this.state.menuOpen}
+								/>
+							}
+						/>
+					</Routes>
+				</BrowserRouter>
+			</div>
+		);
+	}
 }
 
 export default App;
