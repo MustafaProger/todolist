@@ -8,10 +8,15 @@ import AddTask from "./addTask/AddTask";
 class Tasks extends Component {
 	state = {
 		countTasks: 0,
+		addTask: true,
+	};
+
+	onClickAddСancel = () => {
+		this.setState(({ addTask }) => ({ addTask: !addTask }));
 	};
 
 	render() {
-		const { countTasks } = this.state;
+		const { countTasks, addTask } = this.state;
 
 		return (
 			<div className='tasks'>
@@ -52,7 +57,10 @@ class Tasks extends Component {
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
-					<AddTask/>
+					<AddTask
+						addTaskState={addTask}
+						addTaskFunc={this.onClickAddСancel}
+					/>
 				</div>
 			</div>
 		);
