@@ -1,10 +1,10 @@
 .menu {
-
 	li a {
 		display: flex;
 		align-items: center;
 		gap: 6px;
 	}
+
 	#menuToggle {
 		display: block;
 		position: fixed;
@@ -20,7 +20,7 @@
 		text-decoration: none;
 		color: #232323;
 		fill: #232323;
-		transition: all 0.3s ease;
+		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 	}
 
 	#menuToggle a:hover,
@@ -58,7 +58,6 @@
 		transform-origin: 4px 0px;
 		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
 			background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
-		transform: all 0.3s;
 	}
 	/* 
 	#menuToggle span:first-child {

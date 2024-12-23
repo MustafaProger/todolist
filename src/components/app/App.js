@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Tasks from "../../pages/Tasks/Tasks";
+import Tasks from "../../pages/tasks/Tasks";
 import DoneTasks from "../../pages/doneTasks/DoneTasks";
 import AboutAuthor from "../../pages/aboutAuthor/AboutAuthor";
 
