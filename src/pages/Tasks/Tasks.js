@@ -3,13 +3,13 @@ import Menu from "../../components/menu/Menu";
 import CurrentDate from "./currentDate/CurrentDate";
 
 import "./Tasks.scss";
+import AddTask from "./addTask/AddTask";
 
 class Tasks extends Component {
 	state = {
 		countTasks: 0,
 	};
 
-	
 	render() {
 		const { countTasks } = this.state;
 
@@ -52,6 +52,7 @@ class Tasks extends Component {
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
+					<AddTask/>
 				</div>
 			</div>
 		);
