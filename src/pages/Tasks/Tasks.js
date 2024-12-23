@@ -8,7 +8,7 @@ import AddTask from "./addTask/AddTask";
 class Tasks extends Component {
 	state = {
 		countTasks: 0,
-		addTask: true,
+		addTask: false,
 	};
 
 	onClickAddСancel = () => {
