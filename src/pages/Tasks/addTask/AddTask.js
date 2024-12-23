@@ -1,6 +1,7 @@
 import { Component, createRef } from "react";
 import "./AddTask.scss";
 import Flag from "../../../assets/icon/flag";
+import Task from "../task/Task";
 
 class AddTask extends Component {
 	state = {
@@ -18,7 +19,7 @@ class AddTask extends Component {
 
 	handleImportanceChange = (value) => {
 		this.setState({ importance: value, isOpen: false });
-        this.props.updateStatePriority(value);
+		this.props.updateStatePriority(value);
 	};
 
 	toggleDropdown = () => {
@@ -66,12 +67,9 @@ class AddTask extends Component {
 												key={option.value}
 												onClick={(e) => [
 													this.handleImportanceChange(option.value),
-													// this.props.updateState("importance", option),
-                                                    console.log(e.currentTarget)
 												]}
 												className='dropdown-item'>
 												{option.icon}
-                                                {/* {console.log(option.value)} */}
 												<span>{option.label}</span>
 											</li>
 										))}
@@ -85,7 +83,11 @@ class AddTask extends Component {
 								onClick={this.props.addTaskFunc}>
 								Cancel
 							</button>
-							<button className='add-task__form__buttons__add'>Add Task</button>
+							<button
+								className='add-task__form__buttons__add'
+								onClick={this.props.onTask}>
+								Add Task
+							</button>
 						</div>
 					</div>
 				) : (

@@ -11,7 +11,8 @@ class Tasks extends Component {
 		addTask: false,
 		task: "",
 		description: "",
-		importance: "Priority"
+		importance: "Priority",
+		tasks: [],
 	};
 
 	onClickAddСancel = () => {
@@ -24,7 +25,31 @@ class Tasks extends Component {
 
 	updateStatePriority = (value) => {
 		this.setState({ importance: value });
-	}
+	};
+
+	onTask = () => {
+		const { task, description, tasks } = this.state;
+
+		// Проверка на пустую задачу
+		if (!task.trim()) {
+			alert("Task name cannot be empty.");
+			return;
+		}
+
+		// Добавляем задачу в массив
+		const newTask = {
+			id: Date.now(), // Уникальный идентификатор задачи
+			task,
+			description,
+		};
+		this.setState({
+			tasks: [...tasks, newTask], // Обновляем массив задач
+			task: "",
+			description: "",
+			countTasks: tasks.length + 1, // Увеличиваем счетчик задач
+			addTask: false, // Закрываем форму
+		});
+	};
 
 	render() {
 		const { countTasks, addTask } = this.state;
@@ -51,16 +76,16 @@ class Tasks extends Component {
 								stroke='none'>
 								<path
 									d='M622 1239 c-82 -10 -121 -23 -206 -67 -133 -69 -247 -212 -291 -367
--23 -77 -23 -220 -1 -304 52 -202 215 -367 421 -426 77 -23 220 -23 304 -1
-202 52 367 215 426 421 23 77 23 220 1 304 -75 289 -358 479 -654 440z m209
--105 c158 -47 280 -156 340 -305 31 -76 38 -224 14 -304 -47 -163 -153 -283
--306 -347 -46 -19 -73 -22 -174 -22 -102 -1 -128 3 -177 22 -138 55 -248 163
--299 292 -45 117 -36 287 23 405 65 130 209 243 338 268 60 11 189 6 241 -9z'
+	-23 -77 -23 -220 -1 -304 52 -202 215 -367 421 -426 77 -23 220 -23 304 -1
+	202 52 367 215 426 421 23 77 23 220 1 304 -75 289 -358 479 -654 440z m209
+	-105 c158 -47 280 -156 340 -305 31 -76 38 -224 14 -304 -47 -163 -153 -283
+	-306 -347 -46 -19 -73 -22 -174 -22 -102 -1 -128 3 -177 22 -138 55 -248 163
+	-299 292 -45 117 -36 287 23 405 65 130 209 243 338 268 60 11 189 6 241 -9z'
 								/>
 								<path
 									d='M940 843 c-8 -3 -88 -78 -177 -166 l-162 -161 -69 66 c-54 53 -74 66
--91 61 -28 -7 -45 -38 -32 -60 15 -29 177 -183 192 -183 7 0 100 87 206 193
-164 163 192 195 186 215 -6 26 -31 42 -53 35z'
+	-91 61 -28 -7 -45 -38 -32 -60 15 -29 177 -183 192 -183 7 0 100 87 206 193
+	164 163 192 195 186 215 -6 26 -31 42 -53 35z'
 								/>
 							</g>
 						</svg>
@@ -68,11 +93,28 @@ class Tasks extends Component {
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
+
+					{/* Список задач */}
+					<div className='tasks-list'>
+						{this.state.tasks.map(({ id, task, description }) => (
+							<div
+								key={id}
+								className='task-item'>
+								<h3>{task}</h3>
+								<p>{description}</p>
+							</div>
+						))}
+					</div>
+
+					{/* Кнопка Add Task */}
 					<AddTask
 						addTaskState={addTask}
 						addTaskFunc={this.onClickAddСancel}
 						updateState={this.updateState}
 						updateStatePriority={this.updateStatePriority}
+						task={this.state.task}
+						description={this.state.description}
+						onTask={this.onTask}
 					/>
 				</div>
 			</div>
