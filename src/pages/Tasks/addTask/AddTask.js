@@ -18,6 +18,7 @@ class AddTask extends Component {
 
 	handleImportanceChange = (value) => {
 		this.setState({ importance: value, isOpen: false });
+        this.props.updateStatePriority(value);
 	};
 
 	toggleDropdown = () => {
@@ -41,12 +42,14 @@ class AddTask extends Component {
 							type='text'
 							className='add-task__form__input'
 							placeholder='Task Name'
+							onChange={(e) => this.props.updateState("task", e)}
 						/>
 						<textarea
 							className='add-task__form__textarea'
 							placeholder='Description'
 							ref={this.textareaRef}
 							onInput={this.autoResizeTextarea}
+							onChange={(e) => this.props.updateState("description", e)}
 						/>
 						<div className='add-task__form__importance'>
 							<div
@@ -61,11 +64,14 @@ class AddTask extends Component {
 										{options.map((option) => (
 											<li
 												key={option.value}
-												onClick={() =>
-													this.handleImportanceChange(option.value)
-												}
+												onClick={(e) => [
+													this.handleImportanceChange(option.value),
+													// this.props.updateState("importance", option),
+                                                    console.log(e.currentTarget)
+												]}
 												className='dropdown-item'>
 												{option.icon}
+                                                {/* {console.log(option.value)} */}
 												<span>{option.label}</span>
 											</li>
 										))}

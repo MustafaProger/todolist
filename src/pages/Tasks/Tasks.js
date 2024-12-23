@@ -9,11 +9,22 @@ class Tasks extends Component {
 	state = {
 		countTasks: 0,
 		addTask: false,
+		task: "",
+		description: "",
+		importance: "Priority"
 	};
 
 	onClickAddСancel = () => {
 		this.setState(({ addTask }) => ({ addTask: !addTask }));
 	};
+
+	updateState = (prop, event) => {
+		this.setState({ [prop]: event.target.value });
+	};
+
+	updateStatePriority = (value) => {
+		this.setState({ importance: value });
+	}
 
 	render() {
 		const { countTasks, addTask } = this.state;
@@ -60,6 +71,8 @@ class Tasks extends Component {
 					<AddTask
 						addTaskState={addTask}
 						addTaskFunc={this.onClickAddСancel}
+						updateState={this.updateState}
+						updateStatePriority={this.updateStatePriority}
 					/>
 				</div>
 			</div>
