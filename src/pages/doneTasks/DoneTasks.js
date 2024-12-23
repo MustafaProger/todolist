@@ -1,6 +1,8 @@
 import { Component } from "react";
 import Menu from "../../components/menu/Menu";
 
+import './DoneTasks.scss'
+
 class DoneTasks extends Component {
 	render() {
 		return (

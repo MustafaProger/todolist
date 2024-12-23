@@ -4,7 +4,7 @@ import Tasks from "../../pages/Tasks/Tasks";
 import DoneTasks from "../../pages/doneTasks/DoneTasks";
 import AboutAuthor from "../../pages/aboutAuthor/AboutAuthor";
 
-import "./App.css";
+import "./App.scss";
 import { Component } from "react";
 
 class App extends Component {
