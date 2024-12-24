@@ -17,7 +17,7 @@ class Tasks extends Component {
 			updateState,
 			updateStatePriority,
 			onTask,
-			removeOrCompletedTask,
+			onActionWithTask,
 			menuOpen,
 			updateMenuState,
 		} = this.props;
@@ -36,7 +36,7 @@ class Tasks extends Component {
 					<Task
 						clazz={'tasks-list'}
 						tasks={tasks}
-						removeOrCompletedTask={removeOrCompletedTask}
+						onActionWithTask={onActionWithTask}
 					/>
 					<AddTask
 						addTaskState={addTask}

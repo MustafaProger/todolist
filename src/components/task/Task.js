@@ -28,7 +28,7 @@ class Task extends Component {
 								<div
 									className='importance-circle'
 									onClick={() =>
-										this.props.removeOrCompletedTask(id, "completed")
+										this.props.onActionWithTask(id, "completed")
 									}
 									style={{
 										border: `2px solid ${importanceColors[importance]}`,
@@ -47,7 +47,7 @@ class Task extends Component {
 										src={trash}
 										alt='trash'
 										onClick={() =>
-											this.props.removeOrCompletedTask(id, "remove")
+											this.props.onActionWithTask(id, "remove")
 										}
 									/>
 								</div>
@@ -89,12 +89,15 @@ class Task extends Component {
 										src={trash}
 										alt='trash'
 										onClick={() =>
-											this.props.removeOrCompletedTask(id, "remove")
+											this.props.onActionWithTask(id, "remove-completed")
 										}
 									/>
 									<img
 										src={refresh}
 										alt='refresh'
+										onClick={() =>
+											this.props.onActionWithTask(id, "refresh")
+										}
 									/>
 								</div>
 							</div>

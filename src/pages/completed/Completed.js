@@ -13,7 +13,7 @@ class Completed extends Component {
 			updateMenuState,
 			completedTasksCount,
 			completedTasks,
-			removeOrCompletedTask
+			onActionWithTask
 
 		} = this.props;
 		return (
@@ -36,7 +36,7 @@ class Completed extends Component {
 					<Task
 						clazz={'completed-tasks-list'}
 						tasks={completedTasks}
-						removeOrCompletedTask={removeOrCompletedTask}
+						onActionWithTask={onActionWithTask}
 					/>
 				</div>
 			</div>

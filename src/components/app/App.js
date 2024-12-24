@@ -79,23 +79,37 @@ class App extends Component {
 		});
 	};
 
-	removeOrCompletedTask = (id, removeOrCompleted) => {
+	onActionWithTask = (id, action) => {
 		this.setState(({ tasks, completedTasks }) => {
 			const newArr = tasks.filter((item) => item.id !== id);
 			const completedTask = tasks.find((item) => item.id === id);
+			const removeCompletedTask = completedTasks.filter((item) => item.id !== id);
+			const transferCompletedTask = completedTasks.filter((item) => item.id === id);
 
-			if (removeOrCompleted === "remove") {
+			if (action === "remove") {
 				return {
 					tasks: newArr,
 					countTasks: tasks.length - 1,
 				};
-			} else if (removeOrCompleted === "completed") {
+			} else if (action === "completed") {
 				return {
 					tasks: newArr,
 					completedTasks: [...completedTasks, completedTask],
 					countTasks: tasks.length - 1,
 					completedTasksCount: completedTasks.length + 1,
 				};
+			} else if (action === "remove-completed") {
+				return {
+					completedTasks: removeCompletedTask,
+					completedTasksCount: completedTasks.length - 1,
+				};
+			} else if (action === 'refresh') {
+				return  {
+					tasks: [...tasks, ...transferCompletedTask],
+					countTasks: tasks.length + 1,
+					completedTasks: removeCompletedTask,
+					completedTasksCount: completedTasks.length - 1,
+				}
 			}
 		});
 	};
@@ -118,7 +132,7 @@ class App extends Component {
 									updateState={this.updateState}
 									updateStatePriority={this.updateStatePriority}
 									onTask={this.onTask}
-									removeOrCompletedTask={this.removeOrCompletedTask}
+									onActionWithTask={this.onActionWithTask}
 									updateMenuState={this.updateMenuState}
 									menuOpen={menuOpen}
 								/>
@@ -128,7 +142,7 @@ class App extends Component {
 							path='/completed'
 							element={
 								<Completed
-									removeOrCompletedTask={this.removeOrCompletedTask}
+									onActionWithTask={this.onActionWithTask}
 									completedTasks={completedTasks}
 									completedTasksCount={completedTasksCount}
 									updateMenuState={this.updateMenuState}
