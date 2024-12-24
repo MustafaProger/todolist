@@ -1,19 +1,32 @@
 import { Component } from "react";
 import Menu from "../../components/menu/Menu";
 import CurrentDate from "../../components/currentDate/CurrentDate";
-import AddTask from '../../components/addTask/AddTask'
+import AddTask from "../../components/addTask/AddTask";
 import Task from "../../components/task/Task";
 
 import "./Tasks.scss";
 
 class Tasks extends Component {
 	state = {
-		countTasks: 0,
+		countTasks: 2,
 		addTask: false,
 		task: "",
 		description: "",
 		importance: "Priority",
-		tasks: [],
+		tasks: [
+			{
+				id: 1,
+				task: "🕋 Read book about Tawhid",
+				description: "read the chapter 45",
+				importance: "Medium",
+			},
+			{
+				id: 2,
+				task: "💻 Programming",
+				description: "Work with web-site",
+				importance: "High",
+			},
+		],
 	};
 
 	onClickAddСancel = () => {
@@ -47,7 +60,7 @@ class Tasks extends Component {
 			tasks: [...tasks, newTask],
 			task: "",
 			description: "",
-			countTasks: tasks.length + 1, 
+			countTasks: tasks.length + 1,
 			addTask: false,
 		});
 	};
@@ -130,8 +143,6 @@ class Tasks extends Component {
 						addTaskFunc={this.onClickAddСancel}
 						updateState={this.updateState}
 						updateStatePriority={this.updateStatePriority}
-						task={this.state.task}
-						description={this.state.description}
 						onTask={this.onTask}
 					/>
 				</div>

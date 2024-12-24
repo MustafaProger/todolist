@@ -7,7 +7,7 @@
 .task-item {
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
-	padding: 10px;
+	padding: 20px 15px;
 	background: #fff;
 	position: relative;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -26,9 +26,6 @@
 
 .task-header {
 	display: grid;
-	// align-items: center;
-	// justify-content: space-between;
-	// position: relative;
 	grid-template-columns: 20px auto 1fr;
 	gap: 0 10px;
 }
