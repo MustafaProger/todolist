@@ -36,27 +36,34 @@
 	border-radius: 50%;
 	margin-right: 10px;
 	cursor: pointer;
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: #fff;
 	font-size: 12px;
-	.checkmark {
-		color: #fff;
-		font-size: 12px;
+	svg {
+		transition: all 0.2s;
+		opacity: 0;
+	}
+	&:hover {
+		svg {
+			opacity: 1;
+		}
 	}
 }
 
 .menu-trigger {
-	cursor: pointer;
 	font-size: 18px;
 	padding: 0 5px;
 	transition: color 0.2s ease;
 	text-align-last: left;
-	display: inline;
 	margin: 0 0 0 auto;
-	&:hover {
-		color: #0073e6;
+	img {
+		cursor: pointer;
+	}
+	img:nth-child(2) {
+		margin-left: 15px;
 	}
 }
 

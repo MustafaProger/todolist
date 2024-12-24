@@ -120,17 +120,6 @@ class Tasks extends Component {
 					<CurrentDate />
 					<hr className='divider' />
 
-					{/* Список задач */}
-					{/* <div className='tasks-list'>
-						{this.state.tasks.map(({ id, task, description }) => (
-							<div
-								key={id}
-								className='task-item'>
-								<h3>{task}</h3>
-								<p>{description}</p>
-							</div>
-						))}
-					</div> */}
 					<Task
 						tasks={this.state.tasks}
 						updateTask={this.updateTask}

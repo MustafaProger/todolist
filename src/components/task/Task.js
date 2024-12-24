@@ -1,27 +1,14 @@
 import { Component } from "react";
 import "./Task.scss";
+import Check from "../../assets/icon/check";
+
+import pencil from '../../assets/icon/pencil.svg';
+import trash from '../../assets/icon/trash.svg';
+
 
 class Task extends Component {
-	// state = {
-	// 	activeTaskId: null, // ID задачи, у которой открыто меню
-	// };
-
-	// // Открытие/закрытие меню для задачи
-	// toggleMenu = (id) => {
-	// 	this.setState((prevState) => ({
-	// 		activeTaskId: prevState.activeTaskId === id ? null : id,
-	// 	}));
-	// };
-
-	// // Метод для изменения важности задачи
-	// changeImportance = (id, newImportance) => {
-	// 	this.props.updateTask(id, { importance: newImportance });
-	// 	this.setState({ activeTaskId: null }); // Закрыть меню после выбора
-	// };
-
 	render() {
 		const { tasks } = this.props;
-		// const { activeTaskId } = this.state;
 
 		const importanceColors = {
 			Priority: "#CDCDCD",
@@ -35,48 +22,22 @@ class Task extends Component {
 				{tasks.map(({ id, task, description, importance }) => (
 					<div
 						key={id}
-						className='task-item'
-						// onMouseLeave={() => this.setState({ activeTaskId: null })} // Закрыть меню при уходе курсора
-					>
+						className='task-item'>
 						<div className='task-header'>
 							<div
 								className='importance-circle'
 								style={{
 									border: `2px solid ${importanceColors[importance]}`,
-								}}></div>
+								}}>
+									<Check color={importanceColors[importance]}/>
+								</div>
 							<h3 className='task-name'>
 								{task.length > 80 ? task.slice(0, 80) + "..." : task}
 							</h3>
-							<div
-								className='menu-trigger'
-								// onClick={() => this.toggleMenu(id)}
-							>
-								⋮
+							<div className='menu-trigger'>
+								<img src={pencil} alt="pencil"/>
+								<img src={trash} alt="trash"/>
 							</div>
-							{/* {activeTaskId === id && (
-								<div className='task-menu'>
-									<button onClick={() => this.props.editTask(id)}>
-										Edit Task
-									</button>
-									<button onClick={() => this.props.editTask(id)}>
-										Delete Task
-									</button>
-									<div className='importance-options'>
-										{Object.keys(importanceColors).map((level) => (
-											<button
-												key={level}
-												onClick={() => this.changeImportance(id, level)}>
-												<span
-													className='importance-circle'
-													style={{
-														backgroundColor: importanceColors[level],
-													}}></span>
-												{level}
-											</button>
-										))} 
-									</div>
-								</div>
-							)}*/}
 						</div>
 						<p className='task-description'>
 							{description.length > 80
