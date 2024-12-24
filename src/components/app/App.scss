@@ -22,4 +22,13 @@
 	.container.menu-active {
 		padding-left: 200px;
 	}
+
+	.count-tasks {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		margin: 15px 0 30px 0;
+		color: grey;
+		fill: grey;
+	}
 }

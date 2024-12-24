@@ -17,42 +17,50 @@ class Task extends Component {
 		};
 
 		return (
-			<div className='tasks-list'>
-				{tasks.map(({ id, task, description, importance }) => (
-					<div
-						key={id}
-						className='task-item'>
-						<div className='task-header'>
-							<div
-								className='importance-circle'
-								style={{
-									border: `2px solid ${importanceColors[importance]}`,
-								}}>
-								<Check color={importanceColors[importance]} />
+			<>
+				<div className='tasks-list'>
+					{tasks.map(({ id, task, description, importance }) => (
+						<div
+							key={id}
+							className='task-item'>
+							<div className='task-header'>
+								<div
+									className='importance-circle'
+									onClick={() =>
+										this.props.removeOrCompletedTask(id, "completed")
+									}
+									style={{
+										border: `2px solid ${importanceColors[importance]}`,
+									}}>
+									<Check color={importanceColors[importance]} />
+								</div>
+								<h3 className='task-name'>
+									{task.length > 80 ? task.slice(0, 80) + "..." : task}
+								</h3>
+								<div className='menu-trigger'>
+									<img
+										src={pencil}
+										alt='pencil'
+									/>
+									<img
+										src={trash}
+										alt='trash'
+										onClick={() =>
+											this.props.removeOrCompletedTask(id, "remove")
+										}
+									/>
+								</div>
 							</div>
-							<h3 className='task-name'>
-								{task.length > 80 ? task.slice(0, 80) + "..." : task}
-							</h3>
-							<div className='menu-trigger'>
-								<img
-									src={pencil}
-									alt='pencil'
-								/>
-								<img
-									src={trash}
-									alt='trash'
-									onClick={() => this.props.removeTask(id)}
-								/>
-							</div>
+							<p className='task-description'>
+								{description.length > 80
+									? description.slice(0, 80) + "..."
+									: description}
+							</p>
 						</div>
-						<p className='task-description'>
-							{description.length > 80
-								? description.slice(0, 80) + "..."
-								: description}
-						</p>
-					</div>
-				))}
-			</div>
+					))}
+				</div>
+				<div className='competed-tasks-list'></div>
+			</>
 		);
 	}
 }
