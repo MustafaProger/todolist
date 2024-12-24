@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Tasks from "../../pages/tasks/Tasks";
-import DoneTasks from "../../pages/doneTasks/DoneTasks";
+import Completed from "../../pages/completed/Completed";
 import AboutAuthor from "../../pages/aboutAuthor/AboutAuthor";
 
 import "./App.scss";
@@ -125,9 +125,10 @@ class App extends Component {
 							}
 						/>
 						<Route
-							path='/donetasks'
+							path='/completed'
 							element={
-								<DoneTasks
+								<Completed
+									removeOrCompletedTask={this.removeOrCompletedTask}
 									completedTasks={completedTasks}
 									completedTasksCount={completedTasksCount}
 									updateMenuState={this.updateMenuState}

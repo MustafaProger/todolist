@@ -1,26 +1,20 @@
 import { Component } from "react";
 import Menu from "../../components/menu/Menu";
-
-import "./DoneTasks.scss";
-import check from '../../assets/icon/check-circle.svg'
 import CurrentDate from "../../components/currentDate/CurrentDate";
+
+import "./Completed.scss";
+import check from '../../assets/icon/check-circle.svg'
 import Task from "../../components/task/Task";
 
-
-class DoneTasks extends Component {
+class Completed extends Component {
 	render() {
 		const {
-			tasks,
-			countTasks,
-			addTask,
-			onClickAddСancel,
-			updateState,
-			updateStatePriority,
-			onTask,
-			removeOrCompletedTask,
 			menuOpen,
 			updateMenuState,
-			completedTasksCount
+			completedTasksCount,
+			completedTasks,
+			removeOrCompletedTask
+
 		} = this.props;
 		return (
 			<div className='done-tasks'>
@@ -35,18 +29,19 @@ class DoneTasks extends Component {
 							src={check}
 							alt=''
 						/>
-						{completedTasksCount} tasks completed
+						{completedTasksCount} completed
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
-					{/* <Task
-						tasks={tasks}
+					<Task
+						clazz={'completed-tasks-list'}
+						tasks={completedTasks}
 						removeOrCompletedTask={removeOrCompletedTask}
-					/> */}
+					/>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default DoneTasks;
+export default Completed;

@@ -4,10 +4,11 @@ import Check from "../../assets/icon/check";
 
 import pencil from "../../assets/icon/pencil.svg";
 import trash from "../../assets/icon/trash.svg";
+import refresh from '../../assets/icon/refresh.svg'
 
 class Task extends Component {
-	render() {
-		const { tasks } = this.props;
+	renderItem = () => {
+		const { tasks, clazz } = this.props;
 
 		const importanceColors = {
 			Priority: "#CDCDCD",
@@ -16,8 +17,8 @@ class Task extends Component {
 			High: "#FF6247",
 		};
 
-		return (
-			<>
+		if (clazz === "tasks-list") {
+			return tasks.length > 0 ? (
 				<div className='tasks-list'>
 					{tasks.map(({ id, task, description, importance }) => (
 						<div
@@ -59,9 +60,60 @@ class Task extends Component {
 						</div>
 					))}
 				</div>
-				<div className='competed-tasks-list'></div>
-			</>
-		);
+			) : null;
+		} else if (clazz === "completed-tasks-list") {
+			return tasks.length > 0 ? (
+				<div className='completed-tasks-list'>
+					{tasks.map(({ id, task, description, importance }) => (
+						<div
+							key={id}
+							className='task-item completed'
+							style={{
+								borderLeft: `5px solid ${importanceColors[importance]}`,
+							}}>
+							{" "}
+							{/* добавлен класс "completed" */}
+							<div className='task-header'>
+								<div
+									className='importance-circle'
+									style={{
+										border: `2px solid ${importanceColors[importance]}`,
+									}}>
+									<Check color={importanceColors[importance]} />
+								</div>
+								<h3 className='task-name'>
+									{task.length > 80 ? task.slice(0, 80) + "..." : task}
+								</h3>
+								<div className='menu-trigger'>
+									<img
+										src={trash}
+										alt='trash'
+										onClick={() =>
+											this.props.removeOrCompletedTask(id, "remove")
+										}
+									/>
+									<img
+										src={refresh}
+										alt='refresh'
+									/>
+								</div>
+							</div>
+							<p className='task-description'>
+								{description.length > 80
+									? description.slice(0, 80) + "..."
+									: description}
+							</p>
+						</div>
+					))}
+				</div>
+			) : (
+				<p>No completed tasks yet</p>
+			);
+		}
+	};
+
+	render() {
+		return <>{this.renderItem()}</>;
 	}
 }
 

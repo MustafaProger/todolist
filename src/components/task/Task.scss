@@ -1,4 +1,5 @@
-.tasks-list {
+.tasks-list,
+.completed-tasks-list {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -22,7 +23,6 @@
 		text-decoration: line-through;
 	}
 }
-
 
 .task-header {
 	display: grid;
@@ -105,4 +105,44 @@
 	color: #666;
 	font-size: 14px;
 	margin: 5px 0 0 30px;
+}
+
+.task-item.completed {
+	display: flex;
+	flex-direction: column;
+
+	&.completed {
+		text-decoration: line-through; /* зачёркивание текста для завершённых задач */
+		opacity: 0.7; /* уменьшаем яркость для завершённых задач */
+	}
+
+	.task-header {
+		grid-template-columns: auto 1fr;
+	}
+
+	.importance-circle {
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		border: 2px solid #cdcdcd;
+		margin-right: 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		display: none;
+		opacity: 0;
+	}
+
+	.task-description {
+		color: #555;
+		margin-left: 0px;
+	}
+}
+
+.completed-tasks-list {
+	.task-item {
+		background-color: #f0f0f0; /* светлый фон для завершённых задач в списке */
+		border-left: 5px solid #5390f5; /* синий бордер для завершённых задач */
+	}
 }

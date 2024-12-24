@@ -34,6 +34,7 @@ class Tasks extends Component {
 					<CurrentDate />
 					<hr className='divider' />
 					<Task
+						clazz={'tasks-list'}
 						tasks={tasks}
 						removeOrCompletedTask={removeOrCompletedTask}
 					/>
