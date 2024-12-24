@@ -26,6 +26,12 @@ class Tasks extends Component {
 				description: "Work with web-site",
 				importance: "High",
 			},
+			{
+				id: 3,
+				task: "🏫 College",
+				description: "",
+				importance: "Low",
+			},
 		],
 	};
 
@@ -65,16 +71,15 @@ class Tasks extends Component {
 		});
 	};
 
-	updateTask = (id, updatedFields) => {
-		this.setState((prevState) => ({
-			tasks: prevState.tasks.map((task) =>
-				task.id === id ? { ...task, ...updatedFields } : task
-			),
-		}));
-	};
-
 	editTask = (id) => {
 		console.log("Edit task with ID:", id);
+	};
+
+	removeTask = (id) => {
+		this.setState(({ tasks }) => {
+			const newArr = tasks.filter((item) => item.id !== id);
+			return { tasks: newArr };
+		});
 	};
 
 	render() {
@@ -124,6 +129,7 @@ class Tasks extends Component {
 						tasks={this.state.tasks}
 						updateTask={this.updateTask}
 						editTask={this.editTask}
+						removeTask={this.removeTask}
 					/>
 
 					{/* Кнопка Add Task */}

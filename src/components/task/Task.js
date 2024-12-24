@@ -2,9 +2,8 @@ import { Component } from "react";
 import "./Task.scss";
 import Check from "../../assets/icon/check";
 
-import pencil from '../../assets/icon/pencil.svg';
-import trash from '../../assets/icon/trash.svg';
-
+import pencil from "../../assets/icon/pencil.svg";
+import trash from "../../assets/icon/trash.svg";
 
 class Task extends Component {
 	render() {
@@ -29,14 +28,21 @@ class Task extends Component {
 								style={{
 									border: `2px solid ${importanceColors[importance]}`,
 								}}>
-									<Check color={importanceColors[importance]}/>
-								</div>
+								<Check color={importanceColors[importance]} />
+							</div>
 							<h3 className='task-name'>
 								{task.length > 80 ? task.slice(0, 80) + "..." : task}
 							</h3>
 							<div className='menu-trigger'>
-								<img src={pencil} alt="pencil"/>
-								<img src={trash} alt="trash"/>
+								<img
+									src={pencil}
+									alt='pencil'
+								/>
+								<img
+									src={trash}
+									alt='trash'
+									onClick={() => this.props.removeTask(id)}
+								/>
 							</div>
 						</div>
 						<p className='task-description'>
