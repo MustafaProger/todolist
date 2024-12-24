@@ -1,7 +1,6 @@
 import { Component, createRef } from "react";
 import "./AddTask.scss";
-import Flag from "../../../assets/icon/flag";
-import Task from "../task/Task";
+import Flag from '../../assets/icon/flag';
 
 class AddTask extends Component {
 	state = {

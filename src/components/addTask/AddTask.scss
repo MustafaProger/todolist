@@ -125,7 +125,6 @@
 				padding: 10px;
 				background-color: #fff;
 				color: #333;
-
 				&:nth-child(1) {
 					font-weight: bold;
 					color: red;
@@ -187,13 +186,13 @@
 			}
 			.dropdown-list {
 				display: flex;
-				flex-direction: column;
+				// flex-direction: column;
 				list-style: none;
 				background-color: #fff;
 				border: 1px solid rgba(0, 0, 0, 0.1);
 				border-radius: 8px;
-				margin-top: 10px;
-				width: 130px;
+				margin-top: 20px;
+				max-width: 444px;
 				transition: all 0.3s;
 				.dropdown-item {
 					display: flex;
@@ -205,11 +204,11 @@
 					}
 
 					&:nth-child(1):hover {
-						border-radius: 7px 7px 0 0;
+						border-radius: 7px 0 0 7px;
 					}
 
 					&:nth-child(4):hover {
-						border-radius: 0 0 7px 7px;
+						border-radius: 0 7px 7px 0;
 					}
 				}
 			}

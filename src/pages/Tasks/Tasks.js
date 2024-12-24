@@ -1,9 +1,10 @@
 import { Component } from "react";
 import Menu from "../../components/menu/Menu";
-import CurrentDate from "./currentDate/CurrentDate";
+import CurrentDate from "../../components/currentDate/CurrentDate";
+import AddTask from '../../components/addTask/AddTask'
+import Task from "../../components/task/Task";
 
 import "./Tasks.scss";
-import AddTask from "./addTask/AddTask";
 
 class Tasks extends Component {
 	state = {
@@ -28,27 +29,39 @@ class Tasks extends Component {
 	};
 
 	onTask = () => {
-		const { task, description, tasks } = this.state;
+		const { task, description, tasks, importance } = this.state;
 
-		// Проверка на пустую задачу
 		if (!task.trim()) {
 			alert("Task name cannot be empty.");
 			return;
 		}
 
-		// Добавляем задачу в массив
 		const newTask = {
-			id: Date.now(), // Уникальный идентификатор задачи
+			id: Date.now(),
 			task,
 			description,
+			importance,
 		};
+
 		this.setState({
-			tasks: [...tasks, newTask], // Обновляем массив задач
+			tasks: [...tasks, newTask],
 			task: "",
 			description: "",
-			countTasks: tasks.length + 1, // Увеличиваем счетчик задач
-			addTask: false, // Закрываем форму
+			countTasks: tasks.length + 1, 
+			addTask: false,
 		});
+	};
+
+	updateTask = (id, updatedFields) => {
+		this.setState((prevState) => ({
+			tasks: prevState.tasks.map((task) =>
+				task.id === id ? { ...task, ...updatedFields } : task
+			),
+		}));
+	};
+
+	editTask = (id) => {
+		console.log("Edit task with ID:", id);
 	};
 
 	render() {
@@ -95,7 +108,7 @@ class Tasks extends Component {
 					<hr className='divider' />
 
 					{/* Список задач */}
-					<div className='tasks-list'>
+					{/* <div className='tasks-list'>
 						{this.state.tasks.map(({ id, task, description }) => (
 							<div
 								key={id}
@@ -104,7 +117,12 @@ class Tasks extends Component {
 								<p>{description}</p>
 							</div>
 						))}
-					</div>
+					</div> */}
+					<Task
+						tasks={this.state.tasks}
+						updateTask={this.updateTask}
+						editTask={this.editTask}
+					/>
 
 					{/* Кнопка Add Task */}
 					<AddTask
