@@ -97,35 +97,49 @@ class Task extends Component {
 										</h3>
 										<div className='menu-trigger'>
 											{clazz === "completed-tasks-list" ? null : (
-												<img
-													src={pencil}
-													alt='pencil'
-													onClick={() =>
-														this.startEditing(id, {
-															id,
-															task,
-															description,
-															importance,
-														})
-													}
-												/>
+												<>
+													<img
+														src={pencil}
+														alt='pencil'
+														onClick={() =>
+															this.startEditing(id, {
+																id,
+																task,
+																description,
+																importance,
+															})
+														}
+													/>
+													<img
+														src={trash}
+														alt='trash'
+														onClick={() =>
+															this.props.onActionWithTask(id, "remove")
+														}
+													/>
+												</>
 											)}
-											<img
-												src={trash}
-												alt='trash'
-												onClick={() =>
-													this.props.onActionWithTask(id, "remove")
-												}
-											/>
 
 											{clazz !== "completed-tasks-list" ? null : (
-												<img
-													src={refresh}
-													alt='refresh'
-													onClick={() =>
-														this.props.onActionWithTask(id, "refresh")
-													}
-												/>
+												<>
+													<img
+														src={refresh}
+														alt='refresh'
+														onClick={() =>
+															this.props.onActionWithTask(id, "refresh")
+														}
+													/>
+													<img
+														src={trash}
+														alt='trash'
+														onClick={() =>
+															this.props.onActionWithTask(
+																id,
+																"remove-completed"
+															)
+														}
+													/>
+												</>
 											)}
 										</div>
 									</div>

@@ -1,11 +1,13 @@
-import { Component } from "react";
+import { Component, createRef } from "react";
 import "./EditTask.scss";
+import Flag from '../../assets/icon/flag';  // Предполагаем, что иконки флагов в проекте уже есть
 
 class EditTask extends Component {
 	state = {
 		task: this.props.task, // Название задачи
 		description: this.props.description, // Описание задачи
 		importance: this.props.importance, // Приоритет задачи
+		isOpen: false, // Для управления открытием/закрытием селекта
 	};
 
 	handleChange = (prop, value) => {
@@ -13,6 +15,12 @@ class EditTask extends Component {
 	};
 
 	handleSave = () => {
+
+        if (!this.state.task.trim()) {
+			alert("Task name cannot be empty.");
+			return;
+		}
+
 		const updatedTask = {
 			task: this.state.task,
 			description: this.state.description,
@@ -21,8 +29,22 @@ class EditTask extends Component {
 		this.props.saveTask(updatedTask); // Сохраняем изменения
 	};
 
+	toggleDropdown = () => {
+		this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+	};
+
+	handleImportanceChange = (value) => {
+		this.setState({ importance: value, isOpen: false });
+	};
+
 	render() {
-		const { task, description, importance } = this.state;
+		const { task, description, importance, isOpen } = this.state;
+		const options = [
+			{ value: "Priority", label: "Priority", icon: <Flag theme='#CDCDCD' /> },
+			{ value: "Low", label: "Low", icon: <Flag theme='#5390F5' /> },
+			{ value: "Medium", label: "Medium", icon: <Flag theme='orange' /> },
+			{ value: "High", label: "High", icon: <Flag theme='#FF6247' /> },
+		];
 
 		return (
 			<div className='edit-task__form'>
@@ -37,31 +59,43 @@ class EditTask extends Component {
 					className='edit-task__form__textarea'
 					value={description}
 					onChange={(e) => this.handleChange("description", e.target.value)} // Используем onChange
-					placeholder='Task description'
+					placeholder='Description'
 				/>
 				<div className='edit-task__form__importance'>
-					<select
-						className='edit-task__form__importance__select'
-						value={importance}
-						onChange={(e) => this.handleChange("importance", e.target.value)} // Используем onChange
-					>
-						<option value='Low'>Low</option>
-						<option value='Medium'>Medium</option>
-						<option value='High'>High</option>
-					</select>
+					<div
+						className='custom-select'
+						onClick={this.toggleDropdown}>
+						<div className='selected-option'>
+							{options.find((option) => option.value === importance)?.icon}
+							<span>{importance}</span>
+						</div>
+						{isOpen && (
+							<ul className='dropdown-list'>
+								{options.map((option) => (
+									<li
+										key={option.value}
+										onClick={() => this.handleImportanceChange(option.value)}  // Обработчик изменения
+										className='dropdown-item'>
+										{option.icon}
+										<span>{option.label}</span>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
 				</div>
 				<div className='edit-task__form__buttons'>
-					<button
-						className='edit-task__form__buttons__add'
-						onClick={this.handleSave}
-					>
-						Save
-					</button>
 					<button
 						className='edit-task__form__buttons__cancel'
 						onClick={this.props.cancelEdit}
 					>
 						Cancel
+					</button>
+					<button
+						className='edit-task__form__buttons__add'
+						onClick={this.handleSave}
+					>
+						Save
 					</button>
 				</div>
 			</div>
