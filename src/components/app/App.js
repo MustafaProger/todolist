@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
 import AboutAuthor from "../../pages/aboutAuthor/AboutAuthor";
@@ -37,6 +36,7 @@ class App extends Component {
 		],
 		completedTasks: [],
 		completedTasksCount: 0,
+		editingTask: null,
 	};
 
 	updateMenuState = (bool) => {
@@ -83,8 +83,12 @@ class App extends Component {
 		this.setState(({ tasks, completedTasks }) => {
 			const newArr = tasks.filter((item) => item.id !== id);
 			const completedTask = tasks.find((item) => item.id === id);
-			const removeCompletedTask = completedTasks.filter((item) => item.id !== id);
-			const transferCompletedTask = completedTasks.filter((item) => item.id === id);
+			const removeCompletedTask = completedTasks.filter(
+				(item) => item.id !== id
+			);
+			const returnCompletedTask = completedTasks.filter(
+				(item) => item.id === id
+			);
 
 			if (action === "remove") {
 				return {
@@ -103,26 +107,54 @@ class App extends Component {
 					completedTasks: removeCompletedTask,
 					completedTasksCount: completedTasks.length - 1,
 				};
-			} else if (action === 'refresh') {
-				return  {
-					tasks: [...tasks, ...transferCompletedTask],
+			} else if (action === "refresh") {
+				return {
+					tasks: [...tasks, ...returnCompletedTask],
 					countTasks: tasks.length + 1,
 					completedTasks: removeCompletedTask,
 					completedTasksCount: completedTasks.length - 1,
-				}
+				};
 			}
 		});
 	};
 
+	editTaskFunc = (id, updatedTask) => {
+		// Логика обновления задачи в состоянии родительского компонента
+		const updatedTasks = this.state.tasks.map((task) =>
+			task.id === id ? { ...task, ...updatedTask } : task
+		);
+		this.setState({ tasks: updatedTasks });
+	};
+
+	onSaveTask = (updatedTask) => {
+		this.setState(({ tasks }) => ({
+			tasks: tasks.map((task) =>
+				task.id === updatedTask.id ? { ...task, ...updatedTask } : task
+			),
+		}));
+	};
+
+	cancelEdit = () => {
+		this.setState({ editingTask: null });
+	};
+
 	render() {
-		const { menuOpen, tasks, completedTasks, countTasks, addTask, completedTasksCount } = this.state;
+		const {
+			menuOpen,
+			tasks,
+			completedTasks,
+			countTasks,
+			addTask,
+			completedTasksCount,
+			editingTask,
+		} = this.state;
 
 		return (
-			<div className='App'>
+			<div className="App">
 				<BrowserRouter>
 					<Routes>
 						<Route
-							path='/'
+							path="/"
 							element={
 								<Tasks
 									tasks={tasks}
@@ -135,11 +167,14 @@ class App extends Component {
 									onActionWithTask={this.onActionWithTask}
 									updateMenuState={this.updateMenuState}
 									menuOpen={menuOpen}
+									editTaskFunc={this.editTaskFunc}
+									onSaveTask={this.onSaveTask}
+									editingTask={editingTask}
 								/>
 							}
 						/>
 						<Route
-							path='/completed'
+							path="/completed"
 							element={
 								<Completed
 									onActionWithTask={this.onActionWithTask}
@@ -150,9 +185,8 @@ class App extends Component {
 								/>
 							}
 						/>
-
 						<Route
-							path='/about-author'
+							path="/about-author"
 							element={
 								<AboutAuthor
 									updateMenuState={this.updateMenuState}

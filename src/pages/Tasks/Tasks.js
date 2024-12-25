@@ -20,23 +20,29 @@ class Tasks extends Component {
 			onActionWithTask,
 			menuOpen,
 			updateMenuState,
+			editTaskFunc,
+			onSaveTask,
+			editingTask  // Достаем из props
 		} = this.props;
 
 		return (
-			<div className='tasks'>
+			<div className="tasks">
 				<Menu updateMenuState={updateMenuState} menuOpen={menuOpen} />
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
-					<h1 className='title'>Tasks</h1>
-					<p className='count-tasks'>
-						<img src={check} alt=""/>
+					<h1 className="title">Tasks</h1>
+					<p className="count-tasks">
+						<img src={check} alt="" />
 						{countTasks} tasks
 					</p>
 					<CurrentDate />
-					<hr className='divider' />
+					<hr className="divider" />
 					<Task
-						clazz={'tasks-list'}
+						clazz={"tasks-list"}
 						tasks={tasks}
 						onActionWithTask={onActionWithTask}
+						editTaskFunc={editTaskFunc}
+						onSaveTask={onSaveTask}
+						editingTask={editingTask}
 					/>
 					<AddTask
 						addTaskState={addTask}
@@ -47,7 +53,7 @@ class Tasks extends Component {
 					/>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
