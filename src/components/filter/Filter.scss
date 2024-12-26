@@ -1,10 +1,31 @@
 .filtered {
-    .importance {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        span {
-            font-size: 25px;
-        }
-    }
+	.importance {
+		display: grid;
+		align-items: center;
+		grid-template-columns: 25px auto 1fr;
+		gap: 10px;
+		span {
+			font-size: 25px;
+		}
+	}
+
+	.filtered-task {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease, padding 0.3s ease;
+	
+		.no-task {
+			padding: 15px 0px 0px 30px;
+		}
+	}
+
+	.toggle-icon {
+		margin-left: auto;
+	}
+
+	.tasks-list {
+		margin: 30px 0 0 20px;
+		border-radius: 8px;
+		padding: 0;
+	}
 }
