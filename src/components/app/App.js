@@ -157,7 +157,7 @@ class App extends Component {
 
 		return (
 			<div className='App'>
-				<BrowserRouter>
+				<BrowserRouter basename="/todolist">
 					<Routes>
 						<Route
 							path='/'
