@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
-import AboutAuthor from "../../pages/filtersLabels/FiltersLabels";
+import FiltersLabels from "../../pages/filtersLabels/FiltersLabels";
 
 import "./App.scss";
 import { Component } from "react";
@@ -33,10 +33,17 @@ class App extends Component {
 				description: "",
 				importance: "Low",
 			},
+			{
+				id: 4,
+				task: "🗑️ Throw out the trash",
+				description: "",
+				importance: "Priority",
+			},
 		],
 		completedTasks: [],
 		completedTasksCount: 0,
 		editingTask: null,
+		filtered: [],
 	};
 
 	updateMenuState = (bool) => {
@@ -150,11 +157,11 @@ class App extends Component {
 		} = this.state;
 
 		return (
-			<div className="App">
+			<div className='App'>
 				<BrowserRouter>
 					<Routes>
 						<Route
-							path="/"
+							path='/'
 							element={
 								<Tasks
 									tasks={tasks}
@@ -174,7 +181,7 @@ class App extends Component {
 							}
 						/>
 						<Route
-							path="/completed"
+							path='/completed'
 							element={
 								<Completed
 									onActionWithTask={this.onActionWithTask}
@@ -186,11 +193,17 @@ class App extends Component {
 							}
 						/>
 						<Route
-							path="/filters-labels"
+							path='/filters-labels'
 							element={
-								<AboutAuthor
-									updateMenuState={this.updateMenuState}
+								<FiltersLabels
+									tasks={tasks}
+									countTasks={countTasks}
 									menuOpen={menuOpen}
+									updateMenuState={this.updateMenuState}
+									onActionWithTask={this.onActionWithTask}
+									editTaskFunc={this.editTaskFunc}
+									onSaveTask={this.onSaveTask}
+									editingTask={editingTask}
 								/>
 							}
 						/>

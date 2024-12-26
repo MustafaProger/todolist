@@ -21,11 +21,13 @@ class EditTask extends Component {
 		}
 
 		const updatedTask = {
+			id: this.props.id, // передаем ID задачи для обновления
 			task: this.state.task,
 			description: this.state.description,
 			importance: this.state.importance,
 		};
 
+		// Вызываем пропс saveTask, чтобы обновить задачу
 		this.props.saveTask(updatedTask);
 	};
 
