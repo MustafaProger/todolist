@@ -9,7 +9,7 @@ import { Component } from "react";
 class App extends Component {
 	state = {
 		menuOpen: false,
-		countTasks: 3,
+		countTasks: 4,
 		addTask: false,
 		task: "",
 		description: "",
@@ -43,7 +43,6 @@ class App extends Component {
 		completedTasks: [],
 		completedTasksCount: 0,
 		editingTask: null,
-		filtered: [],
 	};
 
 	updateMenuState = (bool) => {
