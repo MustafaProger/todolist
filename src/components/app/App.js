@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
-import AboutAuthor from "../../pages/aboutAuthor/AboutAuthor";
+import AboutAuthor from "../../pages/filtersLabels/FiltersLabels";
 
 import "./App.scss";
 import { Component } from "react";
@@ -186,7 +186,7 @@ class App extends Component {
 							}
 						/>
 						<Route
-							path="/about-author"
+							path="/filters-labels"
 							element={
 								<AboutAuthor
 									updateMenuState={this.updateMenuState}

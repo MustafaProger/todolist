@@ -1,13 +1,13 @@
-import { Component, createRef } from "react";
+import { Component } from "react";
 import "./EditTask.scss";
-import Flag from '../../assets/icon/flag';  // Предполагаем, что иконки флагов в проекте уже есть
+import Flag from "../../assets/icon/flag";
 
 class EditTask extends Component {
 	state = {
-		task: this.props.task, // Название задачи
-		description: this.props.description, // Описание задачи
-		importance: this.props.importance, // Приоритет задачи
-		isOpen: false, // Для управления открытием/закрытием селекта
+		task: this.props.task,
+		description: this.props.description,
+		importance: this.props.importance,
+		isOpen: false,
 	};
 
 	handleChange = (prop, value) => {
@@ -15,8 +15,7 @@ class EditTask extends Component {
 	};
 
 	handleSave = () => {
-
-        if (!this.state.task.trim()) {
+		if (!this.state.task.trim()) {
 			alert("Task name cannot be empty.");
 			return;
 		}
@@ -26,7 +25,8 @@ class EditTask extends Component {
 			description: this.state.description,
 			importance: this.state.importance,
 		};
-		this.props.saveTask(updatedTask); // Сохраняем изменения
+
+		this.props.saveTask(updatedTask);
 	};
 
 	toggleDropdown = () => {
@@ -52,13 +52,13 @@ class EditTask extends Component {
 					type='text'
 					className='edit-task__form__input'
 					value={task}
-					onChange={(e) => this.handleChange("task", e.target.value)} // Используем onChange
+					onChange={(e) => this.handleChange("task", e.target.value)}
 					placeholder='Task name'
 				/>
 				<textarea
 					className='edit-task__form__textarea'
 					value={description}
-					onChange={(e) => this.handleChange("description", e.target.value)} // Используем onChange
+					onChange={(e) => this.handleChange("description", e.target.value)}
 					placeholder='Description'
 				/>
 				<div className='edit-task__form__importance'>
@@ -74,7 +74,7 @@ class EditTask extends Component {
 								{options.map((option) => (
 									<li
 										key={option.value}
-										onClick={() => this.handleImportanceChange(option.value)}  // Обработчик изменения
+										onClick={() => this.handleImportanceChange(option.value)}
 										className='dropdown-item'>
 										{option.icon}
 										<span>{option.label}</span>
@@ -87,14 +87,12 @@ class EditTask extends Component {
 				<div className='edit-task__form__buttons'>
 					<button
 						className='edit-task__form__buttons__cancel'
-						onClick={this.props.cancelEdit}
-					>
+						onClick={this.props.cancelEdit}>
 						Cancel
 					</button>
 					<button
 						className='edit-task__form__buttons__add'
-						onClick={this.handleSave}
-					>
+						onClick={this.handleSave}>
 						Save
 					</button>
 				</div>

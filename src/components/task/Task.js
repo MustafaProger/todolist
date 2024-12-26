@@ -44,7 +44,7 @@ class Task extends Component {
 
 	renderItem = () => {
 		const { tasks, clazz } = this.props;
-		const { editingTaskId, editedTask } = this.state;
+		const { editingTaskId } = this.state;
 
 		const importanceColors = {
 			Priority: "#CDCDCD",
@@ -76,7 +76,6 @@ class Task extends Component {
 									description={description}
 									importance={importance}
 									saveTask={this.saveTask}
-									handleEditChange={this.handleEditChange}
 									cancelEdit={this.cancelEdit}
 								/>
 							) : (

@@ -1,20 +1,20 @@
 import { Component } from "react";
 import Menu from "../../components/menu/Menu";
 
-import "./AboutAuthor.scss";
+import "./FiltersLabels.scss";
 
-class AboutAuthor extends Component {
+class FiltersLabels extends Component {
 	render() {
 		return (
-			<div className='about-author'>
+			<div className='filters-labels'>
 				<Menu
 					updateMenuState={this.props.updateMenuState}
 					menuOpen={this.props.menuOpen}
 				/>
-				<h1>about-author</h1>
+				<h1>filters-labels</h1>
 			</div>
 		);
 	}
 }
 
-export default AboutAuthor;
+export default FiltersLabels;
