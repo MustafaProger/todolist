@@ -24,7 +24,7 @@ class Filter extends Component {
 			// Открываем текущую категорию, если она не совпадает с предыдущей
 			const content = document.querySelector(`.filtered-task-${category}`);
 			if (content && !isSameCategory) {
-				content.style.maxHeight = `${content.scrollHeight}px`;
+				content.style.maxHeight = `${content.scrollHeight * 3}px`;
 			}
 
 			return {
@@ -54,9 +54,10 @@ class Filter extends Component {
 					return (
 						<div
 							key={id}
-							className='filtered-item'
-							onClick={() => this.onOpen(value)}>
-							<div className='importance'>
+							className='filtered-item'>
+							<div
+								className='importance'
+								onClick={() => this.onOpen(value)}>
 								{icon} <span>{value}</span>
 								<span className='toggle-icon'>
 									{openCategory === value ? (

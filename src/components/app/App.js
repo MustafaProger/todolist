@@ -16,25 +16,25 @@ class App extends Component {
 		importance: "Priority",
 		tasks: [
 			{
-				id: 1,
+				id: Date.now(),
 				task: "🕋 Read book about Tawhid",
 				description: "read the chapter 45",
 				importance: "Medium",
 			},
 			{
-				id: 2,
+				id: Date.now() + 2,
 				task: "💻 Programming",
 				description: "Work with web-site",
 				importance: "High",
 			},
 			{
-				id: 3,
+				id: Date.now() + 3,
 				task: "🏫 College",
 				description: "",
 				importance: "Low",
 			},
 			{
-				id: 4,
+				id: Date.now() + 4,
 				task: "🗑️ Throw out the trash",
 				description: "",
 				importance: "Priority",

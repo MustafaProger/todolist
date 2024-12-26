@@ -72,6 +72,7 @@ class Task extends Component {
 							}}>
 							{isEditing ? (
 								<EditTask
+									id={id}
 									task={task}
 									description={description}
 									importance={importance}

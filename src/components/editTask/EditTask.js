@@ -4,6 +4,7 @@ import Flag from "../../assets/icon/flag";
 
 class EditTask extends Component {
 	state = {
+		id: this.props.id,
 		task: this.props.task,
 		description: this.props.description,
 		importance: this.props.importance,
