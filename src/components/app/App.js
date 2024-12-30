@@ -21,38 +21,55 @@ class App extends Component {
 				task: "🕋 Read book about Tawhid",
 				description: "read the chapter 45",
 				importance: "Medium",
+				labels: [],
 			},
 			{
 				id: Date.now() + 2,
 				task: "💻 Programming",
 				description: "Work with web-site",
 				importance: "High",
+				labels: [],
 			},
 			{
 				id: Date.now() + 3,
 				task: "🏫 College",
 				description: "",
 				importance: "Low",
+				labels: [],
 			},
 			{
 				id: Date.now() + 4,
 				task: "🗑️ Throw out the trash",
 				description: "",
 				importance: "Priority",
+				labels: [],
 			},
 		],
 		completedTasks: [],
 		completedTasksCount: 0,
 		editingTask: null,
 		addLabel: true,
+		allLabels: [],
+		currentLabel: 'a'
 	};
 
 	updateStateBool = (prop, bool) => {
 		this.setState(() => ({ [prop]: bool }));
 	};
 
+	// updateStateEvent = (prop, event) => {
+	// 	this.setState({ [prop]: event.target.value });
+	// 	console.log(typeof this.state[prop]);
+	// };
+
 	updateStateEvent = (prop, event) => {
-		this.setState({ [prop]: event.target.value });
+		if (typeof this.state[prop] === "string") {
+			this.setState({ [prop]: event.target.value });
+
+		} else if (typeof this.state[prop] === "object") {
+			this.setState({ [prop]: [...this.state[prop], event] });
+		}
+
 	};
 
 	updateStatePriority = (value) => {
@@ -152,6 +169,8 @@ class App extends Component {
 			completedTasksCount,
 			editingTask,
 			addLabel,
+			allLabels,
+			currentLabel
 		} = this.state;
 
 		return (
@@ -175,6 +194,8 @@ class App extends Component {
 									onSaveTask={this.onSaveTask}
 									editingTask={editingTask}
 									addLabel={addLabel}
+									allLabels={allLabels}
+									currentLabel={currentLabel}
 								/>
 							}
 						/>

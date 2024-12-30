@@ -22,7 +22,9 @@ class Tasks extends Component {
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
-			addLabel
+			addLabel,
+			allLabels,
+			currentLabel
 		} = this.props;
 
 		return (
@@ -51,6 +53,8 @@ class Tasks extends Component {
 						updateStatePriority={updateStatePriority}
 						onTask={onTask}
 						addLabel={addLabel}
+						allLabels={allLabels}
+						currentLabel={currentLabel}
 					/>
 				</div>
 			</div>

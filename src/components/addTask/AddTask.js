@@ -1,6 +1,7 @@
 import { Component, createRef } from "react";
 import "./AddTask.scss";
 import Flag from "../../assets/icon/flag";
+import Label from "../label/Label";
 
 class AddTask extends Component {
 	state = {
@@ -23,11 +24,6 @@ class AddTask extends Component {
 
 	toggleDropdown = () => {
 		this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
-	};
-
-	updateStateLabel = () => {
-		const newAddLabel = !this.props.addLabel;
-		this.props.updateStateBool("addLabel", newAddLabel);
 	};
 
 	render() {
@@ -81,21 +77,15 @@ class AddTask extends Component {
 								)}
 							</div>
 						</div>
-						<div className='add-task__form__labels'>
-							<div
-								className='add-task__button add-task__form__labels__button'
-								onClick={this.updateStateLabel}>
-								<span></span>
-								<p>Labels</p>
-							</div>
-							{this.props.addLabel ? (
-								<input
-									className='add-task__form__labels__input'
-									type='text'
-									placeholder='Type a label'
-								/>
-							) : null}
-						</div>
+						
+						<Label
+							addLabel={this.props.addLabel}
+							currentLabel={this.props.currentLabel}
+							allLabels={this.props.allLabels}
+							updateStateEvent={this.props.updateStateEvent}
+							updateStateBool={this.props.updateStateBool}
+						/>
+
 						<div className='add-task__form__buttons'>
 							<button
 								className='add-task__form__buttons__cancel'
