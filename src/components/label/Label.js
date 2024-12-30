@@ -8,6 +8,11 @@ class Label extends Component {
 	};
 
 	render() {
+		const { updateStateEvent, addLabel, allLabels, currentLabel } = this.props;
+
+		const arrSearched = allLabels.filter(
+			(item) => currentLabel.length === 0 || item.includes(currentLabel)
+		);
 		return (
 			<div className='add-task__form__labels'>
 				<div
@@ -16,37 +21,51 @@ class Label extends Component {
 					<span></span>
 					<p>Labels</p>
 				</div>
-				{this.props.addLabel && (
+
+				{addLabel && (
 					<div className='input-and-labels__wrapper'>
 						<input
 							className='input-label'
 							type='text'
 							placeholder='Type a label'
-							onChange={(e) => this.props.updateStateEvent("currentLabel", e)}
+							value={currentLabel} // Привязываем поле ввода к состоянию
+							onChange={(e) => updateStateEvent("currentLabel", e)} // Передаем только значение
 						/>
-						{this.props.currentLabel && (
-							<>
-								<hr className='divider' />
-								<div className='labels'>
-									{this.props.allLabels.length
-										? this.props.allLabels.map((item, index) => <p>{item}</p>)
-										: null}
-									<p className='labels__undefined'>Label not found</p>
-									<div className='create-label'>
-										<span></span>
-										<p
-											onClick={() =>
-												this.props.updateStateEvent(
-													"allLabels",
-													this.props.currentLabel
-												)
-											}>
-											Create "{this.props.currentLabel}"
-										</p>
-									</div>
-								</div>
-							</>
-						)}
+
+						<>
+							<div>
+								{currentLabel.trim() || arrSearched.length ? (
+									<>
+										<hr className='divider' />
+										{arrSearched.length ? (
+											<div className='labels'>
+												{arrSearched.map((item, index) => (
+													<p key={`${item}-${index}`}>{item}</p>
+												))}
+											</div>
+										) : (
+											<p className='labels__undefined'>Label not found</p>
+										)}
+									</>
+								) : null}
+
+								{currentLabel.trim()
+									? !allLabels.includes(currentLabel.trim()) && (
+											<>
+												<div className='create-label'>
+													<span></span>
+													<p
+														onClick={() =>
+															updateStateEvent("allLabels", currentLabel.trim())
+														}>
+														Create "{currentLabel.trim()}"
+													</p>
+												</div>
+											</>
+									  )
+									: null}
+							</div>
+						</>
 					</div>
 				)}
 			</div>

@@ -50,7 +50,7 @@ class App extends Component {
 		editingTask: null,
 		addLabel: true,
 		allLabels: [],
-		currentLabel: 'a'
+		currentLabel: ''
 	};
 
 	updateStateBool = (prop, bool) => {
