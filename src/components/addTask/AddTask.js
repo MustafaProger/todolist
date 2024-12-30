@@ -25,6 +25,11 @@ class AddTask extends Component {
 		this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
 	};
 
+	updateStateLabel = () => {
+		const newAddLabel = !this.props.addLabel;
+		this.props.updateStateBool("addLabel", newAddLabel);
+	};
+
 	render() {
 		const { importance, isOpen } = this.state;
 		const options = [
@@ -42,14 +47,14 @@ class AddTask extends Component {
 							type='text'
 							className='add-task__form__input'
 							placeholder='Task Name'
-							onChange={(e) => this.props.updateState("task", e)}
+							onChange={(e) => this.props.updateStateEvent("task", e)}
 						/>
 						<textarea
 							className='add-task__form__textarea'
 							placeholder='Description'
 							ref={this.textareaRef}
 							onInput={this.autoResizeTextarea}
-							onChange={(e) => this.props.updateState("description", e)}
+							onChange={(e) => this.props.updateStateEvent("description", e)}
 						/>
 						<div className='add-task__form__importance'>
 							<div
@@ -76,16 +81,25 @@ class AddTask extends Component {
 								)}
 							</div>
 						</div>
-						<div class='add-task__form__labels'>
-							<div className='add-task__button add-task__form__labels__button'> 
+						<div className='add-task__form__labels'>
+							<div
+								className='add-task__button add-task__form__labels__button'
+								onClick={this.updateStateLabel}>
 								<span></span>
 								<p>Labels</p>
 							</div>
+							{this.props.addLabel ? (
+								<input
+									className='add-task__form__labels__input'
+									type='text'
+									placeholder='Type a label'
+								/>
+							) : null}
 						</div>
 						<div className='add-task__form__buttons'>
 							<button
 								className='add-task__form__buttons__cancel'
-								onClick={this.props.addTaskFunc}>
+								onClick={() => this.props.updateStateBool("addTask", false)}>
 								Cancel
 							</button>
 							<button
@@ -98,7 +112,7 @@ class AddTask extends Component {
 				) : (
 					<div
 						className='add-task__button'
-						onClick={this.props.addTaskFunc}>
+						onClick={() => this.props.updateStateBool("addTask", true)}>
 						<span></span>
 						<p>Add Task</p>
 					</div>

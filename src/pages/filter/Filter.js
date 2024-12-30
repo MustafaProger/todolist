@@ -14,12 +14,13 @@ class Filters extends Component {
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
+			updateStateBool
 		} = this.props;
 
 		return (
 			<div className='filter'>
 				<Menu
-					updateMenuState={this.props.updateMenuState}
+					updateStateBool={updateStateBool}
 					menuOpen={menuOpen}
 				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>

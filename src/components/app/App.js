@@ -44,17 +44,14 @@ class App extends Component {
 		completedTasks: [],
 		completedTasksCount: 0,
 		editingTask: null,
+		addLabel: true,
 	};
 
-	updateMenuState = (bool) => {
-		this.setState({ menuOpen: bool });
+	updateStateBool = (prop, bool) => {
+		this.setState(() => ({ [prop]: bool }));
 	};
 
-	onClickAddСancel = () => {
-		this.setState(({ addTask }) => ({ addTask: !addTask }));
-	};
-
-	updateState = (prop, event) => {
+	updateStateEvent = (prop, event) => {
 		this.setState({ [prop]: event.target.value });
 	};
 
@@ -154,6 +151,7 @@ class App extends Component {
 			addTask,
 			completedTasksCount,
 			editingTask,
+			addLabel,
 		} = this.state;
 
 		return (
@@ -167,16 +165,16 @@ class App extends Component {
 									tasks={tasks}
 									countTasks={countTasks}
 									addTask={addTask}
-									onClickAddСancel={this.onClickAddСancel}
-									updateState={this.updateState}
+									updateStateEvent={this.updateStateEvent}
 									updateStatePriority={this.updateStatePriority}
 									onTask={this.onTask}
 									onActionWithTask={this.onActionWithTask}
-									updateMenuState={this.updateMenuState}
+									updateStateBool={this.updateStateBool}
 									menuOpen={menuOpen}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
 									editingTask={editingTask}
+									addLabel={addLabel}
 								/>
 							}
 						/>
@@ -187,7 +185,7 @@ class App extends Component {
 									onActionWithTask={this.onActionWithTask}
 									completedTasks={completedTasks}
 									completedTasksCount={completedTasksCount}
-									updateMenuState={this.updateMenuState}
+									updateStateBool={this.updateStateBool}
 									menuOpen={menuOpen}
 								/>
 							}
@@ -199,7 +197,7 @@ class App extends Component {
 									tasks={tasks}
 									countTasks={countTasks}
 									menuOpen={menuOpen}
-									updateMenuState={this.updateMenuState}
+									updateStateBool={this.updateStateBool}
 									onActionWithTask={this.onActionWithTask}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
@@ -214,6 +212,7 @@ class App extends Component {
 								<Lables
 									countTasks={countTasks}
 									menuOpen={menuOpen}
+									updateStateBool={this.updateStateBool}
 								/>
 							}
 						/>

@@ -10,7 +10,7 @@ class Completed extends Component {
 	render() {
 		const {
 			menuOpen,
-			updateMenuState,
+			updateStateBool,
 			completedTasksCount,
 			completedTasks,
 			onActionWithTask
@@ -19,7 +19,7 @@ class Completed extends Component {
 		return (
 			<div className='done-tasks'>
 				<Menu
-					updateMenuState={updateMenuState}
+					updateStateBool={updateStateBool}
 					menuOpen={menuOpen}
 				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>

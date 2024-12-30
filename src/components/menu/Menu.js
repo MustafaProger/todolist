@@ -4,16 +4,10 @@ import { Link } from "react-router-dom";
 import "./Menu.scss";
 
 class Menu extends Component {
-	state = {
-		menuOpen: this.props.menuOpen,
-	};
 
 	handleCheckboxChange = () => {
-		this.setState(({ menuOpen }) => {
-			const newMenuOpen = !menuOpen;
-			this.props.updateMenuState(newMenuOpen);
-			return { menuOpen: newMenuOpen };
-		});
+		const newMenuOpen = !this.props.menuOpen;
+		this.props.updateStateBool("menuOpen", newMenuOpen);
 	};
 
 	render() {

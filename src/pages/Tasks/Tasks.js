@@ -13,21 +13,21 @@ class Tasks extends Component {
 			tasks,
 			countTasks,
 			addTask,
-			onClickAddСancel,
-			updateState,
+			updateStateEvent,
 			updateStatePriority,
 			onTask,
 			onActionWithTask,
 			menuOpen,
-			updateMenuState,
+			updateStateBool,
 			editTaskFunc,
 			onSaveTask,
-			editingTask  // Достаем из props
+			editingTask,
+			addLabel
 		} = this.props;
 
 		return (
 			<div className="tasks">
-				<Menu updateMenuState={updateMenuState} menuOpen={menuOpen} />
+				<Menu updateStateBool={updateStateBool} menuOpen={menuOpen} />
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
 					<h1 className="title">Tasks</h1>
 					<p className="count-tasks">
@@ -46,10 +46,11 @@ class Tasks extends Component {
 					/>
 					<AddTask
 						addTaskState={addTask}
-						addTaskFunc={onClickAddСancel}
-						updateState={updateState}
+						updateStateBool={updateStateBool}
+						updateStateEvent={updateStateEvent}
 						updateStatePriority={updateStatePriority}
 						onTask={onTask}
+						addLabel={addLabel}
 					/>
 				</div>
 			</div>

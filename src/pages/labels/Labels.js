@@ -5,15 +5,12 @@ import CurrentDate from "../../components/currentDate/CurrentDate";
 
 class Labels extends Component {
 	render() {
-		const {
-			menuOpen,
-			countTasks,
-		} = this.props;
+		const { menuOpen, countTasks, updateStateBool } = this.props;
 		return (
 			<>
 				<div className='labels'>
 					<Menu
-						updateMenuState={this.props.updateMenuState}
+						updateStateBool={updateStateBool}
 						menuOpen={menuOpen}
 					/>
 					<div className={`container${menuOpen ? " menu-active" : ""}`}>
