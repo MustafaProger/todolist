@@ -3,7 +3,7 @@
 		max-width: 1200px;
 		width: 100%;
 		margin: 0 auto;
-		padding: 20px 20px 20px 110px;
+		padding: 20px 20px 80px 110px;
 		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
 			padding-left 0.5s ease;
 		&.menu-active {
@@ -45,7 +45,7 @@
 			background-color: #fff;
 			border: 1px solid rgba(0, 0, 0, 0.1);
 			border-radius: 8px;
-			margin: 20px 0;
+			margin: 20px 0 10px 0;
 			max-width: 444px;
 			transition: all 0.3s;
 			.dropdown-item {
@@ -71,7 +71,6 @@
 @media (max-width: 1370px) {
 	.App {
 		.container {
-			// padding: 20px 20px 20px 100px !important;
 			&.menu-active {
 				padding-left: 300px;
 			}
@@ -82,7 +81,7 @@
 @media (max-width: 840px) {
 	.App {
 		.container {
-			padding: 70px 30px 20px 30px;
+			padding: 70px 30px 80px 30px;
 			transition: all 0.5s;
 			&.menu-active {
 				padding-left: 30px;
@@ -117,6 +116,29 @@
 				transform: translate(100%, 0);
 				width: 220px;
 				padding-left: 30px;
+			}
+		}
+	}
+}
+
+@media (max-width: 550px) {
+	.App {
+		.add-task,
+		.edit-task {
+			&__form__importance {
+				.custom-select {
+					.dropdown-list {
+						flex-direction: column;
+						.dropdown-item {
+							&:nth-child(1) {
+								border-radius: 7px 7px 0 0;
+							}
+							&:nth-child(4) {
+								border-radius: 0 0 7px 7px;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
