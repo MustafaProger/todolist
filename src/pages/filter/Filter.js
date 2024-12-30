@@ -4,7 +4,7 @@ import Filter from "../../components/filter/Filter";
 import countTask from "../../assets/icon/check-circle.svg";
 import CurrentDate from "../../components/currentDate/CurrentDate";
 
-class FiltersLabels extends Component {
+class Filters extends Component {
 	render() {
 		const {
 			menuOpen,
@@ -17,7 +17,7 @@ class FiltersLabels extends Component {
 		} = this.props;
 
 		return (
-			<div className='filters-labels'>
+			<div className='filter'>
 				<Menu
 					updateMenuState={this.props.updateMenuState}
 					menuOpen={menuOpen}
@@ -48,4 +48,4 @@ class FiltersLabels extends Component {
 	}
 }
 
-export default FiltersLabels;
+export default Filters;

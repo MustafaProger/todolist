@@ -1,10 +1,11 @@
+import { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
-import FiltersLabels from "../../pages/filtersLabels/FiltersLabels";
+import Filters from "../../pages/filter/Filter";
+import Lables from "../../pages/labels/Labels";
 
 import "./App.scss";
-import { Component } from "react";
 
 class App extends Component {
 	state = {
@@ -157,7 +158,7 @@ class App extends Component {
 
 		return (
 			<div className='App'>
-				<BrowserRouter basename="/todolist">
+				<BrowserRouter basename='/todolist'>
 					<Routes>
 						<Route
 							path='/'
@@ -192,9 +193,9 @@ class App extends Component {
 							}
 						/>
 						<Route
-							path='/filters-labels'
+							path='/filter'
 							element={
-								<FiltersLabels
+								<Filters
 									tasks={tasks}
 									countTasks={countTasks}
 									menuOpen={menuOpen}
@@ -203,6 +204,16 @@ class App extends Component {
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
 									editingTask={editingTask}
+								/>
+							}
+						/>
+
+						<Route
+							path='/labels'
+							element={
+								<Lables
+									countTasks={countTasks}
+									menuOpen={menuOpen}
 								/>
 							}
 						/>
