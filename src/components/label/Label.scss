@@ -27,6 +27,21 @@
 			font-size: 14px;
 		}
 
+		.labels__wrapper {
+			padding-left: 3px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 5px;
+
+			.labels__item {
+				display: flex;
+				align-items: center;
+				gap: 5px;
+                cursor: pointer;
+			}
+		}
+
 		.create-label {
 			cursor: pointer;
 			position: relative;

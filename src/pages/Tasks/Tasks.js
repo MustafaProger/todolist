@@ -5,7 +5,7 @@ import AddTask from "../../components/addTask/AddTask";
 import Task from "../../components/task/Task";
 
 import "./Tasks.scss";
-import check from '../../assets/icon/check-circle.svg'
+import check from "../../assets/icon/check-circle.svg";
 
 class Tasks extends Component {
 	render() {
@@ -24,20 +24,27 @@ class Tasks extends Component {
 			editingTask,
 			addLabel,
 			allLabels,
-			currentLabel
+			currentLabel,
+			chosenLabels,
 		} = this.props;
 
 		return (
-			<div className="tasks">
-				<Menu updateStateBool={updateStateBool} menuOpen={menuOpen} />
+			<div className='tasks'>
+				<Menu
+					updateStateBool={updateStateBool}
+					menuOpen={menuOpen}
+				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
-					<h1 className="title">Tasks</h1>
-					<p className="count-tasks">
-						<img src={check} alt="" />
+					<h1 className='title'>Tasks</h1>
+					<p className='count-tasks'>
+						<img
+							src={check}
+							alt=''
+						/>
 						{countTasks} tasks
 					</p>
 					<CurrentDate />
-					<hr className="divider" />
+					<hr className='divider' />
 					<Task
 						clazz={"tasks-list"}
 						tasks={tasks}
@@ -47,6 +54,7 @@ class Tasks extends Component {
 						editingTask={editingTask}
 					/>
 					<AddTask
+						tasks={tasks}
 						addTaskState={addTask}
 						updateStateBool={updateStateBool}
 						updateStateEvent={updateStateEvent}
@@ -55,6 +63,7 @@ class Tasks extends Component {
 						addLabel={addLabel}
 						allLabels={allLabels}
 						currentLabel={currentLabel}
+						chosenLabels={chosenLabels}
 					/>
 				</div>
 			</div>

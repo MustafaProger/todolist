@@ -49,27 +49,21 @@ class App extends Component {
 		completedTasksCount: 0,
 		editingTask: null,
 		addLabel: true,
-		allLabels: [],
-		currentLabel: ''
+		allLabels: ["College", "Work", "Hobbis"],
+		currentLabel: "",
+		chosenLabels: []
 	};
 
 	updateStateBool = (prop, bool) => {
 		this.setState(() => ({ [prop]: bool }));
 	};
 
-	// updateStateEvent = (prop, event) => {
-	// 	this.setState({ [prop]: event.target.value });
-	// 	console.log(typeof this.state[prop]);
-	// };
-
 	updateStateEvent = (prop, event) => {
 		if (typeof this.state[prop] === "string") {
 			this.setState({ [prop]: event.target.value });
-
 		} else if (typeof this.state[prop] === "object") {
 			this.setState({ [prop]: [...this.state[prop], event] });
 		}
-
 	};
 
 	updateStatePriority = (value) => {
@@ -77,7 +71,7 @@ class App extends Component {
 	};
 
 	onTask = () => {
-		const { task, description, tasks, importance } = this.state;
+		const { task, description, tasks, importance, chosenLabels } = this.state;
 
 		if (!task.trim()) {
 			alert("Task name cannot be empty.");
@@ -89,6 +83,7 @@ class App extends Component {
 			task,
 			description,
 			importance,
+			labels: [...chosenLabels]
 		};
 
 		this.setState({
@@ -97,6 +92,8 @@ class App extends Component {
 			description: "",
 			countTasks: tasks.length + 1,
 			addTask: false,
+			currentLabel: "",
+			chosenLabels: []
 		});
 	};
 
@@ -170,7 +167,8 @@ class App extends Component {
 			editingTask,
 			addLabel,
 			allLabels,
-			currentLabel
+			currentLabel,
+			chosenLabels
 		} = this.state;
 
 		return (
@@ -196,6 +194,7 @@ class App extends Component {
 									addLabel={addLabel}
 									allLabels={allLabels}
 									currentLabel={currentLabel}
+									chosenLabels={chosenLabels}
 								/>
 							}
 						/>
