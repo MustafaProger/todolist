@@ -6,7 +6,6 @@
 		display: flex;
 		align-items: center;
 		gap: 15px;
-
 		&:hover {
 			span {
 				background-color: tomato;
@@ -53,6 +52,18 @@
 		}
 	}
 
+	&__form__labels__button {
+		gap: 7px;
+		span {
+			width: 15px;
+			height: 15px;
+			&::before,
+			&::after {
+				width: 10px;
+			}
+		}
+	}
+
 	&__form {
 		display: flex;
 		flex-direction: column;
@@ -90,7 +101,6 @@
 
 		&__importance {
 			position: relative;
-			margin-bottom: 20px;
 			&__select {
 				width: 100%;
 				padding: 12px 40px 12px 16px;
@@ -139,6 +149,11 @@
 				width: 20px;
 				height: 20px;
 			}
+		}
+
+		&__labels {
+			margin: 20px 0 20px 3px;
+
 		}
 
 		&__buttons {

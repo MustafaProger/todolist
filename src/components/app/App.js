@@ -11,7 +11,7 @@ class App extends Component {
 	state = {
 		menuOpen: false,
 		countTasks: 4,
-		addTask: false,
+		addTask: true,
 		task: "",
 		description: "",
 		importance: "Priority",

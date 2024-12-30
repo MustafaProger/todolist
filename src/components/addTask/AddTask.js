@@ -1,6 +1,6 @@
 import { Component, createRef } from "react";
 import "./AddTask.scss";
-import Flag from '../../assets/icon/flag';
+import Flag from "../../assets/icon/flag";
 
 class AddTask extends Component {
 	state = {
@@ -74,6 +74,12 @@ class AddTask extends Component {
 										))}
 									</ul>
 								)}
+							</div>
+						</div>
+						<div class='add-task__form__labels'>
+							<div className='add-task__button add-task__form__labels__button'> 
+								<span></span>
+								<p>Labels</p>
 							</div>
 						</div>
 						<div className='add-task__form__buttons'>
