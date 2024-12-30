@@ -56,7 +56,7 @@ class Label extends Component {
 							type='text'
 							placeholder='Type a label'
 							value={currentLabel}
-							onChange={(e) => updateStateEvent("currentLabel", e.target.value)}
+							onChange={(e) => updateStateEvent("currentLabel", e)}
 						/>
 
 						<>
@@ -69,7 +69,6 @@ class Label extends Component {
 												{arrSearched.map((item, index) => (
 													<div
 														className='labels__item'
-														// onClick={() => this.toggleLabelSelection(item)}
 														key={`${item}-${index}`}>
 														<svg
 															viewBox='0 0 24 24'
@@ -80,8 +79,6 @@ class Label extends Component {
 														<p>{item}</p>
 														<input
 															type='checkbox'
-															// checked={chosenLabels.includes(item)}
-															// onChange={() => this.toggleLabelSelection(item)}
 														/>
 													</div>
 												))}
