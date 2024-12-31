@@ -14,7 +14,12 @@ class Filters extends Component {
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
-			updateStateBool
+			updateStateBool,
+			updateStateEvent,
+			addLabel,
+			allLabels,
+			currentLabel,
+			chosenLabels,
 		} = this.props;
 
 		return (
@@ -42,6 +47,12 @@ class Filters extends Component {
 						editTaskFunc={editTaskFunc}
 						onSaveTask={onSaveTask}
 						editingTask={editingTask}
+						updateStateEvent={updateStateEvent}
+						updateStateBool={updateStateBool}
+						addLabel={addLabel}
+						allLabels={allLabels}
+						currentLabel={currentLabel}
+						chosenLabels={chosenLabels}
 					/>
 				</div>
 			</div>

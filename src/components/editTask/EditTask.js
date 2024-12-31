@@ -63,6 +63,7 @@ class EditTask extends Component {
 			{ value: "High", label: "High", icon: <Flag theme='#FF6247' /> },
 		];
 
+
 		return (
 			<div className='edit-task__form'>
 				<input

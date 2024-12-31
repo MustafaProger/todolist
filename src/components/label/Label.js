@@ -1,4 +1,4 @@
-import { Component, createRef } from "react";
+import { Component } from "react";
 import "./Label.scss";
 
 class Label extends Component {
@@ -39,8 +39,11 @@ class Label extends Component {
 				const newArr = checkedItemsKeys.filter(
 					(item, index) => checkedItemsValues[index]
 				);
-				
-				this.props.handleChange('labels', newArr);
+
+				if (this.props.handleChange) {
+					this.props.handleChange("labels", newArr);
+				}
+
 				this.props.updateStateEvent("chosenLabels", newArr);
 			}
 		);
@@ -55,9 +58,8 @@ class Label extends Component {
 				currentLabel.length === 0 ||
 				item.toLowerCase().includes(currentLabel.toLowerCase())
 		);
-		const { checkedItems } = this.state;
 
-		// console.log(checkedItems);
+		const { checkedItems } = this.state;
 
 		return (
 			<div className='add-task__form__labels'>

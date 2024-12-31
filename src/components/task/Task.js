@@ -126,6 +126,7 @@ class Task extends Component {
 																task,
 																description,
 																importance,
+																labels
 															})
 														}
 													/>
