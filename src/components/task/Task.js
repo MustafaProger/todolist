@@ -43,7 +43,16 @@ class Task extends Component {
 	};
 
 	renderItem = () => {
-		const { tasks, clazz } = this.props;
+		const {
+			tasks,
+			clazz,
+			addLabel,
+			allLabels,
+			currentLabel,
+			chosenLabels,
+			updateStateEvent,
+			updateStateBool,
+		} = this.props;
 		const { editingTaskId } = this.state;
 
 		const importanceColors = {
@@ -76,8 +85,16 @@ class Task extends Component {
 									task={task}
 									description={description}
 									importance={importance}
+									labels={labels}
 									saveTask={this.saveTask}
 									cancelEdit={this.cancelEdit}
+									addLabel={addLabel}
+									currentLabel={currentLabel}
+									allLabels={allLabels}
+									updateStateEvent={updateStateEvent}
+									updateStateBool={updateStateBool}
+									tasks={tasks}
+									chosenLabels={chosenLabels}
 								/>
 							) : (
 								<div className='task-view'>

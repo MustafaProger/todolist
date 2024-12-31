@@ -1,6 +1,7 @@
 import { Component } from "react";
 import "./EditTask.scss";
 import Flag from "../../assets/icon/flag";
+import Label from "../label/Label";
 
 class EditTask extends Component {
 	state = {
@@ -8,6 +9,7 @@ class EditTask extends Component {
 		task: this.props.task,
 		description: this.props.description,
 		importance: this.props.importance,
+		labels: this.props.labels,
 		isOpen: false,
 	};
 
@@ -26,6 +28,7 @@ class EditTask extends Component {
 			task: this.state.task,
 			description: this.state.description,
 			importance: this.state.importance,
+			labels: this.state.labels
 		};
 
 		// Вызываем пропс saveTask, чтобы обновить задачу
@@ -42,6 +45,17 @@ class EditTask extends Component {
 
 	render() {
 		const { task, description, importance, isOpen } = this.state;
+
+		const {
+			tasks,
+			addLabel,
+			allLabels,
+			currentLabel,
+			chosenLabels,
+			updateStateEvent,
+			updateStateBool,
+		} = this.props;
+
 		const options = [
 			{ value: "Priority", label: "Priority", icon: <Flag theme='#CDCDCD' /> },
 			{ value: "Low", label: "Low", icon: <Flag theme='#5390F5' /> },
@@ -87,6 +101,16 @@ class EditTask extends Component {
 						)}
 					</div>
 				</div>
+				<Label
+					tasks={tasks}
+					updateStateBool={updateStateBool}
+					updateStateEvent={updateStateEvent}
+					addLabel={addLabel}
+					currentLabel={currentLabel}
+					allLabels={allLabels}
+					chosenLabels={chosenLabels}
+					handleChange={this.handleChange}
+				/>
 				<div className='edit-task__form__buttons'>
 					<button
 						className='edit-task__form__buttons__cancel'

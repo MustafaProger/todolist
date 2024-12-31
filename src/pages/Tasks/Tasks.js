@@ -52,6 +52,12 @@ class Tasks extends Component {
 						editTaskFunc={editTaskFunc}
 						onSaveTask={onSaveTask}
 						editingTask={editingTask}
+						updateStateBool={updateStateBool}
+						updateStateEvent={updateStateEvent}
+						addLabel={addLabel}
+						allLabels={allLabels}
+						currentLabel={currentLabel}
+						chosenLabels={chosenLabels}
 					/>
 					<AddTask
 						tasks={tasks}

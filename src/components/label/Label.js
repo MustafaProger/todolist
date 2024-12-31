@@ -39,7 +39,8 @@ class Label extends Component {
 				const newArr = checkedItemsKeys.filter(
 					(item, index) => checkedItemsValues[index]
 				);
-
+				
+				this.props.handleChange('labels', newArr);
 				this.props.updateStateEvent("chosenLabels", newArr);
 			}
 		);
