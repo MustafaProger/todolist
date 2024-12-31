@@ -28,25 +28,57 @@
 		}
 
 		.labels__wrapper {
-			padding-left: 3px;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			gap: 5px;
 
 			.labels__item {
-				display: flex;
+				cursor: pointer;
+				position: relative;
+				height: 30px;
+				padding: 0 15px 0 10px;
+				border-radius: 5px;
+				display: grid;
+				grid-template-columns: 15px auto 15px;
 				align-items: center;
 				gap: 5px;
-                cursor: pointer;
-				position: relative;
-				// .labels__item__input {
-				// 	position: absolute;
-				// 	top: 0;
-				// 	left: 0;
-				// 	text-align: left;
-				// 	display: block;
-				// }
+				&:hover {
+					background-color: #f3f3f3; // Цвет фона при наведении
+				}
+				.labels__item__input {
+					display: none; // Скрываем стандартный чекбокс
+				}
+
+				.labels__item__checkbox {
+					position: relative;
+					width: 20px;
+					height: 20px;
+					border: 2px solid #ccc;
+					border-radius: 4px;
+					transition: all 0.3s;
+				}
+
+				.labels__item__checkbox::after {
+					content: "";
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					width: 12px;
+					height: 12px;
+					background-color: tomato; // Цвет галочки
+					border-radius: 2px;
+					transform: translate(-50%, -50%) scale(0); // Изначально скрыта
+					transition: transform 0.3s;
+				}
+
+				.labels__item__input:checked + .labels__item__checkbox {
+					border-color: tomato; // Цвет рамки при выборе
+				}
+
+				.labels__item__input:checked + .labels__item__checkbox::after {
+					transform: translate(-50%, -50%) scale(1); // Появление галочки
+				}
 			}
 		}
 
@@ -56,7 +88,8 @@
 			padding: 5px 0;
 			margin: 5px 0;
 			border-radius: 5px;
-			display: flex;
+			display: grid;
+			grid-template-columns: 20px 1fr;
 			gap: 5px;
 			span {
 				position: relative;

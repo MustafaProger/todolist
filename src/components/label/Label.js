@@ -103,6 +103,7 @@ class Label extends Component {
 															onChange={(e) => e.stopPropagation()}
 															ref={(el) => (this.checkboxRefs[item] = el)}
 														/>
+														<span className='labels__item__checkbox'></span>
 													</div>
 												))}
 											</div>
