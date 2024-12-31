@@ -45,7 +45,7 @@ class Filter extends Component {
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
-      		updateStateBool,
+			updateStateBool,
 			updateStateEvent,
 			addLabel,
 			allLabels,
@@ -61,7 +61,6 @@ class Filter extends Component {
 						(item) => item.importance === value
 					);
 					const taskCount = filteredTask.length;
-
 					return (
 						<div
 							key={id}
@@ -107,7 +106,7 @@ class Filter extends Component {
 										onSaveTask={onSaveTask}
 										editingTask={editingTask}
 										updateStateEvent={updateStateEvent}
-                    					updateStateBool={updateStateBool}
+										updateStateBool={updateStateBool}
 										addLabel={addLabel}
 										allLabels={allLabels}
 										currentLabel={currentLabel}

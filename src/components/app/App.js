@@ -253,7 +253,17 @@ class App extends Component {
 								<Lables
 									countTasks={countTasks}
 									menuOpen={menuOpen}
+									updateStateEvent={this.updateStateEvent}
 									updateStateBool={this.updateStateBool}
+									allLabels={allLabels}
+									tasks={tasks}
+									onActionWithTask={this.onActionWithTask}
+									editTaskFunc={this.editTaskFunc}
+									onSaveTask={this.onSaveTask}
+									editingTask={editingTask}
+									addLabel={addLabel}
+									currentLabel={currentLabel}
+									chosenLabels={chosenLabels}
 								/>
 							}
 						/>
