@@ -9,29 +9,6 @@ class Filter extends Component {
 		isOpen: false,
 	};
 
-	onOpen = (category) => {
-		this.setState((prevState) => {
-			const isSameCategory = prevState.openCategory === category;
-
-			// Получаем текущие элементы
-			const allTasks = document.querySelectorAll(".filtered-task");
-			allTasks.forEach((task) => {
-				// Сбрасываем высоту для всех категорий
-				task.style.maxHeight = "0px";
-			});
-
-			// Открываем текущую категорию, если она не совпадает с предыдущей
-			const content = document.querySelector(`.filtered-task-${category}`);
-			if (content && !isSameCategory) {
-				content.style.maxHeight = `${content.scrollHeight * 1}px`;
-			}
-
-			return {
-				openCategory: isSameCategory ? null : category, // Если совпадает, закрываем
-			};
-		});
-	};
-
 	render() {
 		const options = [
 			{ value: "High", icon: <Flag theme='#FF6247' /> },
@@ -51,7 +28,9 @@ class Filter extends Component {
 			allLabels,
 			currentLabel,
 			chosenLabels,
+			onOpenFilterLabel,
 		} = this.props;
+
 		const { openCategory, isOpen } = this.state;
 
 		return (
@@ -67,7 +46,7 @@ class Filter extends Component {
 							className='filtered-item'>
 							<div
 								className='importance'
-								onClick={() => this.onOpen(value)}>
+								onClick={() => onOpenFilterLabel(value, "filtered-task")}>
 								{icon} <span>{value}</span>
 								<div className='toggle-icon'>
 									<span className='task-count'>{taskCount}</span>{" "}

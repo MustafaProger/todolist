@@ -56,6 +56,7 @@ class Task extends Component {
 			chosenLabels,
 			updateStateEvent,
 			updateStateBool,
+			onOpenFilterLabel
 		} = this.props;
 		const { editingTaskId } = this.state;
 	
@@ -112,6 +113,7 @@ class Task extends Component {
 									updateStateBool={updateStateBool}
 									tasks={tasks}
 									chosenLabels={chosenLabels}
+									onOpenFilterLabel={onOpenFilterLabel}
 								/>
 							) : (
 								<div className='task-view'>

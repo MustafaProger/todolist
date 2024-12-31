@@ -167,6 +167,28 @@ class App extends Component {
 		}));
 	};
 
+	onOpenFilterLabel = (label, clazz) => {
+		this.setState((prevState) => {
+			const isSameLabel = prevState.openLabel === label;
+
+			// Закрытие всех меток
+			const allTasks = document.querySelectorAll(`.${clazz}`);
+			allTasks.forEach((task) => {
+				task.style.maxHeight = "0px";
+			});
+
+			// Открытие текущей метки, если она не совпадает с предыдущей
+			const content = document.querySelector(`.${clazz}-${label}`);
+			if (content && !isSameLabel) {
+				content.style.maxHeight = `${content.scrollHeight * 1}px`;
+			}
+
+			return {
+				openLabel: isSameLabel ? null : label, // Закрываем, если метка совпадает
+			};
+		});
+	};
+
 	render() {
 		const {
 			menuOpen,
@@ -235,6 +257,7 @@ class App extends Component {
 									onActionWithTask={this.onActionWithTask}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
+									onOpenFilterLabel={this.onOpenFilterLabel}
 								/>
 							}
 						/>
@@ -255,6 +278,7 @@ class App extends Component {
 									onActionWithTask={this.onActionWithTask}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
+									onOpenFilterLabel={this.onOpenFilterLabel}
 								/>
 							}
 						/>

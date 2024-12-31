@@ -51,7 +51,7 @@
 			}
 		}
 
-		.filtered-task {
+		.tasks-label {
 			max-height: 0;
 			overflow: hidden;
 			overflow-y: auto;
@@ -73,7 +73,7 @@
 	}
 
 	// Стили для открытых задач
-	.filtered-task.open {
+	.tasks-label.open {
 		max-height: 0; // Можете увеличить это значение в зависимости от высоты контента
 		transition: max-height 0.5s ease-in-out;
 	}

@@ -112,6 +112,7 @@ class EditTask extends Component {
 					allLabels={allLabels}
 					chosenLabels={chosenLabels}
 					handleChange={this.handleChange}
+					
 				/>
 				<div className='edit-task__form__buttons'>
 					<button

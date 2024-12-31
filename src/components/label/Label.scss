@@ -1,10 +1,10 @@
-.add-task__form__labels {
+.edit-task__form__labels {
 	margin: 20px 0 20px 3px;
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
 
-	.input-and-labels__wrapper {
+	&__input__checkboxes {
 		max-width: 300px;
 		border: 1px solid rgba(0, 0, 0, 0.1);
 		border-radius: 8px;
@@ -27,13 +27,13 @@
 			font-size: 14px;
 		}
 
-		.labels__wrapper {
+		.checkboxes__wrapper {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			gap: 5px;
 
-			.labels__item {
+			.checkboxes__item {
 				cursor: pointer;
 				position: relative;
 				height: 30px;
@@ -46,11 +46,11 @@
 				&:hover {
 					background-color: #f3f3f3; // Цвет фона при наведении
 				}
-				.labels__item__input {
+				.input__checkbox {
 					display: none; // Скрываем стандартный чекбокс
 				}
 
-				.labels__item__checkbox {
+				.custom-checkbox {
 					position: relative;
 					width: 20px;
 					height: 20px;
@@ -59,7 +59,7 @@
 					transition: all 0.3s;
 				}
 
-				.labels__item__checkbox::after {
+				.custom-checkbox::after {
 					content: "";
 					position: absolute;
 					top: 50%;
@@ -72,11 +72,11 @@
 					transition: transform 0.3s;
 				}
 
-				.labels__item__input:checked + .labels__item__checkbox {
+				.input__checkbox:checked + .custom-checkbox {
 					border-color: tomato; // Цвет рамки при выборе
 				}
 
-				.labels__item__input:checked + .labels__item__checkbox::after {
+				.input__checkbox:checked + .custom-checkbox::after {
 					transform: translate(-50%, -50%) scale(1); // Появление галочки
 				}
 			}

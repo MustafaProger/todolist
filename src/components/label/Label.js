@@ -83,16 +83,16 @@ class Label extends Component {
 		const { checkedItems } = this.state;
 
 		return (
-			<div className='add-task__form__labels'>
+			<div className='edit-task__form__labels'>
 				<div
-					className='add-task__button add-task__form__labels__button'
+					className='edit-task__button edit-task__form__labels__button'
 					onClick={this.updateStateLabel}>
 					<span></span>
 					<p>Labels</p>
 				</div>
 
 				{addLabel && (
-					<div className='input-and-labels__wrapper'>
+					<div className='edit-task__form__labels__input__checkboxes'>
 						<input
 							className='input-label'
 							type='text'
@@ -107,10 +107,10 @@ class Label extends Component {
 									<>
 										<hr className='divider' />
 										{arrSearched.length ? (
-											<div className='labels__wrapper'>
+											<div className='checkboxes__wrapper'>
 												{arrSearched.map((item, index) => (
 													<div
-														className='labels__item'
+														className='checkboxes__item'
 														key={`${item}-${index}`}
 														onClick={() => this.handleCheckboxChange(item)}>
 														<svg
@@ -122,12 +122,12 @@ class Label extends Component {
 														<p>{item}</p>
 														<input
 															type='checkbox'
-															className='labels__item__input'
+															className='input__checkbox'
 															checked={checkedItems[item] || false}
 															onChange={(e) => e.stopPropagation()}
 															ref={(el) => (this.checkboxRefs[item] = el)}
 														/>
-														<span className='labels__item__checkbox'></span>
+														<span className='custom-checkbox'></span>
 													</div>
 												))}
 											</div>

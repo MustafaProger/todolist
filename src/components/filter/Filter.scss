@@ -32,6 +32,12 @@
 		padding: 0;
 	}
 
+	.edit-task__form__labels__input__checkboxes {
+		hr.divider {
+			margin: 20px 0;
+		}
+	}
+
 	hr.divider {
 		margin: 0;
 	}
@@ -40,10 +46,10 @@
 		display: flex;
 		align-items: center;
 		gap: 20px;
-	  }
-	  
-	  span.task-count {
+	}
+
+	span.task-count {
 		font-size: 18px;
 		color: grey;
-	  }
+	}
 }

@@ -11,28 +11,6 @@ class Labels extends Component {
 		openLabel: null,
 	};
 
-	onOpen = (label) => {
-		this.setState((prevState) => {
-			const isSameLabel = prevState.openLabel === label;
-
-			// Закрытие всех меток
-			const allTasks = document.querySelectorAll(".filtered-task");
-			allTasks.forEach((task) => {
-				task.style.maxHeight = "0px";
-			});
-
-			// Открытие текущей метки, если она не совпадает с предыдущей
-			const content = document.querySelector(`.filtered-task-${label}`);
-			if (content && !isSameLabel) {
-				content.style.maxHeight = `${content.scrollHeight * 1}px`;
-			}
-
-			return {
-				openLabel: isSameLabel ? null : label, // Закрываем, если метка совпадает
-			};
-		});
-	};
-
 	render() {
 		const {
 			menuOpen,
@@ -48,7 +26,9 @@ class Labels extends Component {
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
+			onOpenFilterLabel,
 		} = this.props;
+
 		const { openLabel } = this.state;
 
 		return (
@@ -82,7 +62,7 @@ class Labels extends Component {
 									className='labels__element'>
 									<div
 										className='label__name'
-										onClick={() => this.onOpen(label)}>
+										onClick={() => onOpenFilterLabel(label, "tasks-label")}>
 										<svg
 											xmlns='http://www.w3.org/2000/svg'
 											id='Layer_1'
@@ -120,7 +100,7 @@ class Labels extends Component {
 									</div>
 
 									<div
-										className={`filtered-task filtered-task-${label} ${
+										className={`tasks-label tasks-label-${label} ${
 											label === openLabel ? "open" : ""
 										}`}>
 										{filteredTasks.length ? (
