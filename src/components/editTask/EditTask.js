@@ -1,4 +1,4 @@
-import { Component, lazy } from "react";
+import { Component } from "react";
 import "./EditTask.scss";
 import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";

@@ -18,10 +18,17 @@ class Label extends Component {
 	componentDidMount() {
 		const { allLabels, chosenLabels } = this.props;
 		const initialCheckedState = allLabels.reduce((acc, label) => {
-			acc[label] = chosenLabels.includes(label);  // Проверяем, если метка в chosenLabels, то true, иначе false
+			acc[label] = chosenLabels.includes(label); // Проверяем, если метка в chosenLabels, то true, иначе false
 			return acc;
 		}, {});
-	
+
+		if (this.props.labels) {
+			for (let i = 0; i < this.props.labels.length; i++) {
+				initialCheckedState[this.props.labels[i]] = true;
+			}
+			this.props.updateStateEvent("chosenLabels", [...this.props.labels]);
+		}
+
 		this.setState({ checkedItems: initialCheckedState });
 	}
 
@@ -55,10 +62,10 @@ class Label extends Component {
 		// Проверяем, изменились ли метки задачи
 		if (this.props.chosenLabels !== prevProps.chosenLabels) {
 			const initialCheckedState = this.props.allLabels.reduce((acc, label) => {
-				acc[label] = this.props.chosenLabels.includes(label);  // Отмечаем метки задачи как выбранные
+				acc[label] = this.props.chosenLabels.includes(label); // Отмечаем метки задачи как выбранные
 				return acc;
 			}, {});
-	
+
 			this.setState({ checkedItems: initialCheckedState });
 		}
 	}

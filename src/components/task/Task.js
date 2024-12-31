@@ -35,11 +35,15 @@ class Task extends Component {
 		const { editedTask } = this.state;
 		this.props.editTaskFunc(editedTask.id, updatedTask); // Передаем обновленную задачу через пропс
 		this.setState({ editingTaskId: null, editedTask: {} }); // Сбрасываем состояние
+		this.props.updateStateEvent("chosenLabels", []);
+		this.props.updateStateBool("addLabel", false);
 	};
 
 	// Отмена редактирования
 	cancelEdit = () => {
 		this.setState({ editingTaskId: null, editedTask: {} });
+		this.props.updateStateEvent("chosenLabels", []);
+		this.props.updateStateBool("addLabel", false);
 	};
 
 	renderItem = () => {
@@ -126,7 +130,7 @@ class Task extends Component {
 																task,
 																description,
 																importance,
-																labels
+																labels,
 															})
 														}
 													/>
