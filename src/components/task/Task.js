@@ -58,19 +58,32 @@ class Task extends Component {
 			updateStateBool,
 		} = this.props;
 		const { editingTaskId } = this.state;
-
+	
 		const importanceColors = {
 			Priority: "#CDCDCD",
 			Low: "#5390F5",
 			Medium: "orange",
 			High: "#FF6247",
 		};
-
-		return tasks.length > 0 ? (
+	
+		// Задаём порядок важности
+		const importanceOrder = {
+			High: 1,
+			Medium: 2,
+			Low: 3,
+			Priority: 4, // Меньший приоритет, чем у остальных
+		};
+	
+		// Сортируем задачи по важности
+		const sortedTasks = [...tasks].sort(
+			(a, b) => importanceOrder[a.importance] - importanceOrder[b.importance]
+		);
+	
+		return sortedTasks.length > 0 ? (
 			<div className={clazz}>
-				{tasks.map(({ id, task, description, importance, labels }) => {
+				{sortedTasks.map(({ id, task, description, importance, labels }) => {
 					const isEditing = editingTaskId === id;
-
+	
 					return (
 						<div
 							key={id}
@@ -143,7 +156,7 @@ class Task extends Component {
 													/>
 												</>
 											)}
-
+	
 											{clazz !== "completed-tasks-list" ? null : (
 												<>
 													<img
@@ -176,7 +189,7 @@ class Task extends Component {
 										{labels.length
 											? labels.map((item, index) => (
 													<p key={`${item}-${index}`}>{item}</p>
-											  ))
+												))
 											: null}
 									</div>
 								</div>
