@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, lazy } from "react";
 import "./EditTask.scss";
 import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
@@ -104,6 +104,7 @@ class EditTask extends Component {
 				</div>
 				<Label
 					tasks={tasks}
+					labels={this.props.labels}
 					updateStateBool={updateStateBool}
 					updateStateEvent={updateStateEvent}
 					addLabel={addLabel}

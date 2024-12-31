@@ -233,8 +233,8 @@ class App extends Component {
 									tasks={tasks}
 									countTasks={countTasks}
 									menuOpen={menuOpen}
-									updateStateEvent={this.updateStateEvent}
 									updateStateBool={this.updateStateBool}
+									updateStateEvent={this.updateStateEvent}
 									onActionWithTask={this.onActionWithTask}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}

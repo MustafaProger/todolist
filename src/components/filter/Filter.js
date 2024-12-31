@@ -45,7 +45,7 @@ class Filter extends Component {
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
-      updateStateBool,
+      		updateStateBool,
 			updateStateEvent,
 			addLabel,
 			allLabels,
@@ -107,7 +107,7 @@ class Filter extends Component {
 										onSaveTask={onSaveTask}
 										editingTask={editingTask}
 										updateStateEvent={updateStateEvent}
-                    updateStateBool={updateStateBool}
+                    					updateStateBool={updateStateBool}
 										addLabel={addLabel}
 										allLabels={allLabels}
 										currentLabel={currentLabel}

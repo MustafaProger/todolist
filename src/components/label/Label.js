@@ -16,11 +16,12 @@ class Label extends Component {
 	};
 
 	componentDidMount() {
-		// Инициализация состояний чекбоксов на основе props
-		const initialCheckedState = this.props.allLabels.reduce((acc, label) => {
-			acc[label] = this.props.chosenLabels.includes(label);
+		const { allLabels, chosenLabels } = this.props;
+		const initialCheckedState = allLabels.reduce((acc, label) => {
+			acc[label] = chosenLabels.includes(label);  // Проверяем, если метка в chosenLabels, то true, иначе false
 			return acc;
 		}, {});
+	
 		this.setState({ checkedItems: initialCheckedState });
 	}
 
@@ -29,25 +30,38 @@ class Label extends Component {
 			(prevState) => ({
 				checkedItems: {
 					...prevState.checkedItems,
-					[label]: !prevState.checkedItems[label],
+					[label]: !prevState.checkedItems[label], // Переключаем состояние чекбокса
 				},
 			}),
 			() => {
+				// Создаем новый массив выбранных меток на основе состояния чекбоксов
 				const checkedItemsKeys = Object.keys(this.state.checkedItems);
 				const checkedItemsValues = Object.values(this.state.checkedItems);
 
 				const newArr = checkedItemsKeys.filter(
-					(item, index) => checkedItemsValues[index]
+					(item, index) => checkedItemsValues[index] // Фильтруем выбранные метки
 				);
 
 				if (this.props.handleChange) {
-					this.props.handleChange("labels", newArr);
+					this.props.handleChange("labels", newArr); // Обновляем родительский компонент
 				}
 
-				this.props.updateStateEvent("chosenLabels", newArr);
+				this.props.updateStateEvent("chosenLabels", newArr); // Обновляем состояние в родительском компоненте
 			}
 		);
 	};
+
+	componentDidUpdate(prevProps) {
+		// Проверяем, изменились ли метки задачи
+		if (this.props.chosenLabels !== prevProps.chosenLabels) {
+			const initialCheckedState = this.props.allLabels.reduce((acc, label) => {
+				acc[label] = this.props.chosenLabels.includes(label);  // Отмечаем метки задачи как выбранные
+				return acc;
+			}, {});
+	
+			this.setState({ checkedItems: initialCheckedState });
+		}
+	}
 
 	render() {
 		const { updateStateEvent, addLabel, allLabels, currentLabel } = this.props;
