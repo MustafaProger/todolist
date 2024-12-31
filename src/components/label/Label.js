@@ -1,37 +1,52 @@
-import { Component } from "react";
+import { Component, createRef } from "react";
 import "./Label.scss";
 
 class Label extends Component {
 	// Переключение отображения меток
+
+	state = {
+		checkedItems: {}, // Объект для отслеживания состояний чекбоксов
+	};
+
+	checkboxRefs = {}; // Объект для хранения рефов чекбоксов
+
 	updateStateLabel = () => {
 		const newAddLabel = !this.props.addLabel;
 		this.props.updateStateBool("addLabel", newAddLabel);
 	};
 
-	// Добавление или удаление метки
-	// toggleLabelSelection = (label) => {
-	// 	const { chosenLabels } = this.props;
+	componentDidMount() {
+		// Инициализация состояний чекбоксов на основе props
+		const initialCheckedState = this.props.allLabels.reduce((acc, label) => {
+			acc[label] = this.props.chosenLabels.includes(label);
+			return acc;
+		}, {});
+		this.setState({ checkedItems: initialCheckedState });
+	}
 
-	// 	// Если метка уже выбрана, удаляем её
-	// 	if (chosenLabels.includes(label)) {
-	// 		const updatedLabels = chosenLabels.filter((item) => item !== label);
-	// 		this.props.updateStateEvent("chosenLabels", updatedLabels); // Передаём массив
-	// 	} else {
-	// 		// Если метка не выбрана, добавляем её
-	// 		this.props.updateStateEvent("chosenLabels", [...chosenLabels, label]); // Передаём обновлённый массив
-	// 	}
+	handleCheckboxChange = (label) => {
+		this.setState(
+			(prevState) => ({
+				checkedItems: {
+					...prevState.checkedItems,
+					[label]: !prevState.checkedItems[label],
+				},
+			}),
+			() => {
+				const checkedItemsKeys = Object.keys(this.state.checkedItems);
+				const checkedItemsValues = Object.values(this.state.checkedItems);
 
-	// 	console.log(label, chosenLabels);
-	// };
+				const newArr = checkedItemsKeys.filter(
+					(item, index) => checkedItemsValues[index]
+				);
+
+				this.props.updateStateEvent("chosenLabels", newArr);
+			}
+		);
+	};
 
 	render() {
-		const {
-			updateStateEvent,
-			addLabel,
-			allLabels,
-			currentLabel,
-			chosenLabels,
-		} = this.props;
+		const { updateStateEvent, addLabel, allLabels, currentLabel } = this.props;
 
 		// Поиск по меткам
 		const arrSearched = allLabels.filter(
@@ -39,6 +54,9 @@ class Label extends Component {
 				currentLabel.length === 0 ||
 				item.toLowerCase().includes(currentLabel.toLowerCase())
 		);
+		const { checkedItems } = this.state;
+
+		// console.log(checkedItems);
 
 		return (
 			<div className='add-task__form__labels'>
@@ -69,7 +87,8 @@ class Label extends Component {
 												{arrSearched.map((item, index) => (
 													<div
 														className='labels__item'
-														key={`${item}-${index}`}>
+														key={`${item}-${index}`}
+														onClick={() => this.handleCheckboxChange(item)}>
 														<svg
 															viewBox='0 0 24 24'
 															width='15'
@@ -79,6 +98,10 @@ class Label extends Component {
 														<p>{item}</p>
 														<input
 															type='checkbox'
+															className='labels__item__input'
+															checked={checkedItems[item] || false}
+															onChange={(e) => e.stopPropagation()}
+															ref={(el) => (this.checkboxRefs[item] = el)}
 														/>
 													</div>
 												))}

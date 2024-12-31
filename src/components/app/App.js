@@ -61,8 +61,10 @@ class App extends Component {
 	updateStateEvent = (prop, event) => {
 		if (typeof this.state[prop] === "string") {
 			this.setState({ [prop]: event.target.value });
-		} else if (typeof this.state[prop] === "object") {
+		} else if (typeof this.state[prop] === "object" && prop !== 'chosenLabels') {
 			this.setState({ [prop]: [...this.state[prop], event] });
+		}  else if (typeof this.state[prop] === "object" && prop === 'chosenLabels') {
+			this.setState({ [prop]: event });
 		}
 	};
 
