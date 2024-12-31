@@ -10,9 +10,9 @@ class Completed extends Component {
 	render() {
 		const {
 			menuOpen,
-			updateStateBool,
-			completedTasksCount,
 			completedTasks,
+			completedTasksCount,
+			updateStateBool,
 			onActionWithTask
 
 		} = this.props;

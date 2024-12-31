@@ -1,6 +1,5 @@
 import { Component } from "react";
 import "./Labels.scss";
-import Flag from "../../assets/icon/flag";
 import Task from "../../components/task/Task";
 
 import Menu from "../../components/menu/Menu";
@@ -36,19 +35,19 @@ class Labels extends Component {
 
 	render() {
 		const {
-			tasks,
-			allLabels,
-			updateStateBool,
 			menuOpen,
 			countTasks,
+			tasks,
+			allLabels,
+			addLabel,
+			currentLabel,
+			chosenLabels,
+			updateStateBool,
+			updateStateEvent,
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
-			updateStateEvent,
-			addLabel,
-			currentLabel,
-			chosenLabels,
 		} = this.props;
 		const { openLabel } = this.state;
 
@@ -128,16 +127,16 @@ class Labels extends Component {
 											<Task
 												clazz={"tasks-list"}
 												tasks={filteredTasks}
-												onActionWithTask={onActionWithTask}
-												editTaskFunc={editTaskFunc}
-												onSaveTask={onSaveTask}
-												editingTask={editingTask}
-												updateStateEvent={updateStateEvent}
-												updateStateBool={updateStateBool}
 												addLabel={addLabel}
 												allLabels={allLabels}
 												currentLabel={currentLabel}
 												chosenLabels={chosenLabels}
+												updateStateBool={updateStateBool}
+												updateStateEvent={updateStateEvent}
+												onActionWithTask={onActionWithTask}
+												editTaskFunc={editTaskFunc}
+												editingTask={editingTask}
+												onSaveTask={onSaveTask}
 											/>
 										) : (
 											<p className='no-task'>
@@ -145,8 +144,6 @@ class Labels extends Component {
 											</p>
 										)}
 									</div>
-
-									{/* <hr className='divider' /> */}
 								</div>
 							);
 						})}

@@ -2,8 +2,8 @@ import { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
-import Filters from "../../pages/filter/Filter";
-import Lables from "../../pages/labels/Labels";
+import Filters from "../../pages/filter/Filters";
+import Labels from "../../pages/labels/Labels";
 
 import "./App.scss";
 
@@ -242,7 +242,7 @@ class App extends Component {
 						<Route
 							path='/labels'
 							element={
-								<Lables
+								<Labels
 									menuOpen={menuOpen}
 									countTasks={countTasks}
 									tasks={tasks}

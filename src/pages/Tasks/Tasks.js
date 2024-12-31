@@ -10,6 +10,7 @@ import check from "../../assets/icon/check-circle.svg";
 class Tasks extends Component {
 	render() {
 		const {
+			menuOpen,
 			tasks,
 			countTasks,
 			addTask,
@@ -18,7 +19,6 @@ class Tasks extends Component {
 			updateStatePriority,
 			onTask,
 			onActionWithTask,
-			menuOpen,
 			editTaskFunc,
 			onSaveTask,
 			editingTask,

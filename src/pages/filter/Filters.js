@@ -8,18 +8,19 @@ class Filters extends Component {
 	render() {
 		const {
 			menuOpen,
-			tasks,
 			countTasks,
-			onActionWithTask,
-			editTaskFunc,
-			onSaveTask,
-			editingTask,
-			updateStateBool,
-			updateStateEvent,
+			tasks,
 			addLabel,
 			allLabels,
 			currentLabel,
 			chosenLabels,
+			updateStateBool,
+			updateStateEvent,
+			onActionWithTask,
+			editTaskFunc,
+			onSaveTask,
+			editingTask,
+
 		} = this.props;
 
 		return (
@@ -43,16 +44,16 @@ class Filters extends Component {
 					<Filter
 						tasks={tasks}
 						countTasks={countTasks}
-						onActionWithTask={onActionWithTask}
-						editTaskFunc={editTaskFunc}
-						onSaveTask={onSaveTask}
-						editingTask={editingTask}
-						updateStateEvent={updateStateEvent}
-						updateStateBool={updateStateBool}
 						addLabel={addLabel}
 						allLabels={allLabels}
 						currentLabel={currentLabel}
 						chosenLabels={chosenLabels}
+						updateStateBool={updateStateBool}
+						updateStateEvent={updateStateEvent}
+						onActionWithTask={onActionWithTask}
+						editTaskFunc={editTaskFunc}
+						onSaveTask={onSaveTask}
+						editingTask={editingTask}
 					/>
 				</div>
 			</div>
