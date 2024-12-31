@@ -17,7 +17,7 @@ class App extends Component {
 		importance: "Priority",
 		tasks: [
 			{
-				id: Date.now(),
+				id: Date.now() + 1,
 				task: "🕋 Read book about Tawhid",
 				description: "read the chapter 45",
 				importance: "Medium",
@@ -47,7 +47,6 @@ class App extends Component {
 		],
 		completedTasks: [],
 		completedTasksCount: 0,
-		editingTask: null,
 		addLabel: false,
 		allLabels: [
 			"Work",
@@ -168,10 +167,6 @@ class App extends Component {
 		}));
 	};
 
-	cancelEdit = () => {
-		this.setState({ editingTask: null });
-	};
-
 	render() {
 		const {
 			menuOpen,
@@ -180,7 +175,6 @@ class App extends Component {
 			countTasks,
 			addTask,
 			completedTasksCount,
-			editingTask,
 			addLabel,
 			allLabels,
 			currentLabel,
@@ -195,22 +189,21 @@ class App extends Component {
 							path='/'
 							element={
 								<Tasks
-									tasks={tasks}
+									menuOpen={menuOpen}
 									countTasks={countTasks}
 									addTask={addTask}
+									tasks={tasks}
+									addLabel={addLabel}
+									allLabels={allLabels}
+									currentLabel={currentLabel}
+									chosenLabels={chosenLabels}
 									updateStateEvent={this.updateStateEvent}
 									updateStatePriority={this.updateStatePriority}
 									onTask={this.onTask}
 									onActionWithTask={this.onActionWithTask}
 									updateStateBool={this.updateStateBool}
-									menuOpen={menuOpen}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
-									editingTask={editingTask}
-									addLabel={addLabel}
-									allLabels={allLabels}
-									currentLabel={currentLabel}
-									chosenLabels={chosenLabels}
 								/>
 							}
 						/>
@@ -218,11 +211,11 @@ class App extends Component {
 							path='/completed'
 							element={
 								<Completed
-									onActionWithTask={this.onActionWithTask}
+									menuOpen={menuOpen}
 									completedTasks={completedTasks}
 									completedTasksCount={completedTasksCount}
 									updateStateBool={this.updateStateBool}
-									menuOpen={menuOpen}
+									onActionWithTask={this.onActionWithTask}
 								/>
 							}
 						/>
@@ -230,19 +223,18 @@ class App extends Component {
 							path='/filter'
 							element={
 								<Filters
-									tasks={tasks}
-									countTasks={countTasks}
 									menuOpen={menuOpen}
+									countTasks={countTasks}
+									tasks={tasks}
+									addLabel={addLabel}
+									allLabels={allLabels}
+									currentLabel={currentLabel}
+									chosenLabels={chosenLabels}
 									updateStateBool={this.updateStateBool}
 									updateStateEvent={this.updateStateEvent}
 									onActionWithTask={this.onActionWithTask}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
-									editingTask={editingTask}
-									addLabel={addLabel}
-									allLabels={allLabels}
-									currentLabel={currentLabel}
-									chosenLabels={chosenLabels}
 								/>
 							}
 						/>
@@ -251,19 +243,18 @@ class App extends Component {
 							path='/labels'
 							element={
 								<Lables
-									countTasks={countTasks}
 									menuOpen={menuOpen}
-									updateStateEvent={this.updateStateEvent}
-									updateStateBool={this.updateStateBool}
-									allLabels={allLabels}
+									countTasks={countTasks}
 									tasks={tasks}
-									onActionWithTask={this.onActionWithTask}
-									editTaskFunc={this.editTaskFunc}
-									onSaveTask={this.onSaveTask}
-									editingTask={editingTask}
+									allLabels={allLabels}
 									addLabel={addLabel}
 									currentLabel={currentLabel}
 									chosenLabels={chosenLabels}
+									updateStateEvent={this.updateStateEvent}
+									updateStateBool={this.updateStateBool}
+									onActionWithTask={this.onActionWithTask}
+									editTaskFunc={this.editTaskFunc}
+									onSaveTask={this.onSaveTask}
 								/>
 							}
 						/>
