@@ -55,7 +55,7 @@ class Task extends Component {
 
 		return tasks.length > 0 ? (
 			<div className={clazz}>
-				{tasks.map(({ id, task, description, importance }) => {
+				{tasks.map(({ id, task, description, importance, labels }) => {
 					const isEditing = editingTaskId === id;
 
 					return (
@@ -150,6 +150,13 @@ class Task extends Component {
 											? description.slice(0, window.innerWidth / 20) + "..."
 											: description}
 									</p>
+									<div className='task-labels'>
+										{labels.length
+											? labels.map((item, index) => (
+													<p key={`${item}-${index}`}>{item}</p>
+											  ))
+											: null}
+									</div>
 								</div>
 							)}
 						</div>

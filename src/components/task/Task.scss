@@ -17,11 +17,6 @@
 	&:hover {
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 	}
-
-	&.completed {
-		opacity: 0.5;
-		text-decoration: line-through;
-	}
 }
 
 .task-header {
@@ -107,17 +102,30 @@
 	margin: 5px 0 0 30px;
 }
 
+.task-labels {
+	margin: 10px 0 0 30px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	p {
+		background-color: #F0F0F0;
+		padding: 8px;
+		border-radius: 8px;
+		font-size: 14px;
+	}
+}
+
 .task-item.completed {
 	display: flex;
 	flex-direction: column;
 
 	&.completed {
-		text-decoration: line-through; /* зачёркивание текста для завершённых задач */
 		opacity: 0.7; /* уменьшаем яркость для завершённых задач */
 	}
 
 	.task-header {
 		grid-template-columns: auto 1fr;
+		text-decoration: line-through; /* зачёркивание текста для завершённых задач */
 	}
 
 	.importance-circle {
@@ -137,6 +145,15 @@
 	.task-description {
 		color: #555;
 		margin-left: 0px;
+		text-decoration: line-through; /* зачёркивание текста для завершённых задач */
+	}
+
+	.task-labels {
+		text-decoration: none;
+		margin: 10px 0 0 0;
+		p {
+			background-color: rgb(219, 219, 219);
+		}
 	}
 }
 

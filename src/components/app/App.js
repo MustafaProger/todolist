@@ -21,14 +21,14 @@ class App extends Component {
 				task: "🕋 Read book about Tawhid",
 				description: "read the chapter 45",
 				importance: "Medium",
-				labels: [],
+				labels: ["Religion", "Self-Development"],
 			},
 			{
 				id: Date.now() + 2,
 				task: "💻 Programming",
 				description: "Work with web-site",
 				importance: "High",
-				labels: [],
+				labels: ["Work", "Finance", "Job"],
 			},
 			{
 				id: Date.now() + 3,
@@ -42,16 +42,23 @@ class App extends Component {
 				task: "🗑️ Throw out the trash",
 				description: "",
 				importance: "Priority",
-				labels: [],
+				labels: ["Routine"],
 			},
 		],
 		completedTasks: [],
 		completedTasksCount: 0,
 		editingTask: null,
 		addLabel: false,
-		allLabels: ["College", "Work", "Hobbis"],
+		allLabels: [
+			"Work",
+			"Finance",
+			"Job",
+			"Religion",
+			"Self-Development",
+			"Routine",
+		],
 		currentLabel: "",
-		chosenLabels: []
+		chosenLabels: [],
 	};
 
 	updateStateBool = (prop, bool) => {
@@ -61,9 +68,15 @@ class App extends Component {
 	updateStateEvent = (prop, event) => {
 		if (typeof this.state[prop] === "string") {
 			this.setState({ [prop]: event.target.value });
-		} else if (typeof this.state[prop] === "object" && prop !== 'chosenLabels') {
+		} else if (
+			typeof this.state[prop] === "object" &&
+			prop !== "chosenLabels"
+		) {
 			this.setState({ [prop]: [...this.state[prop], event] });
-		}  else if (typeof this.state[prop] === "object" && prop === 'chosenLabels') {
+		} else if (
+			typeof this.state[prop] === "object" &&
+			prop === "chosenLabels"
+		) {
 			this.setState({ [prop]: event });
 		}
 	};
@@ -85,7 +98,7 @@ class App extends Component {
 			task,
 			description,
 			importance,
-			labels: [...chosenLabels]
+			labels: [...chosenLabels],
 		};
 
 		this.setState({
@@ -94,8 +107,9 @@ class App extends Component {
 			description: "",
 			countTasks: tasks.length + 1,
 			addTask: false,
+			addLabel: false,
 			currentLabel: "",
-			chosenLabels: []
+			chosenLabels: [],
 		});
 	};
 
@@ -170,7 +184,7 @@ class App extends Component {
 			addLabel,
 			allLabels,
 			currentLabel,
-			chosenLabels
+			chosenLabels,
 		} = this.state;
 
 		return (
