@@ -4,6 +4,26 @@ import { Link } from "react-router-dom";
 import "./Menu.scss";
 
 class Menu extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isDark: false,
+		};
+		// Привязываем метод к контексту компонента
+		this.toggleTheme = this.toggleTheme.bind(this);
+	}
+
+	toggleTheme() {
+		this.setState({ isDark: !this.state.isDark }, () => {
+			document.body.classList.toggle("dark");
+
+			if (this.state.isDark) {
+				this.props.updateStateBool("theme", "dark");
+			} else {
+				this.props.updateStateBool("theme", "light");
+			}
+		});
+	}
 
 	handleCheckboxChange = () => {
 		const newMenuOpen = !this.props.menuOpen;
@@ -80,6 +100,18 @@ class Menu extends Component {
 
 									<label htmlFor='menuCheckbox'>Labels</label>
 								</Link>
+							</li>
+							<li>
+								<div
+									className='mode__container'
+									onClick={this.toggleTheme}>
+									<div className='mode'></div>
+									{this.state.isDark ? (
+										<div>Dark mode</div>
+									) : (
+										<div>Light mode</div>
+									)}
+								</div>
 							</li>
 						</ul>
 					</div>

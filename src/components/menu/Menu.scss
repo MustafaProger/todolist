@@ -1,4 +1,6 @@
 .menu {
+	position: relative;
+
 	li a {
 		display: flex;
 		align-items: center;
@@ -101,5 +103,92 @@
 
 	#menuToggle input.active ~ ul {
 		transform: none;
+	}
+}
+
+.mode__container {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	position: relative;
+	left: -5px;
+}
+
+.mode {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: black;
+	cursor: pointer;
+	text-align: center;
+}
+
+.mode:before {
+	content: "";
+	position: absolute;
+	top: 2.5px;
+	left: 2.5px;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background-image: linear-gradient(to right, white 50%, black 50.01%);
+	border: 2px solid white;
+	transition: transform 0.5s ease-out;
+	box-sizing: border-box;
+}
+
+.mode:after {
+	content: "";
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: white;
+	mix-blend-mode: difference;
+	box-sizing: border-box;
+}
+
+.mode div {
+	position: absolute;
+	bottom: -44px;
+	width: 76px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 14px;
+	font-weight: 500;
+	color: white;
+	line-height: 18px;
+	pointer-events: none;
+}
+
+.mode div:after {
+	content: "Off";
+	font-weight: 400;
+}
+
+body.dark .mode {
+	background: white;
+}
+
+body.dark .mode:before {
+	border: 2px solid black;
+	transform: rotate(180deg);
+}
+
+body.dark .mode div:after {
+	content: "On";
+}
+
+.mode.scaling:after {
+	animation: scaleInner 0.5s ease forwards;
+}
+
+@keyframes scaleInner {
+	50% {
+		transform: scale(1.8);
 	}
 }
