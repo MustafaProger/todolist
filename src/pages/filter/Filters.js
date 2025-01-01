@@ -20,7 +20,7 @@ class Filters extends Component {
 			editTaskFunc,
 			onSaveTask,
 			editingTask,
-			onOpenFilterLabel
+			onOpenFilterLabel,
 		} = this.props;
 
 		return (
@@ -55,7 +55,6 @@ class Filters extends Component {
 						onSaveTask={onSaveTask}
 						editingTask={editingTask}
 						onOpenFilterLabel={onOpenFilterLabel}
-
 					/>
 				</div>
 			</div>

@@ -2,6 +2,7 @@ import { Component, createRef } from "react";
 import "./AddTask.scss";
 import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
+import Time from "../time/Time";
 
 class AddTask extends Component {
 	state = {
@@ -90,6 +91,8 @@ class AddTask extends Component {
 								)}
 							</div>
 						</div>
+
+						<Time updateStateBool={updateStateBool} />
 
 						<Label
 							addLabel={addLabel}
