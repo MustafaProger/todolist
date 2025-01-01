@@ -13,8 +13,8 @@ class Task extends Component {
 	};
 
 	componentDidMount() {
-		if (this.props.updateStateBool) {
-			this.props.updateStateBool("term", "")
+		if (this.props.updateStateBool && this.props.sortedBy === "task") {
+			this.props.updateStateBool("term", "");
 		}
 	}
 
@@ -119,7 +119,7 @@ class Task extends Component {
 
 		const sortedBySearch =
 			this.props.sortedBy === "task"
-				? this.props.search(sortedTasks, 'task')
+				? this.props.search(sortedTasks, "task")
 				: sortedTasks;
 
 		return sortedBySearch.length > 0 ? (
