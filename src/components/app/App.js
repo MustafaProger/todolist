@@ -166,6 +166,17 @@ class App extends Component {
 		term: "",
 	};
 
+	componentDidMount() {
+		const oldState = JSON.parse(localStorage.getItem("state"));
+		if (oldState) {
+			this.setState(oldState);
+		}
+	}
+
+	updateLocalStorage = () => {
+		localStorage.setItem("state", JSON.stringify(this.state));
+	};
+
 	updateStateBool = (prop, bool) => {
 		this.setState(() => ({ [prop]: bool }));
 	};
@@ -191,8 +202,7 @@ class App extends Component {
 	};
 
 	onTask = () => {
-		const { task, description, tasks, importance, chosenLabels, time } =
-			this.state;
+		const { task, description, importance, chosenLabels, time } = this.state;
 
 		if (!task.trim()) {
 			alert("Task name cannot be empty.");
@@ -211,56 +221,62 @@ class App extends Component {
 			time,
 		};
 
-		this.setState({
-			tasks: [...tasks, newTask],
-			task: "",
-			description: "",
-			countTasks: tasks.length + 1,
-			addTask: false,
-			addLabel: false,
-			currentLabel: "",
-			chosenLabels: [],
-			time: "",
-		});
+		this.setState(
+			(prevState) => ({
+				tasks: [...prevState.tasks, newTask],
+				task: "",
+				description: "",
+				countTasks: prevState.tasks.length + 1,
+				addTask: false,
+				addLabel: false,
+				currentLabel: "",
+				chosenLabels: [],
+				time: "",
+			}),
+			this.updateLocalStorage
+		);
 	};
 
 	onActionWithTask = (id, action) => {
-		this.setState(({ tasks, completedTasks }) => {
-			const newArr = tasks.filter((item) => item.id !== id);
-			const completedTask = tasks.find((item) => item.id === id);
-			const removeCompletedTask = completedTasks.filter(
-				(item) => item.id !== id
-			);
-			const returnCompletedTask = completedTasks.filter(
-				(item) => item.id === id
-			);
+		this.setState(
+			({ tasks, completedTasks }) => {
+				const newArr = tasks.filter((item) => item.id !== id);
+				const completedTask = tasks.find((item) => item.id === id);
+				const removeCompletedTask = completedTasks.filter(
+					(item) => item.id !== id
+				);
+				const returnCompletedTask = completedTasks.filter(
+					(item) => item.id === id
+				);
 
-			if (action === "remove") {
-				return {
-					tasks: newArr,
-					countTasks: tasks.length - 1,
-				};
-			} else if (action === "completed") {
-				return {
-					tasks: newArr,
-					completedTasks: [...completedTasks, completedTask],
-					countTasks: tasks.length - 1,
-					completedTasksCount: completedTasks.length + 1,
-				};
-			} else if (action === "remove-completed") {
-				return {
-					completedTasks: removeCompletedTask,
-					completedTasksCount: completedTasks.length - 1,
-				};
-			} else if (action === "refresh") {
-				return {
-					tasks: [...tasks, ...returnCompletedTask],
-					countTasks: tasks.length + 1,
-					completedTasks: removeCompletedTask,
-					completedTasksCount: completedTasks.length - 1,
-				};
-			}
-		});
+				if (action === "remove") {
+					return {
+						tasks: newArr,
+						countTasks: tasks.length - 1,
+					};
+				} else if (action === "completed") {
+					return {
+						tasks: newArr,
+						completedTasks: [...completedTasks, completedTask],
+						countTasks: tasks.length - 1,
+						completedTasksCount: completedTasks.length + 1,
+					};
+				} else if (action === "remove-completed") {
+					return {
+						completedTasks: removeCompletedTask,
+						completedTasksCount: completedTasks.length - 1,
+					};
+				} else if (action === "refresh") {
+					return {
+						tasks: [...tasks, ...returnCompletedTask],
+						countTasks: tasks.length + 1,
+						completedTasks: removeCompletedTask,
+						completedTasksCount: completedTasks.length - 1,
+					};
+				}
+			},
+			() => this.updateLocalStorage()
+		);
 	};
 
 	editTaskFunc = (id, updatedTask) => {
@@ -268,7 +284,7 @@ class App extends Component {
 		const updatedTasks = this.state.tasks.map((task) =>
 			task.id === id ? { ...task, ...updatedTask } : task
 		);
-		this.setState({ tasks: updatedTasks });
+		this.setState({ tasks: updatedTasks }, () => this.updateLocalStorage());
 	};
 
 	onSaveTask = (updatedTask) => {
@@ -411,7 +427,6 @@ class App extends Component {
 									onSaveTask={this.onSaveTask}
 									onOpenFilterLabel={this.onOpenFilterLabel}
 									search={this.search}
-
 								/>
 							}
 						/>
