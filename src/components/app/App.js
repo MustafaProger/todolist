@@ -15,46 +15,14 @@ class App extends Component {
 		task: "",
 		description: "",
 		importance: "Priority",
-		tasks:[
-			{
-				id: Date.now() + 5,
-				task: "🏋️ Gym",
-				description: "Complete a 45-minute workout",
-				importance: "High",
-				labels: ["Health", "Fitness"],
-				time: '08:30'
-			},
-			{
-				id: Date.now() + 6,
-				task: "📖 Quran Study",
-				description: "Memorize Surah Al-Mulk",
-				importance: "Priority",
-				labels: ["Religion", "Self-Development"],
-				time: '06:00'
-			},
-			{
-				id: Date.now() + 7,
-				task: "📧 Check Emails",
-				description: "Respond to work and personal emails",
-				importance: "Medium",
-				labels: ["Work", "Routine"],
-				time: '09:00'
-			},
-			{
-				id: Date.now() + 8,
-				task: "🍳 Cook Breakfast",
-				description: "Prepare omelette and coffee",
-				importance: "Low",
-				labels: ["Routine", "Food"],
-				time: '07:15'
-			},
+		tasks: [
 			{
 				id: Date.now() + 9,
 				task: "📚 College Assignment",
 				description: "Complete math homework",
 				importance: "High",
 				labels: ["Education", "College"],
-				time: '10:30'
+				time: "10:30",
 			},
 			{
 				id: Date.now() + 10,
@@ -62,7 +30,7 @@ class App extends Component {
 				description: "Organize desk and vacuum floor",
 				importance: "Medium",
 				labels: ["Routine"],
-				time: '13:00'
+				time: "13:00",
 			},
 			{
 				id: Date.now() + 11,
@@ -70,7 +38,7 @@ class App extends Component {
 				description: "Buy vegetables, milk, and bread",
 				importance: "Low",
 				labels: ["Routine", "Chores"],
-				time: '16:00'
+				time: "16:00",
 			},
 			{
 				id: Date.now() + 12,
@@ -78,7 +46,7 @@ class App extends Component {
 				description: "Finish the last chapter of 'Atomic Habits'",
 				importance: "Medium",
 				labels: ["Self-Development"],
-				time: '18:30'
+				time: "18:30",
 			},
 			{
 				id: Date.now() + 13,
@@ -86,7 +54,7 @@ class App extends Component {
 				description: "Write tasks for tomorrow",
 				importance: "High",
 				labels: ["Planning"],
-				time: '20:00'
+				time: "20:00",
 			},
 			{
 				id: Date.now() + 14,
@@ -94,7 +62,7 @@ class App extends Component {
 				description: "30-minute walk in the park",
 				importance: "Low",
 				labels: ["Health", "Relaxation"],
-				time: '19:00'
+				time: "19:00",
 			},
 			{
 				id: Date.now() + 15,
@@ -102,7 +70,7 @@ class App extends Component {
 				description: "Check in with parents and siblings",
 				importance: "Priority",
 				labels: ["Family"],
-				time: '17:00'
+				time: "17:00",
 			},
 			{
 				id: Date.now() + 16,
@@ -110,7 +78,7 @@ class App extends Component {
 				description: "",
 				importance: "High",
 				labels: ["Religion"],
-				time: '05:00'
+				time: "05:00",
 			},
 			{
 				id: Date.now() + 17,
@@ -118,7 +86,7 @@ class App extends Component {
 				description: "Discuss project updates and deadlines",
 				importance: "High",
 				labels: ["Work", "Job"],
-				time: '11:00'
+				time: "11:00",
 			},
 			{
 				id: Date.now() + 18,
@@ -126,7 +94,7 @@ class App extends Component {
 				description: "",
 				importance: "Low",
 				labels: ["Routine", "Cleaning"],
-				time: '14:30'
+				time: "14:30",
 			},
 			{
 				id: Date.now() + 19,
@@ -134,11 +102,44 @@ class App extends Component {
 				description: "Relax with friends online",
 				importance: "Low",
 				labels: ["Relaxation", "Fun"],
-				time: '21:00'
-			}
+				time: "21:00",
+			},
 		],
-		completedTasks: [],
-		completedTasksCount: 0,
+		completedTasks: [
+			{
+				id: Date.now() + 5,
+				task: "🏋️ Gym",
+				description: "Complete a 45-minute workout",
+				importance: "High",
+				labels: ["Health", "Fitness"],
+				time: "08:30",
+			},
+			{
+				id: Date.now() + 6,
+				task: "📖 Quran Study",
+				description: "Memorize Surah Al-Mulk",
+				importance: "Priority",
+				labels: ["Religion", "Self-Development"],
+				time: "06:00",
+			},
+			{
+				id: Date.now() + 7,
+				task: "📧 Check Emails",
+				description: "Respond to work and personal emails",
+				importance: "Medium",
+				labels: ["Work", "Routine"],
+				time: "09:00",
+			},
+			{
+				id: Date.now() + 8,
+				task: "🍳 Cook Breakfast",
+				description: "Prepare omelette and coffee",
+				importance: "Low",
+				labels: ["Routine", "Food"],
+				time: "07:15",
+			},
+		],
+		completedTasksCount: 3,
 		addLabel: false,
 		allLabels: [
 			"Work",
@@ -157,7 +158,7 @@ class App extends Component {
 			"Relaxation",
 			"Family",
 			"Cleaning",
-			"Fun"
+			"Fun",
 		],
 		currentLabel: "",
 		chosenLabels: [],

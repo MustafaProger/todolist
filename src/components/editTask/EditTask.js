@@ -2,6 +2,7 @@ import { Component } from "react";
 import "./EditTask.scss";
 import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
+import Time from "../time/Time";
 
 class EditTask extends Component {
 	state = {
@@ -10,6 +11,7 @@ class EditTask extends Component {
 		description: this.props.description,
 		importance: this.props.importance,
 		labels: this.props.labels,
+		time: this.props.time,
 		isOpen: false,
 	};
 
@@ -28,8 +30,14 @@ class EditTask extends Component {
 			task: this.state.task,
 			description: this.state.description,
 			importance: this.state.importance,
-			labels: this.state.labels
+			labels: this.state.labels,
+			time: this.state.time,
 		};
+
+		if (this.state.time === "Invalid Date") {
+			alert("Enter the time correctly");
+			return;
+		}
 
 		// Вызываем пропс saveTask, чтобы обновить задачу
 		this.props.saveTask(updatedTask);
@@ -62,7 +70,6 @@ class EditTask extends Component {
 			{ value: "Medium", label: "Medium", icon: <Flag theme='orange' /> },
 			{ value: "High", label: "High", icon: <Flag theme='#FF6247' /> },
 		];
-
 
 		return (
 			<div className='edit-task__form'>
@@ -102,6 +109,10 @@ class EditTask extends Component {
 						)}
 					</div>
 				</div>
+				<Time
+					updateStateBool={updateStateBool}
+					handleChange={this.handleChange}
+				/>
 				<Label
 					tasks={tasks}
 					labels={this.props.labels}
@@ -112,7 +123,6 @@ class EditTask extends Component {
 					allLabels={allLabels}
 					chosenLabels={chosenLabels}
 					handleChange={this.handleChange}
-					
 				/>
 				<div className='edit-task__form__buttons'>
 					<button
