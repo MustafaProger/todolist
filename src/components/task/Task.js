@@ -12,6 +12,12 @@ class Task extends Component {
 		editedTask: {}, // Данные редактируемой задачи
 	};
 
+	componentDidMount() {
+		if (this.props.updateStateBool) {
+			this.props.updateStateBool("term", "")
+		}
+	}
+
 	// Включить режим редактирования
 	startEditing = (id, taskData) => {
 		this.setState({
@@ -37,7 +43,7 @@ class Task extends Component {
 		this.setState({ editingTaskId: null, editedTask: {} }); // Сбрасываем состояние
 		this.props.updateStateBool("addLabel", false);
 		this.props.updateStateEvent("chosenLabels", []);
-		this.props.updateStateBool("time", '');
+		this.props.updateStateBool("time", "");
 	};
 
 	// Отмена редактирования
@@ -45,7 +51,7 @@ class Task extends Component {
 		this.setState({ editingTaskId: null, editedTask: {} });
 		this.props.updateStateBool("addLabel", false);
 		this.props.updateStateEvent("chosenLabels", []);
-		this.props.updateStateBool("time", '');
+		this.props.updateStateBool("time", "");
 	};
 
 	isTimeExpired = (taskTime) => {
@@ -111,9 +117,14 @@ class Task extends Component {
 			return importanceOrder[a.importance] - importanceOrder[b.importance];
 		});
 
-		return sortedTasks.length > 0 ? (
+		const sortedBySearch =
+			this.props.sortedBy === "task"
+				? this.props.search(sortedTasks, 'task')
+				: sortedTasks;
+
+		return sortedBySearch.length > 0 ? (
 			<div className={clazz}>
-				{sortedTasks.map(
+				{sortedBySearch.map(
 					({ id, task, description, importance, labels, time }) => {
 						const isEditing = editingTaskId === id;
 						const isExpired = time ? this.isTimeExpired(time) : false;

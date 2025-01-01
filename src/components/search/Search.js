@@ -5,10 +5,10 @@ class Search extends Component {
 	render() {
 		const { placeholder } = this.props;
 		return (
-			<div class='search'>
-				<div class='search__inner'>
-					<div class='search__container'>
-						<div class='icon'>
+			<div className='search'>
+				<div className='search__inner'>
+					<div className='search__container'>
+						<div className='icon'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								width='24'
@@ -16,10 +16,10 @@ class Search extends Component {
 								viewBox='0 0 24 24'
 								fill='none'
 								stroke='#657789'
-								stroke-width='3'
-								stroke-linecap='round'
-								stroke-linejoin='round'
-								class='feather feather-search'>
+								strokeWidth='3'
+								strokeLinecap='round'
+								strokeLinejoin='round'
+								className='feather feather-search'>
 								<circle
 									cx='11'
 									cy='11'
@@ -33,8 +33,11 @@ class Search extends Component {
 								/>
 							</svg>
 						</div>
-						<div class='container__input'>
-							<input placeholder={placeholder} />
+						<div className='container__input'>
+							<input
+								placeholder={placeholder}
+								onChange={(e) => this.props.updateStateEvent("term", e)}
+							/>
 						</div>
 					</div>
 				</div>

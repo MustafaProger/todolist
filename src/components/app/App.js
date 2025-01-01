@@ -10,7 +10,7 @@ import "./App.scss";
 class App extends Component {
 	state = {
 		menuOpen: false,
-		countTasks: 15,
+		countTasks: 11,
 		addTask: false,
 		task: "",
 		description: "",
@@ -163,6 +163,7 @@ class App extends Component {
 		currentLabel: "",
 		chosenLabels: [],
 		time: "",
+		term: "",
 	};
 
 	updateStateBool = (prop, bool) => {
@@ -300,6 +301,24 @@ class App extends Component {
 		});
 	};
 
+	search = (tasks, nameSearch) => {
+		if (this.state.term.length === 0) return tasks;
+
+		if (nameSearch === "task") {
+			return tasks.filter((item) => {
+				return (
+					item[nameSearch]
+						.toLowerCase()
+						.indexOf(this.state.term.toLowerCase()) > -1
+				);
+			});
+		} else if (nameSearch === "label") {
+			return tasks.filter(
+				(item) => item.toLowerCase().indexOf(this.state.term.toLowerCase()) > -1
+			);
+		}
+	};
+
 	render() {
 		const {
 			menuOpen,
@@ -337,6 +356,7 @@ class App extends Component {
 									updateStateBool={this.updateStateBool}
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
+									search={this.search}
 								/>
 							}
 						/>
@@ -390,6 +410,8 @@ class App extends Component {
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
 									onOpenFilterLabel={this.onOpenFilterLabel}
+									search={this.search}
+
 								/>
 							}
 						/>

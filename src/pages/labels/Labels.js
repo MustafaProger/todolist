@@ -5,11 +5,16 @@ import Task from "../../components/task/Task";
 import Menu from "../../components/menu/Menu";
 import countTask from "../../assets/icon/check-circle.svg";
 import CurrentDate from "../../components/currentDate/CurrentDate";
+import Search from "../../components/search/Search";
 
 class Labels extends Component {
 	state = {
 		openLabel: null,
 	};
+
+	componentDidMount() {
+		this.props.updateStateBool("term", "")
+	}
 
 	render() {
 		const {
@@ -27,9 +32,12 @@ class Labels extends Component {
 			onSaveTask,
 			editingTask,
 			onOpenFilterLabel,
+			search,
 		} = this.props;
 
 		const { openLabel } = this.state;
+
+		const sortedLabels = this.props.search(allLabels, "label");
 
 		return (
 			<div className='labels'>
@@ -46,10 +54,18 @@ class Labels extends Component {
 						/>
 						{countTasks} tasks
 					</p>
+
 					<CurrentDate />
+
 					<hr className='divider' />
+
+					<Search
+						placeholder={"Type a label"}
+						updateStateEvent={updateStateEvent}
+					/>
+
 					<div className='labels__wrapper'>
-						{allLabels.map((label, index) => {
+						{sortedLabels.map((label, index) => {
 							// Фильтрация задач по метке
 							const filteredTasks = tasks.filter((task) =>
 								task.labels.includes(label)
@@ -117,6 +133,8 @@ class Labels extends Component {
 												editTaskFunc={editTaskFunc}
 												editingTask={editingTask}
 												onSaveTask={onSaveTask}
+												search={search}
+												sortedBy={"label"}
 											/>
 										) : (
 											<p className='no-task'>

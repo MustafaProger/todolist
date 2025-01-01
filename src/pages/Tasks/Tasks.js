@@ -27,6 +27,8 @@ class Tasks extends Component {
 			allLabels,
 			currentLabel,
 			chosenLabels,
+			search,
+			term,
 		} = this.props;
 
 		return (
@@ -46,7 +48,10 @@ class Tasks extends Component {
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
-					<Search placeholder={'Type a taskname'}/>
+					<Search
+						placeholder={"Type a taskname"}
+						updateStateEvent={updateStateEvent}
+					/>
 					<Task
 						clazz={"tasks-list"}
 						tasks={tasks}
@@ -60,6 +65,8 @@ class Tasks extends Component {
 						allLabels={allLabels}
 						currentLabel={currentLabel}
 						chosenLabels={chosenLabels}
+						search={search}
+						sortedBy={"task"}
 					/>
 					<AddTask
 						tasks={tasks}
