@@ -6,23 +6,36 @@ import "./Menu.scss";
 class Menu extends Component {
 	constructor(props) {
 		super(props);
+		const savedTheme = localStorage.getItem("theme");
 		this.state = {
-			isDark: false,
+			isDark: savedTheme === "dark",
 		};
 		// Привязываем метод к контексту компонента
 		this.toggleTheme = this.toggleTheme.bind(this);
 	}
 
-	toggleTheme() {
-		this.setState({ isDark: !this.state.isDark }, () => {
-			document.body.classList.toggle("dark");
+	componentDidMount() {
+		// Если тема тёмная, добавляем класс dark на body
+		if (this.state.isDark) {
+			document.body.classList.add("dark");
+		}
+	}
 
-			if (this.state.isDark) {
-				this.props.updateStateBool("theme", "dark");
-			} else {
-				this.props.updateStateBool("theme", "light");
+	toggleTheme() {
+		this.setState(
+			(prevState) => ({ isDark: !prevState.isDark }),
+			() => {
+				// Меняем класс на body в зависимости от состояния
+				document.body.classList.toggle("dark");
+
+				// Сохраняем тему в localStorage
+				if (this.state.isDark) {
+					localStorage.setItem("theme", "dark");
+				} else {
+					localStorage.setItem("theme", "light");
+				}
 			}
-		});
+		);
 	}
 
 	handleCheckboxChange = () => {

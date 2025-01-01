@@ -33,6 +33,7 @@ class Labels extends Component {
 			editingTask,
 			onOpenFilterLabel,
 			search,
+			theme
 		} = this.props;
 
 		const { openLabel } = this.state;
@@ -44,6 +45,7 @@ class Labels extends Component {
 				<Menu
 					updateStateBool={updateStateBool}
 					menuOpen={menuOpen}
+					theme={theme}
 				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
 					<h1 className='title'>Labels</h1>

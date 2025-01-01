@@ -3,7 +3,7 @@ import Menu from "../../components/menu/Menu";
 import CurrentDate from "../../components/currentDate/CurrentDate";
 
 import "./Completed.scss";
-import check from '../../assets/icon/check-circle.svg'
+import check from "../../assets/icon/check-circle.svg";
 import Task from "../../components/task/Task";
 
 class Completed extends Component {
@@ -13,14 +13,15 @@ class Completed extends Component {
 			completedTasks,
 			completedTasksCount,
 			updateStateBool,
-			onActionWithTask
-
+			onActionWithTask,
+			theme,
 		} = this.props;
 		return (
 			<div className='done-tasks'>
 				<Menu
 					updateStateBool={updateStateBool}
 					menuOpen={menuOpen}
+					theme={theme}
 				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
 					<h1 className='title'>Completed</h1>
@@ -34,7 +35,7 @@ class Completed extends Component {
 					<CurrentDate />
 					<hr className='divider' />
 					<Task
-						clazz={'completed-tasks-list'}
+						clazz={"completed-tasks-list"}
 						tasks={completedTasks}
 						onActionWithTask={onActionWithTask}
 					/>

@@ -28,7 +28,7 @@ class Tasks extends Component {
 			currentLabel,
 			chosenLabels,
 			search,
-			term,
+			theme
 		} = this.props;
 
 		return (
@@ -36,6 +36,8 @@ class Tasks extends Component {
 				<Menu
 					updateStateBool={updateStateBool}
 					menuOpen={menuOpen}
+					theme={theme}
+
 				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
 					<h1 className='title'>Tasks</h1>

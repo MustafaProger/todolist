@@ -164,6 +164,7 @@ class App extends Component {
 		chosenLabels: [],
 		time: "",
 		term: "",
+		theme: 'light'
 	};
 
 	componentDidMount() {
@@ -347,6 +348,7 @@ class App extends Component {
 			allLabels,
 			currentLabel,
 			chosenLabels,
+			theme
 		} = this.state;
 
 		return (
@@ -373,6 +375,7 @@ class App extends Component {
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
 									search={this.search}
+									theme={theme}
 								/>
 							}
 						/>
@@ -385,6 +388,8 @@ class App extends Component {
 									completedTasksCount={completedTasksCount}
 									updateStateBool={this.updateStateBool}
 									onActionWithTask={this.onActionWithTask}
+									theme={theme}
+
 								/>
 							}
 						/>
@@ -405,6 +410,8 @@ class App extends Component {
 									editTaskFunc={this.editTaskFunc}
 									onSaveTask={this.onSaveTask}
 									onOpenFilterLabel={this.onOpenFilterLabel}
+									theme={theme}
+
 								/>
 							}
 						/>
@@ -427,6 +434,8 @@ class App extends Component {
 									onSaveTask={this.onSaveTask}
 									onOpenFilterLabel={this.onOpenFilterLabel}
 									search={this.search}
+									theme={theme}
+
 								/>
 							}
 						/>
