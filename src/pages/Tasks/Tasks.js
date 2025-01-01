@@ -6,6 +6,7 @@ import Task from "../../components/task/Task";
 
 import "./Tasks.scss";
 import check from "../../assets/icon/check-circle.svg";
+import Search from "../../components/search/Search";
 
 class Tasks extends Component {
 	render() {
@@ -45,6 +46,7 @@ class Tasks extends Component {
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
+					<Search placeholder={'Type a taskname'}/>
 					<Task
 						clazz={"tasks-list"}
 						tasks={tasks}

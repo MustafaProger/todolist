@@ -11,7 +11,7 @@ class App extends Component {
 	state = {
 		menuOpen: false,
 		countTasks: 15,
-		addTask: true,
+		addTask: false,
 		task: "",
 		description: "",
 		importance: "Priority",
@@ -139,7 +139,7 @@ class App extends Component {
 				time: "07:15",
 			},
 		],
-		completedTasksCount: 3,
+		completedTasksCount: 4,
 		addLabel: false,
 		allLabels: [
 			"Work",
