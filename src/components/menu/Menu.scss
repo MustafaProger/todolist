@@ -1,6 +1,7 @@
 .menu {
 	position: relative;
 
+
 	li a {
 		display: flex;
 		align-items: center;
@@ -23,6 +24,7 @@
 		color: #232323;
 		fill: #232323;
 		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+		transition: 0.5s;
 	}
 
 	#menuToggle a:hover,
@@ -79,8 +81,7 @@
 		max-height: 100vh;
 		min-height: calc(100vh + 100px);
 		margin: -100px 0 0 -50px;
-		padding-left: 40px;
-		padding-top: 150px;
+		padding: 150px 0 100px 40px;
 		box-sizing: border-box;
 		overflow-y: auto;
 		background: #ededed;
@@ -88,7 +89,7 @@
 		-webkit-font-smoothing: antialiased;
 		transform-origin: 0% 0%;
 		transform: translate(-100%, 0);
-		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+		transition: transform 0.5s  cubic-bezier(0.77, 0.2, 0.05, 1) !important;
 		text-align: left;
 	}
 
@@ -107,18 +108,19 @@
 }
 
 .mode__container {
+	margin: 100px 20px 0 0;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	gap: 5px;
+	justify-content: center;
 	position: relative;
 	left: -5px;
 }
 
 .mode {
 	position: relative;
-	width: 20px;
-	height: 20px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 	background: black;
 	cursor: pointer;
@@ -128,10 +130,10 @@
 .mode:before {
 	content: "";
 	position: absolute;
-	top: 2.5px;
-	left: 2.5px;
-	width: 15px;
-	height: 15px;
+	top: 10px;
+	left: 10px;
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
 	background-image: linear-gradient(to right, white 50%, black 50.01%);
 	border: 2px solid white;
@@ -142,10 +144,10 @@
 .mode:after {
 	content: "";
 	position: absolute;
-	top: 7px;
-	left: 7px;
-	width: 6px;
-	height: 6px;
+	top: 19px;
+	left: 19px;
+	width: 12px;
+	height: 12px;
 	border-radius: 50%;
 	background: white;
 	mix-blend-mode: difference;

@@ -164,19 +164,19 @@ class App extends Component {
 		chosenLabels: [],
 		time: "",
 		term: "",
-		theme: 'light'
+		theme: "light",
 	};
 
-	componentDidMount() {
-		const oldState = JSON.parse(localStorage.getItem("state"));
-		if (oldState) {
-			this.setState(oldState);
-		}
-	}
+	// componentDidMount() {
+	// 	const oldState = JSON.parse(localStorage.getItem("state"));
+	// 	if (oldState) {
+	// 		this.setState(oldState);
+	// 	}
+	// }
 
-	updateLocalStorage = () => {
-		localStorage.setItem("state", JSON.stringify(this.state));
-	};
+	// updateLocalStorage = () => {
+	// 	localStorage.setItem("state", JSON.stringify(this.state));
+	// };
 
 	updateStateBool = (prop, bool) => {
 		this.setState(() => ({ [prop]: bool }));
@@ -233,8 +233,8 @@ class App extends Component {
 				currentLabel: "",
 				chosenLabels: [],
 				time: "",
-			}),
-			this.updateLocalStorage
+			})
+			// this.updateLocalStorage
 		);
 	};
 
@@ -275,8 +275,8 @@ class App extends Component {
 						completedTasksCount: completedTasks.length - 1,
 					};
 				}
-			},
-			() => this.updateLocalStorage()
+			}
+			// () => this.updateLocalStorage()
 		);
 	};
 
@@ -285,7 +285,10 @@ class App extends Component {
 		const updatedTasks = this.state.tasks.map((task) =>
 			task.id === id ? { ...task, ...updatedTask } : task
 		);
-		this.setState({ tasks: updatedTasks }, () => this.updateLocalStorage());
+		this.setState(
+			{ tasks: updatedTasks }
+			// () => this.updateLocalStorage()
+		);
 	};
 
 	onSaveTask = (updatedTask) => {
@@ -348,7 +351,7 @@ class App extends Component {
 			allLabels,
 			currentLabel,
 			chosenLabels,
-			theme
+			theme,
 		} = this.state;
 
 		return (
@@ -389,7 +392,6 @@ class App extends Component {
 									updateStateBool={this.updateStateBool}
 									onActionWithTask={this.onActionWithTask}
 									theme={theme}
-
 								/>
 							}
 						/>
@@ -411,7 +413,6 @@ class App extends Component {
 									onSaveTask={this.onSaveTask}
 									onOpenFilterLabel={this.onOpenFilterLabel}
 									theme={theme}
-
 								/>
 							}
 						/>
@@ -435,7 +436,6 @@ class App extends Component {
 									onOpenFilterLabel={this.onOpenFilterLabel}
 									search={this.search}
 									theme={theme}
-
 								/>
 							}
 						/>

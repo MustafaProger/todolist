@@ -12,7 +12,7 @@ class CurrentDate extends Component {
 
         return (
             <div>
-                <h3>{dateArr[2]} {dateArr[1]} • {dateArr[0]}</h3>
+                <h3 className='current-date'>{dateArr[2]} {dateArr[1]} • {dateArr[0]}</h3>
             </div>
         );
     }

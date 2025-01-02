@@ -119,11 +119,6 @@ class Menu extends Component {
 									className='mode__container'
 									onClick={this.toggleTheme}>
 									<div className='mode'></div>
-									{this.state.isDark ? (
-										<div>Dark mode</div>
-									) : (
-										<div>Light mode</div>
-									)}
 								</div>
 							</li>
 						</ul>
