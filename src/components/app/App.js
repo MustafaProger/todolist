@@ -9,9 +9,9 @@ import "./App.scss";
 
 class App extends Component {
 	state = {
-		menuOpen: true,
+		menuOpen: false,
 		countTasks: 11,
-		addTask: true,
+		addTask: false,
 		task: "",
 		description: "",
 		importance: "Priority",
@@ -140,7 +140,7 @@ class App extends Component {
 			},
 		],
 		completedTasksCount: 4,
-		addLabel: true,
+		addLabel: false,
 		allLabels: [
 			"Work",
 			"Finance",
@@ -167,16 +167,38 @@ class App extends Component {
 		theme: "light",
 	};
 
-	// componentDidMount() {
-	// 	const oldState = JSON.parse(localStorage.getItem("state"));
-	// 	if (oldState) {
-	// 		this.setState(oldState);
-	// 	}
-	// }
+	componentDidMount() {
+		const savedState = JSON.parse(localStorage.getItem("appState"));
+		if (savedState) {
+			this.setState(savedState);
+		}
+	}
 
-	// updateLocalStorage = () => {
-	// 	localStorage.setItem("state", JSON.stringify(this.state));
-	// };
+	componentDidUpdate(prevProps, prevState) {
+		const {
+			menuOpen,
+			countTasks,
+			tasks,
+			completedTasks,
+			completedTasksCount,
+			allLabels,
+			theme,
+		} = this.state;
+
+		const stateToSave = {
+			menuOpen,
+			countTasks,
+			tasks,
+			completedTasks,
+			completedTasksCount,
+			allLabels,
+			theme,
+		};
+
+		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
+			localStorage.setItem("appState", JSON.stringify(stateToSave));
+		}
+	}
 
 	updateStateBool = (prop, bool) => {
 		this.setState(() => ({ [prop]: bool }));
