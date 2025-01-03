@@ -172,6 +172,20 @@ class App extends Component {
 		if (savedState) {
 			this.setState(savedState);
 		}
+
+		// Проверка задач на удаление каждые 10 минут
+		this.interval = setInterval(() => {
+			const { completedTasks } = this.state;
+			const now = Date.now();
+			const filteredTasks = completedTasks.filter(
+				(task) => now - task.completedAt < 24 * 60 * 60 * 1000 // Задачи, завершенные менее 24 часов назад
+			);
+			this.setState({ completedTasks: filteredTasks });
+		}, 10 * 60 * 1000); // каждые 10 минут
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval); // Очищаем интервал при размонтировании компонента
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -261,45 +275,46 @@ class App extends Component {
 	};
 
 	onActionWithTask = (id, action) => {
-		this.setState(
-			({ tasks, completedTasks }) => {
-				const newArr = tasks.filter((item) => item.id !== id);
-				const completedTask = tasks.find((item) => item.id === id);
-				const removeCompletedTask = completedTasks.filter(
-					(item) => item.id !== id
-				);
-				const returnCompletedTask = completedTasks.filter(
-					(item) => item.id === id
-				);
+		this.setState(({ tasks, completedTasks }) => {
+			const newArr = tasks.filter((item) => item.id !== id);
+			const completedTask = tasks.find((item) => item.id === id);
+			const removeCompletedTask = completedTasks.filter(
+				(item) => item.id !== id
+			);
+			const returnCompletedTask = completedTasks.filter(
+				(item) => item.id === id
+			);
 
-				if (action === "remove") {
-					return {
-						tasks: newArr,
-						countTasks: tasks.length - 1,
-					};
-				} else if (action === "completed") {
-					return {
-						tasks: newArr,
-						completedTasks: [...completedTasks, completedTask],
-						countTasks: tasks.length - 1,
-						completedTasksCount: completedTasks.length + 1,
-					};
-				} else if (action === "remove-completed") {
-					return {
-						completedTasks: removeCompletedTask,
-						completedTasksCount: completedTasks.length - 1,
-					};
-				} else if (action === "refresh") {
-					return {
-						tasks: [...tasks, ...returnCompletedTask],
-						countTasks: tasks.length + 1,
-						completedTasks: removeCompletedTask,
-						completedTasksCount: completedTasks.length - 1,
-					};
-				}
+			if (action === "remove") {
+				return {
+					tasks: newArr,
+					countTasks: tasks.length - 1,
+				};
+			} else if (action === "completed") {
+				const taskWithTimestamp = {
+					...completedTask,
+					completedAt: Date.now(), // Добавляем метку времени
+				};
+				return {
+					tasks: newArr,
+					completedTasks: [...completedTasks, taskWithTimestamp],
+					countTasks: tasks.length - 1,
+					completedTasksCount: completedTasks.length + 1,
+				};
+			} else if (action === "remove-completed") {
+				return {
+					completedTasks: removeCompletedTask,
+					completedTasksCount: completedTasks.length - 1,
+				};
+			} else if (action === "refresh") {
+				return {
+					tasks: [...tasks, ...returnCompletedTask],
+					countTasks: tasks.length + 1,
+					completedTasks: removeCompletedTask,
+					completedTasksCount: completedTasks.length - 1,
+				};
 			}
-			// () => this.updateLocalStorage()
-		);
+		});
 	};
 
 	editTaskFunc = (id, updatedTask) => {
