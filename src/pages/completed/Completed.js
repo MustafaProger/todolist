@@ -1,10 +1,9 @@
 import { Component } from "react";
 import Menu from "../../components/menu/Menu";
+import Task from "../../components/task/Task";
 import CurrentDate from "../../components/currentDate/CurrentDate";
 
-import "./Completed.scss";
 import check from "../../assets/icon/check-circle.svg";
-import Task from "../../components/task/Task";
 
 class Completed extends Component {
 	render() {

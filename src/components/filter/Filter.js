@@ -5,8 +5,16 @@ import Task from "../task/Task";
 
 class Filter extends Component {
 	state = {
-		openCategory: null,
-		isOpen: false,
+		openCategory: null, // Открытая категория
+		isOpen: false, // Состояние открытости
+	};
+
+	// Обработчик для переключения категорий
+	handleToggleCategory = (category) => {
+		this.setState((prevState) => ({
+			openCategory: prevState.openCategory === category ? null : category, // Сбрасываем категорию, если повторно нажали
+			isOpen: prevState.openCategory !== category, // Переключаем состояние открытости
+		}));
 	};
 
 	render() {
@@ -16,6 +24,7 @@ class Filter extends Component {
 			{ value: "Low", icon: <Flag theme='#5390F5' /> },
 			{ value: "Priority", icon: <Flag theme='#CDCDCD' /> },
 		];
+
 		const {
 			tasks,
 			onActionWithTask,
@@ -40,17 +49,20 @@ class Filter extends Component {
 						(item) => item.importance === value
 					);
 					const taskCount = filteredTask.length;
+
 					return (
 						<div
 							key={id}
 							className='filtered-item'>
 							<div
 								className='importance'
-								onClick={() => onOpenFilterLabel(value, "filtered-task")}>
+								onClick={() => {
+									this.handleToggleCategory(value);
+									onOpenFilterLabel(value, "filtered-task"); // Вызываем переданный пропс
+								}}>
 								{icon} <span>{value}</span>
 								<div className='toggle-icon'>
-									<span className='task-count'>{taskCount}</span>{" "}
-									{/* Количество задач */}
+									<span className='task-count'>{taskCount}</span>
 									{openCategory === value ? (
 										<svg
 											xmlns='http://www.w3.org/2000/svg'

@@ -16,6 +16,13 @@ class Labels extends Component {
 		this.props.updateStateBool("term", "")
 	}
 
+	// Функция для открытия или закрытия метки
+	toggleLabel = (label) => {
+		this.setState((prevState) => ({
+			openLabel: prevState.openLabel === label ? null : label
+		}));
+	};
+
 	render() {
 		const {
 			menuOpen,
@@ -80,7 +87,10 @@ class Labels extends Component {
 									className='labels__element'>
 									<div
 										className='label__name'
-										onClick={() => onOpenFilterLabel(label, "tasks-label")}>
+										onClick={() => {
+											this.toggleLabel(label); // Открытие/закрытие метки
+											onOpenFilterLabel(label, "tasks-label");
+										}}>
 										<svg
 											xmlns='http://www.w3.org/2000/svg'
 											id='Layer_1'

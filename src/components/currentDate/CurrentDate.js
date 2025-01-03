@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './CurrentDate.scss'
 
 class CurrentDate extends Component {
     state = {

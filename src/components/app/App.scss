@@ -1,20 +1,46 @@
-* {
-	transition: all 0.3s;
-	.add-task,
-	.edit-task {
-		&__form,
-		&__form__input,
-		&__form__textarea,
-		&__form__importance,
-		.custom-select,
-		.selected-option,
-		.selected-option span {
-			transition: all 0s;
-		}
-	}
-}
-
 .App {
+	#menuToggle,
+	.tasks,
+	.done-tasks,
+	.filter,
+	.labels,
+	.title,
+	.current-date,
+	.divider,
+	.search .icon,
+	.search input,
+	.count-tasks,
+	.task-item,
+	.task-view,
+	.task-header,
+	.task-header .task-name,
+	.task-description,
+	.importance-circle,
+	.task-labels p,
+	.add-task,
+	.add-task__form,
+	.add-task__form__input,
+	.add-task__form__textarea,
+	.edit-task,
+	.edit-task__form,
+	.edit-task__form__input,
+	.edit-task__form__textarea,
+	.dropdown-item,
+	.time input,
+	.input-label,
+	.checkboxes__item svg path,
+	.importance svg path,
+	.importance span,
+	.importance .toggle-icon .task-count,
+	.importance .toggle-icon svg path,
+	.labels__element,
+	.label__name svg path,
+	.label__name span,
+	.label__name .toggle-icon .task-count,
+	.label__name .toggle-icon svg path {
+		transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+	}
+
 	.container {
 		max-width: 1200px;
 		width: 100%;
@@ -22,8 +48,9 @@
 		margin: 0 auto;
 		overflow-y: auto;
 		padding: 20px 20px 80px 110px;
-		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+		transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
 			padding-left 0.5s ease;
+
 		&.menu-active {
 			padding-left: 200px;
 		}
@@ -32,7 +59,6 @@
 	.title {
 		font-size: 35px;
 		margin-bottom: 0;
-		transition: all 0.3s;
 	}
 
 	.divider {
@@ -40,7 +66,6 @@
 		height: 1px;
 		border: none;
 		margin: 20px 0;
-		transition: all 0.3s;
 	}
 
 	.count-tasks {
@@ -50,7 +75,6 @@
 		margin: 15px 0 30px 0;
 		color: grey;
 		fill: grey;
-		transition: all 0.3s;
 	}
 
 	.custom-select {
@@ -68,12 +92,12 @@
 			border-radius: 8px;
 			margin: 20px 0 0 0;
 			max-width: 444px;
-			transition: all 0.3s;
 			.dropdown-item {
 				display: flex;
 				align-items: center;
 				gap: 5px;
 				padding: 10px 20px;
+				transition: all 0.2s;
 				&:hover {
 					background-color: rgba(0, 0, 0, 0.1);
 				}
@@ -104,7 +128,7 @@
 	.App {
 		.container {
 			padding: 70px 30px 80px 30px;
-			transition: all 0.3s;
+			// transition: all 0.5s;
 			&.menu-active {
 				padding-left: 30px;
 				opacity: 0.5;
@@ -175,6 +199,10 @@ body.dark {
 				fill: white;
 			}
 		}
+	}
+
+	#menuToggle {
+		background-color: #202020 !important;
 	}
 
 	#menuToggle input.active ~ span {
@@ -280,6 +308,21 @@ body.dark {
 
 		.label__name svg path {
 			fill: white;
+		}
+	}
+
+	.MuiPickersLayout-root {
+		background-color: #191919;
+		color: white;
+		.MuiButtonBase-root {
+			color: white;
+		}
+	}
+
+	// For mobile
+	.MuiPickersLayout-root {
+		* {
+			color: white !important;
 		}
 	}
 }

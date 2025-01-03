@@ -4,7 +4,6 @@ import CurrentDate from "../../components/currentDate/CurrentDate";
 import AddTask from "../../components/addTask/AddTask";
 import Task from "../../components/task/Task";
 
-import "./Tasks.scss";
 import check from "../../assets/icon/check-circle.svg";
 import Search from "../../components/search/Search";
 

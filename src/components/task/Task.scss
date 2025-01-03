@@ -17,7 +17,7 @@
 	background: #fff;
 	position: relative;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	transition: all 0.3s;
+	// transition: all 0.3s;
 
 	&:hover {
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -43,7 +43,7 @@
 	color: #fff;
 	font-size: 12px;
 	svg {
-		transition: all 0.2s;
+		// transition: all 0.2s;
 		opacity: 0;
 	}
 	&:hover {
@@ -56,7 +56,7 @@
 .menu-trigger {
 	font-size: 18px;
 	padding: 0 5px;
-	transition: color 0.2s ease;
+	// transition: color 0.2s ease;
 	text-align-last: left;
 	margin: 0 0 0 auto;
 	img {

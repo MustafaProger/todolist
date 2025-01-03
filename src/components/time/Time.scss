@@ -1,6 +1,14 @@
 .time {
-	width: 150px;
+	position: relative;
+	height: 30px;
 	margin: 30px 0 !important;
+	display: flex;
+	align-items: center;
+
+	input {
+		outline: none !important;
+		font-size: 16px;
+	}
 
 	&:hover,
 	&:focus {
@@ -9,8 +17,14 @@
 		}
 	}
 
+	.clock {
+		position: absolute;
+		fill: tomato;
+	}
+
+	// 	// #F5F5F5
+
 	.MuiOutlinedInput-root {
-		// outline: none !important;
 		gap: 3px;
 
 		& > input:nth-of-type(1) {
@@ -19,12 +33,11 @@
 	}
 
 	.MuiInputBase-root {
-		position: absolute;
-		top: -12.5px;
+		position: relative;
 		left: -3px;
 	}
 
-	// input time
+	// 	// input time
 	.MuiInputBase-input {
 		padding: 0;
 	}
@@ -33,13 +46,14 @@
 		border: none !important;
 	}
 
-	// container of the time button
+	// 	// container of the time button
 	.MuiInputAdornment-root {
 		margin: 0;
 		button {
 			padding: 3px;
 			margin: 0px;
 			svg {
+				opacity: 0;
 				width: 20px;
 				height: 20px;
 				fill: tomato;
@@ -47,8 +61,10 @@
 		}
 	}
 
-	input {
-		outline: none !important;
-		font-size: 16px;
+	@media (hover: none) and (pointer: coarse) {
+		.MuiInputBase-root {
+			position: relative;
+			left: 25px;
+		}
 	}
 }

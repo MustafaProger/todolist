@@ -24,7 +24,7 @@
 		color: #232323;
 		fill: #232323;
 		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-		transition: 0.5s;
+		transition: all 0.3s;
 	}
 
 	#menuToggle a:hover,
@@ -89,7 +89,7 @@
 		-webkit-font-smoothing: antialiased;
 		transform-origin: 0% 0%;
 		transform: translate(-100%, 0);
-		transition: transform 0.5s  cubic-bezier(0.77, 0.2, 0.05, 1) !important;
+		transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 		text-align: left;
 	}
 

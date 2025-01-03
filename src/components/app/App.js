@@ -9,9 +9,9 @@ import "./App.scss";
 
 class App extends Component {
 	state = {
-		menuOpen: false,
+		menuOpen: true,
 		countTasks: 11,
-		addTask: false,
+		addTask: true,
 		task: "",
 		description: "",
 		importance: "Priority",
@@ -140,7 +140,7 @@ class App extends Component {
 			},
 		],
 		completedTasksCount: 4,
-		addLabel: false,
+		addLabel: true,
 		allLabels: [
 			"Work",
 			"Finance",
