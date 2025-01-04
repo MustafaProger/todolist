@@ -59,9 +59,6 @@ class Label extends Component {
 				}
 
 				this.props.updateStateEvent("chosenLabels", newArr); // Обновляем состояние в родительском компоненте
-				// console.log(this.state.checkedItems);
-				// console.log(this.checkboxRefs[label]);
-				// console.log(this.state.checkedItems);
 			}
 		);
 	};
@@ -81,35 +78,26 @@ class Label extends Component {
 				};
 			},
 			() => {
-				// Создаем новый массив выбранных меток на основе состояния чекбоксов
 				const checkedItemsKeys = Object.keys(this.state.checkedItems);
 				const checkedItemsValues = Object.values(this.state.checkedItems);
 
 				const newArr = checkedItemsKeys.filter(
-					(item, index) => checkedItemsValues[index] // Фильтруем выбранные метки
+					(item, index) => checkedItemsValues[index]
 				);
 
-				if (this.props.handleChange) {
-					this.props.handleChange("labels", newArr); // Обновляем родительский компонент
-				}
+				this.props.updateStateEvent("chosenLabels", newArr);
 
-				this.props.updateStateEvent("chosenLabels", newArr); // Обновляем состояние в родительском компоненте
 				delete this.checkboxRefs[label];
 
 				tasks.map(({ labels }, index) => {
-
-					const newLabels =  labels.filter(
+					const newLabels = labels.filter(
 						(label) => this.state.checkedItems[label] !== undefined
 					);
 
-					this.props.tasks[index].labels = newLabels
+					this.props.tasks[index].labels = newLabels;
 
-					return this.props.tasks[index].labels = newLabels;
+					return (this.props.tasks[index].labels = newLabels);
 				});
-				
-
-				// console.log(newTaskLabels);
-				// this.props.tasks[0].labels = ['1', 2]
 			}
 		);
 	};
@@ -190,6 +178,9 @@ class Label extends Component {
 													: arrSearched.map((item, index) => (
 															<div
 																className='checkboxes__item checkboxes__item_delete'
+																style={{
+																	animationDelay: `${Math.random() * 0.2}s`,
+																}}
 																key={`${item}-${index}`}
 																onClick={() => this.deleteCheckbox(item)}>
 																<svg
@@ -215,24 +206,6 @@ class Label extends Component {
 										) : (
 											<p className='labels__undefined'>Label not found</p>
 										)}
-
-										{arrSearched.length ? (
-											<div
-												className='delete-labels'
-												onClick={() => this.updateStateBool("deleteLabels")}>
-												<svg
-													xmlns='http://www.w3.org/2000/svg'
-													fill='white'
-													id='Outline'
-													viewBox='0 0 24 24'
-													width='20'
-													height='20'>
-													<path d='M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z' />
-													<path d='M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z' />
-													<path d='M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z' />
-												</svg>
-											</div>
-										) : null}
 									</>
 								) : null}
 
@@ -248,6 +221,24 @@ class Label extends Component {
 											</p>
 										</div>
 									)}
+
+								{arrSearched.length ? (
+									<div
+										className='delete-labels'
+										onClick={() => this.updateStateBool("deleteLabels")}>
+										<svg
+											xmlns='http://www.w3.org/2000/svg'
+											fill='white'
+											id='Outline'
+											viewBox='0 0 24 24'
+											width='20'
+											height='20'>
+											<path d='M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z' />
+											<path d='M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z' />
+											<path d='M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z' />
+										</svg>
+									</div>
+								) : null}
 							</div>
 						</>
 					</div>
