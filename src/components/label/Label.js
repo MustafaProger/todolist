@@ -6,7 +6,7 @@ class Label extends Component {
 
 	state = {
 		checkedItems: {}, // Объект для отслеживания состояний чекбоксов
-		deleteLabels: true,
+		deleteLabels: false,
 	};
 
 	updateStateBool = (prop) => {
@@ -59,16 +59,59 @@ class Label extends Component {
 				}
 
 				this.props.updateStateEvent("chosenLabels", newArr); // Обновляем состояние в родительском компоненте
-				console.log(this.state.checkedItems)
+				// console.log(this.state.checkedItems);
+				// console.log(this.checkboxRefs[label]);
+				// console.log(this.state.checkedItems);
 			}
 		);
 	};
 
-	deleteCheckbox = (e) => {
-		const { allLabels, updateStateBool } = this.props;
+	deleteCheckbox = (label) => {
+		const { allLabels, updateStateBool, tasks } = this.props;
 
-		const newArr = allLabels.filter((item) => item !== e);
+		const newArr = allLabels.filter((item) => item !== label);
+
 		updateStateBool("allLabels", newArr);
+
+		this.setState(
+			(prevState) => {
+				const { [label]: _, ...updatedCheckedItems } = prevState.checkedItems;
+				return {
+					checkedItems: updatedCheckedItems,
+				};
+			},
+			() => {
+				// Создаем новый массив выбранных меток на основе состояния чекбоксов
+				const checkedItemsKeys = Object.keys(this.state.checkedItems);
+				const checkedItemsValues = Object.values(this.state.checkedItems);
+
+				const newArr = checkedItemsKeys.filter(
+					(item, index) => checkedItemsValues[index] // Фильтруем выбранные метки
+				);
+
+				if (this.props.handleChange) {
+					this.props.handleChange("labels", newArr); // Обновляем родительский компонент
+				}
+
+				this.props.updateStateEvent("chosenLabels", newArr); // Обновляем состояние в родительском компоненте
+				delete this.checkboxRefs[label];
+
+				tasks.map(({ labels }, index) => {
+
+					const newLabels =  labels.filter(
+						(label) => this.state.checkedItems[label] !== undefined
+					);
+
+					this.props.tasks[index].labels = newLabels
+
+					return this.props.tasks[index].labels = newLabels;
+				});
+				
+
+				// console.log(newTaskLabels);
+				// this.props.tasks[0].labels = ['1', 2]
+			}
+		);
 	};
 
 	componentDidUpdate(prevProps) {
@@ -80,7 +123,6 @@ class Label extends Component {
 			}, {});
 
 			this.setState({ checkedItems: initialCheckedState });
-			console.log(this.checkboxRefs);
 		}
 	}
 

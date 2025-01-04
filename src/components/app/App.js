@@ -9,9 +9,9 @@ import "./App.scss";
 
 class App extends Component {
 	state = {
-		menuOpen: true,
+		menuOpen: false,
 		countTasks: 11,
-		addTask: true,
+		addTask: false,
 		task: "",
 		description: "",
 		importance: "Priority",
@@ -140,7 +140,7 @@ class App extends Component {
 			},
 		],
 		completedTasksCount: 4,
-		addLabel: true,
+		addLabel: false,
 		allLabels: [
 			"Work",
 			"Finance",
@@ -270,7 +270,6 @@ class App extends Component {
 				chosenLabels: [],
 				time: "",
 			})
-			// this.updateLocalStorage
 		);
 	};
 
