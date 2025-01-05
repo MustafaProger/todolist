@@ -38,6 +38,7 @@ class Filter extends Component {
 			currentLabel,
 			chosenLabels,
 			onOpenFilterLabel,
+			completedTasks
 		} = this.props;
 
 		const { openCategory, isOpen } = this.state;
@@ -102,6 +103,7 @@ class Filter extends Component {
 										allLabels={allLabels}
 										currentLabel={currentLabel}
 										chosenLabels={chosenLabels}
+										completedTasks={completedTasks}
 									/>
 								) : (
 									<p className='no-task'>

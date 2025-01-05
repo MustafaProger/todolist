@@ -425,6 +425,7 @@ class App extends Component {
 									onSaveTask={this.onSaveTask}
 									onOpenFilterLabel={this.onOpenFilterLabel}
 									theme={theme}
+									completedTasks={completedTasks}
 								/>
 							}
 						/>
@@ -445,6 +446,7 @@ class App extends Component {
 									onOpenFilterLabel={this.onOpenFilterLabel}
 									search={this.search}
 									theme={theme}
+									completedTasks={completedTasks}
 								/>
 							}
 						/>

@@ -13,13 +13,12 @@ class Labels extends Component {
 	};
 
 	componentDidMount() {
-		this.props.updateStateBool("term", "")
+		this.props.updateStateBool("term", "");
 	}
 
-	// Функция для открытия или закрытия метки
 	toggleLabel = (label) => {
 		this.setState((prevState) => ({
-			openLabel: prevState.openLabel === label ? null : label
+			openLabel: prevState.openLabel === label ? null : label,
 		}));
 	};
 
@@ -29,18 +28,15 @@ class Labels extends Component {
 			tasksCount,
 			tasks,
 			allLabels,
-			addLabel,
-			currentLabel,
-			chosenLabels,
 			updateStateBool,
 			updateStateEvent,
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
-			editingTask,
 			onOpenFilterLabel,
 			search,
-			theme
+			theme,
+			completedTasks,
 		} = this.props;
 
 		const { openLabel } = this.state;
@@ -88,7 +84,7 @@ class Labels extends Component {
 									<div
 										className='label__name'
 										onClick={() => {
-											this.toggleLabel(label); // Открытие/закрытие метки
+											this.toggleLabel(label);
 											onOpenFilterLabel(label, "tasks-label");
 										}}>
 										<svg
@@ -143,6 +139,7 @@ class Labels extends Component {
 												onSaveTask={onSaveTask}
 												search={search}
 												sortedBy={"label"}
+												completedTasks={completedTasks}
 											/>
 										) : (
 											<p className='no-task'>

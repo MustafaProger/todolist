@@ -126,7 +126,6 @@ class Label extends Component {
 
 		const { updateStateEvent, allLabels, currentLabel } = this.props;
 
-		// Поиск по меткам
 		const arrSearched = allLabels.filter(
 			(item) =>
 				currentLabel.length === 0 ||
