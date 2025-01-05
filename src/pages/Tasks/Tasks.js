@@ -12,7 +12,7 @@ class Tasks extends Component {
 		const {
 			menuOpen,
 			tasks,
-			countTasks,
+			tasksCount,
 			updateStateBool,
 			updateStateEvent,
 			updateStatePriority,
@@ -20,10 +20,7 @@ class Tasks extends Component {
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
-			editingTask,
-			addLabel,
 			allLabels,
-			currentLabel,
 			chosenLabels,
 			search,
 			theme
@@ -44,7 +41,7 @@ class Tasks extends Component {
 							src={check}
 							alt=''
 						/>
-						{countTasks} tasks
+						{tasksCount} tasks
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
@@ -58,13 +55,9 @@ class Tasks extends Component {
 						onActionWithTask={onActionWithTask}
 						editTaskFunc={editTaskFunc}
 						onSaveTask={onSaveTask}
-						editingTask={editingTask}
 						updateStateBool={updateStateBool}
 						updateStateEvent={updateStateEvent}
-						addLabel={addLabel}
 						allLabels={allLabels}
-						currentLabel={currentLabel}
-						chosenLabels={chosenLabels}
 						search={search}
 						sortedBy={"task"}
 					/>
@@ -75,7 +68,6 @@ class Tasks extends Component {
 						updateStatePriority={updateStatePriority}
 						onTask={onTask}
 						allLabels={allLabels}
-						chosenLabels={chosenLabels}
 					/>
 				</div>
 			</div>

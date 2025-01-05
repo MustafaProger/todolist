@@ -26,7 +26,7 @@ class Labels extends Component {
 	render() {
 		const {
 			menuOpen,
-			countTasks,
+			tasksCount,
 			tasks,
 			allLabels,
 			addLabel,
@@ -61,7 +61,7 @@ class Labels extends Component {
 							src={countTask}
 							alt=''
 						/>
-						{countTasks} tasks
+						{tasksCount} tasks
 					</p>
 
 					<CurrentDate />

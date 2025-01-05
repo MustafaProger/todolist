@@ -9,8 +9,7 @@ import "./App.scss";
 
 class App extends Component {
 	state = {
-		menuOpen: true,
-		countTasks: 11,
+		menuOpen: false,
 		tasks: [
 			{
 				id: Date.now() + 9,
@@ -101,6 +100,7 @@ class App extends Component {
 				time: "21:00",
 			},
 		],
+		tasksCount: 11,
 		completedTasks: [
 			{
 				id: Date.now() + 5,
@@ -183,7 +183,7 @@ class App extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		const {
 			menuOpen,
-			countTasks,
+			tasksCount,
 			tasks,
 			completedTasks,
 			completedTasksCount,
@@ -193,7 +193,7 @@ class App extends Component {
 
 		const stateToSave = {
 			menuOpen,
-			countTasks,
+			tasksCount,
 			tasks,
 			completedTasks,
 			completedTasksCount,
@@ -250,19 +250,9 @@ class App extends Component {
 			time,
 		};
 
-		stateAddTask = {
-			addTask: true,
-			task: "",
-			description: "",
-			importance: "Priority",
-			isOpen: false,
-			chosenLabels: [],
-			time: "",
-		};
-
 		this.setState((prevState) => ({
 			tasks: [...prevState.tasks, newTask],
-			countTasks: prevState.tasks.length + 1,
+			tasksCount: prevState.tasks.length + 1,
 			addLabel: false,
 			currentLabel: "",
 			chosenLabels: [],
@@ -283,7 +273,7 @@ class App extends Component {
 			if (action === "remove") {
 				return {
 					tasks: newArr,
-					countTasks: tasks.length - 1,
+					tasksCount: tasks.length - 1,
 				};
 			} else if (action === "completed") {
 				const taskWithTimestamp = {
@@ -293,7 +283,7 @@ class App extends Component {
 				return {
 					tasks: newArr,
 					completedTasks: [...completedTasks, taskWithTimestamp],
-					countTasks: tasks.length - 1,
+					tasksCount: tasks.length - 1,
 					completedTasksCount: completedTasks.length + 1,
 				};
 			} else if (action === "remove-completed") {
@@ -304,7 +294,7 @@ class App extends Component {
 			} else if (action === "refresh") {
 				return {
 					tasks: [...tasks, ...returnCompletedTask],
-					countTasks: tasks.length + 1,
+					tasksCount: tasks.length + 1,
 					completedTasks: removeCompletedTask,
 					completedTasksCount: completedTasks.length - 1,
 				};
@@ -375,8 +365,8 @@ class App extends Component {
 		const {
 			menuOpen,
 			tasks,
+			tasksCount,
 			completedTasks,
-			countTasks,
 			completedTasksCount,
 			allLabels,
 			theme,
@@ -391,7 +381,7 @@ class App extends Component {
 							element={
 								<Tasks
 									menuOpen={menuOpen}
-									countTasks={countTasks}
+									tasksCount={tasksCount}
 									tasks={tasks}
 									allLabels={allLabels}
 									updateStateEvent={this.updateStateEvent}
@@ -424,7 +414,7 @@ class App extends Component {
 							element={
 								<Filters
 									menuOpen={menuOpen}
-									countTasks={countTasks}
+									tasksCount={tasksCount}
 									tasks={tasks}
 									allLabels={allLabels}
 									updateStateBool={this.updateStateBool}
@@ -443,7 +433,7 @@ class App extends Component {
 							element={
 								<Labels
 									menuOpen={menuOpen}
-									countTasks={countTasks}
+									tasksCount={tasksCount}
 									tasks={tasks}
 									allLabels={allLabels}
 									updateStateEvent={this.updateStateEvent}

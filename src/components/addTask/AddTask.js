@@ -6,7 +6,7 @@ import Time from "../time/Time";
 
 class AddTask extends Component {
 	state = {
-		addTask: true,
+		addTask: false,
 		task: "",
 		description: "",
 		importance: "Priority",
@@ -65,9 +65,7 @@ class AddTask extends Component {
 			updateStateEvent,
 			updateStateBool,
 			addLabel,
-			currentLabel,
 			allLabels,
-			chosenLabels,
 			onTask,
 		} = this.props;
 
@@ -128,14 +126,12 @@ class AddTask extends Component {
 						/>
 
 						<Label
-							addLabel={addLabel}
-							currentLabel={this.state.currentLabel}
+							tasks={tasks}
 							allLabels={allLabels}
+							currentLabel={this.state.currentLabel}
 							updateStateEvent={updateStateEvent}
 							updateStateBool={updateStateBool}
-
 							handleChange={this.updateState}
-							tasks={tasks}
 							chosenLabels={this.state.chosenLabels}
 							updateState={this.updateState}
 						/>

@@ -8,7 +8,7 @@ class Filters extends Component {
 	render() {
 		const {
 			menuOpen,
-			countTasks,
+			tasksCount,
 			tasks,
 			addLabel,
 			allLabels,
@@ -38,24 +38,20 @@ class Filters extends Component {
 							src={countTask}
 							alt=''
 						/>
-						{countTasks} tasks
+						{tasksCount} tasks
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
 
 					<Filter
 						tasks={tasks}
-						countTasks={countTasks}
-						addLabel={addLabel}
+						tasksCount={tasksCount}
 						allLabels={allLabels}
-						currentLabel={currentLabel}
-						chosenLabels={chosenLabels}
 						updateStateBool={updateStateBool}
 						updateStateEvent={updateStateEvent}
 						onActionWithTask={onActionWithTask}
 						editTaskFunc={editTaskFunc}
 						onSaveTask={onSaveTask}
-						editingTask={editingTask}
 						onOpenFilterLabel={onOpenFilterLabel}
 					/>
 				</div>

@@ -151,14 +151,10 @@ class Task extends Component {
 										time={time}
 										saveTask={this.saveTask}
 										cancelEdit={this.cancelEdit}
-										addLabel={addLabel}
-										currentLabel={currentLabel}
 										allLabels={allLabels}
 										updateStateEvent={updateStateEvent}
 										updateStateBool={updateStateBool}
 										tasks={tasks}
-										chosenLabels={chosenLabels}
-										onOpenFilterLabel={onOpenFilterLabel}
 									/>
 								) : (
 									<div className='task-view'>
