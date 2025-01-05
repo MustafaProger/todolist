@@ -21,9 +21,9 @@ class Tasks extends Component {
 			editTaskFunc,
 			onSaveTask,
 			allLabels,
-			chosenLabels,
 			search,
-			theme
+			theme,
+			completedTasks
 		} = this.props;
 
 		return (
@@ -60,6 +60,7 @@ class Tasks extends Component {
 						allLabels={allLabels}
 						search={search}
 						sortedBy={"task"}
+						completedTasks={completedTasks}
 					/>
 					<AddTask
 						tasks={tasks}
@@ -68,6 +69,7 @@ class Tasks extends Component {
 						updateStatePriority={updateStatePriority}
 						onTask={onTask}
 						allLabels={allLabels}
+						completedTasks={completedTasks}
 					/>
 				</div>
 			</div>

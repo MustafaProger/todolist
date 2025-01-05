@@ -52,14 +52,14 @@ class Label extends Component {
 				}
 
 				if (this.props.updateState) {
-					this.props.updateState('chosenLabels', this.state.chosenLabels);
+					this.props.updateState("chosenLabels", this.state.chosenLabels);
 				}
 			}
 		);
 	};
 
 	deleteCheckbox = (label) => {
-		const { allLabels, updateStateBool, tasks } = this.props;
+		const { allLabels, updateStateBool, tasks, completedTasks } = this.props;
 
 		const newArr = allLabels.filter((item) => item !== label);
 
@@ -95,6 +95,16 @@ class Label extends Component {
 
 					return (this.props.tasks[index].labels = newLabels);
 				});
+
+				completedTasks.map(({ labels }, index) => {
+					const newLabels = labels.filter(
+						(label) => this.state.checkedItems[label] !== undefined
+					);
+
+					this.props.completedTasks[index].labels = newLabels;
+
+					return (this.props.completedTasks[index].labels = newLabels);
+				});
 			}
 		);
 	};
@@ -107,7 +117,7 @@ class Label extends Component {
 				return acc;
 			}, {});
 
-			this.setState({ checkedItems: initialCheckedState }, () => console.log(this.state.checkedItems));
+			this.setState({ checkedItems: initialCheckedState });
 		}
 	}
 
@@ -139,7 +149,9 @@ class Label extends Component {
 							type='text'
 							placeholder='Type a label'
 							value={currentLabel}
-							onChange={(e) => this.props.handleChange("currentLabel", e.target.value)}
+							onChange={(e) =>
+								this.props.handleChange("currentLabel", e.target.value)
+							}
 						/>
 
 						<>

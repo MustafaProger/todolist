@@ -63,7 +63,7 @@ class EditTask extends Component {
 			allLabels,
 			updateStateEvent,
 			updateStateBool,
-			chosenLabels
+			completedTasks
 		} = this.props;
 
 		const options = [
@@ -126,6 +126,8 @@ class EditTask extends Component {
 					chosenLabels={this.state.chosenLabels}
 					handleChange={this.handleChange}
 					isOpenLabels={isOpenLabels}
+					completedTasks={completedTasks}
+
 				/>
 				<div className='edit-task__form__buttons'>
 					<button

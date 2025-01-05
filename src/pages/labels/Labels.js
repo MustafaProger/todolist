@@ -135,15 +135,11 @@ class Labels extends Component {
 											<Task
 												clazz={"tasks-list"}
 												tasks={filteredTasks}
-												addLabel={addLabel}
 												allLabels={allLabels}
-												currentLabel={currentLabel}
-												chosenLabels={chosenLabels}
 												updateStateBool={updateStateBool}
 												updateStateEvent={updateStateEvent}
 												onActionWithTask={onActionWithTask}
 												editTaskFunc={editTaskFunc}
-												editingTask={editingTask}
 												onSaveTask={onSaveTask}
 												search={search}
 												sortedBy={"label"}

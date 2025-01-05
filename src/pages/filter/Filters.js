@@ -10,16 +10,12 @@ class Filters extends Component {
 			menuOpen,
 			tasksCount,
 			tasks,
-			addLabel,
 			allLabels,
-			currentLabel,
-			chosenLabels,
 			updateStateBool,
 			updateStateEvent,
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
-			editingTask,
 			onOpenFilterLabel,
 			theme
 		} = this.props;

@@ -64,9 +64,9 @@ class AddTask extends Component {
 			tasks,
 			updateStateEvent,
 			updateStateBool,
-			addLabel,
 			allLabels,
 			onTask,
+			completedTasks,
 		} = this.props;
 
 		const options = [
@@ -134,6 +134,7 @@ class AddTask extends Component {
 							handleChange={this.updateState}
 							chosenLabels={this.state.chosenLabels}
 							updateState={this.updateState}
+							completedTasks={completedTasks}
 						/>
 
 						<div className='add-task__form__buttons'>

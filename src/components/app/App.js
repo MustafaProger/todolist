@@ -278,7 +278,7 @@ class App extends Component {
 			} else if (action === "completed") {
 				const taskWithTimestamp = {
 					...completedTask,
-					completedAt: Date.now(), // Добавляем метку времени
+					completedAt: Date.now(),
 				};
 				return {
 					tasks: newArr,
@@ -393,6 +393,7 @@ class App extends Component {
 									onSaveTask={this.onSaveTask}
 									search={this.search}
 									theme={theme}
+									completedTasks={completedTasks}
 								/>
 							}
 						/>
