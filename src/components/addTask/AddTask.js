@@ -92,9 +92,9 @@ class AddTask extends Component {
 						<textarea
 							className='add-task__form__textarea'
 							placeholder='Description'
-							ref={this.textareaRef}
 							onInput={this.autoResizeTextarea}
 							onChange={(e) => this.updateState("description", e.target.value)}
+							ref={this.textareaRef}
 						/>
 						<div className='add-task__form__importance'>
 							<div
@@ -133,9 +133,10 @@ class AddTask extends Component {
 							allLabels={allLabels}
 							updateStateEvent={updateStateEvent}
 							updateStateBool={updateStateBool}
+
 							handleChange={this.updateState}
 							tasks={tasks}
-							chosenLabels={chosenLabels}
+							chosenLabels={this.state.chosenLabels}
 							updateState={this.updateState}
 						/>
 

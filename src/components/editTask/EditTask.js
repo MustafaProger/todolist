@@ -10,13 +10,12 @@ class EditTask extends Component {
 		task: this.props.task,
 		description: this.props.description,
 		importance: this.props.importance,
-		labels: this.props.labels,
 		time: this.props.time,
 
 		isOpenImportance: false,
 		isOpenLabels: false,
 		currentLabel: "",
-
+		chosenLabels: [...this.props.labels],
 	};
 
 	handleChange = (prop, value) => {
@@ -34,7 +33,7 @@ class EditTask extends Component {
 			task: this.state.task,
 			description: this.state.description,
 			importance: this.state.importance,
-			labels: this.state.labels,
+			labels: this.state.chosenLabels,
 			time: this.state.time,
 		};
 
@@ -62,10 +61,9 @@ class EditTask extends Component {
 			tasks,
 			addLabel,
 			allLabels,
-			currentLabel,
-			chosenLabels,
 			updateStateEvent,
 			updateStateBool,
+			chosenLabels
 		} = this.props;
 
 		const options = [
@@ -125,7 +123,7 @@ class EditTask extends Component {
 					addLabel={addLabel}
 					currentLabel={this.state.currentLabel}
 					allLabels={allLabels}
-					chosenLabels={chosenLabels}
+					chosenLabels={this.state.chosenLabels}
 					handleChange={this.handleChange}
 					isOpenLabels={isOpenLabels}
 				/>

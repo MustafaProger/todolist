@@ -136,7 +136,6 @@ class App extends Component {
 			},
 		],
 		completedTasksCount: 4,
-		addLabel: true,
 		allLabels: [
 			"Work",
 			"Finance",
@@ -156,9 +155,6 @@ class App extends Component {
 			"Cleaning",
 			"Fun",
 		],
-		currentLabel: "",
-		chosenLabels: [],
-		time: "",
 		term: "",
 		theme: "light",
 	};
@@ -381,12 +377,8 @@ class App extends Component {
 			tasks,
 			completedTasks,
 			countTasks,
-			addTask,
 			completedTasksCount,
-			addLabel,
 			allLabels,
-			currentLabel,
-			chosenLabels,
 			theme,
 		} = this.state;
 
@@ -400,12 +392,8 @@ class App extends Component {
 								<Tasks
 									menuOpen={menuOpen}
 									countTasks={countTasks}
-									addTask={addTask}
 									tasks={tasks}
-									addLabel={addLabel}
 									allLabels={allLabels}
-									currentLabel={currentLabel}
-									chosenLabels={chosenLabels}
 									updateStateEvent={this.updateStateEvent}
 									updateStatePriority={this.updateStatePriority}
 									onTask={this.onTask}
@@ -438,10 +426,7 @@ class App extends Component {
 									menuOpen={menuOpen}
 									countTasks={countTasks}
 									tasks={tasks}
-									addLabel={addLabel}
 									allLabels={allLabels}
-									currentLabel={currentLabel}
-									chosenLabels={chosenLabels}
 									updateStateBool={this.updateStateBool}
 									updateStateEvent={this.updateStateEvent}
 									onActionWithTask={this.onActionWithTask}
@@ -461,9 +446,6 @@ class App extends Component {
 									countTasks={countTasks}
 									tasks={tasks}
 									allLabels={allLabels}
-									addLabel={addLabel}
-									currentLabel={currentLabel}
-									chosenLabels={chosenLabels}
 									updateStateEvent={this.updateStateEvent}
 									updateStateBool={this.updateStateBool}
 									onActionWithTask={this.onActionWithTask}

@@ -13,7 +13,6 @@ class Tasks extends Component {
 			menuOpen,
 			tasks,
 			countTasks,
-			addTask,
 			updateStateBool,
 			updateStateEvent,
 			updateStatePriority,
@@ -71,14 +70,11 @@ class Tasks extends Component {
 					/>
 					<AddTask
 						tasks={tasks}
-						addTaskState={addTask}
 						updateStateBool={updateStateBool}
 						updateStateEvent={updateStateEvent}
 						updateStatePriority={updateStatePriority}
 						onTask={onTask}
-						addLabel={addLabel}
 						allLabels={allLabels}
-						currentLabel={currentLabel}
 						chosenLabels={chosenLabels}
 					/>
 				</div>

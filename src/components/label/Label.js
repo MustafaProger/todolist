@@ -8,18 +8,13 @@ class Label extends Component {
 		checkedItems: {},
 		isOpenLabels: false,
 		deleteLabels: false,
-		chosenLabels: [],
 	};
+
+	checkboxRefs = {};
 
 	updateStateBool = (prop) => {
 		this.setState({ [prop]: !this.state[prop] });
 	};
-
-	updateStateChosenLabels = (newLabels) => {
-		this.setState({ chosenLabels: [...this.state.chosenLabels, ...newLabels] });
-	};
-
-	checkboxRefs = {}; // Объект для хранения рефов чекбоксов
 
 	componentDidMount() {
 		const { allLabels, chosenLabels } = this.props;
@@ -27,14 +22,6 @@ class Label extends Component {
 			acc[label] = chosenLabels.includes(label); // Проверяем, если метка в chosenLabels, то true, иначе false
 			return acc;
 		}, {});
-
-		if (this.props.labels) {
-			for (let i = 0; i < this.props.labels.length; i++) {
-				initialCheckedState[this.props.labels[i]] = true;
-			}
-			this.props.updateStateEvent("chosenLabels", [...this.props.labels]);
-			this.updateStateChosenLabels([...this.props.labels]);
-		}
 
 		this.setState({ checkedItems: initialCheckedState });
 	}
@@ -61,7 +48,7 @@ class Label extends Component {
 			() => {
 				// После обновления локального состояния обновляем родительское
 				if (this.props.handleChange) {
-					this.props.handleChange("labels", this.state.chosenLabels);
+					this.props.handleChange("chosenLabels", this.state.chosenLabels);
 				}
 
 				if (this.props.updateState) {
@@ -93,11 +80,8 @@ class Label extends Component {
 					(item, index) => checkedItemsValues[index]
 				);
 
-				this.props.updateStateEvent("chosenLabels", newArr);
-				this.updateStateChosenLabels(newArr);
-
 				if (this.props.handleChange) {
-					this.props.handleChange("labels", newArr);
+					this.props.handleChange("chosenLabels", newArr);
 				}
 
 				delete this.checkboxRefs[label];
@@ -123,14 +107,14 @@ class Label extends Component {
 				return acc;
 			}, {});
 
-			this.setState({ checkedItems: initialCheckedState });
+			this.setState({ checkedItems: initialCheckedState }, () => console.log(this.state.checkedItems));
 		}
 	}
 
 	render() {
 		const { checkedItems, deleteLabels, isOpenLabels } = this.state;
 
-		const { updateStateEvent, allLabels, currentLabel, updateStateBool } = this.props;
+		const { updateStateEvent, allLabels, currentLabel } = this.props;
 
 		// Поиск по меткам
 		const arrSearched = allLabels.filter(
