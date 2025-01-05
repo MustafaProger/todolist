@@ -125,23 +125,12 @@ class Label extends Component {
 
 			this.setState({ checkedItems: initialCheckedState });
 		}
-
-		if (this.state.chosenLabels !== prevState.chosenLabels) {
-			const initialCheckedState = this.props.allLabels.reduce((acc, label) => {
-				acc[label] = this.state.chosenLabels.includes(label); // Отмечаем метки задачи как выбранные
-				return acc;
-			}, {});
-
-			// this.setState({ checkedItems: initialCheckedState });
-
-			console.error(initialCheckedState);
-		}
 	}
 
 	render() {
 		const { checkedItems, deleteLabels, isOpenLabels } = this.state;
 
-		const { updateStateEvent, allLabels, currentLabel } = this.props;
+		const { updateStateEvent, allLabels, currentLabel, updateStateBool } = this.props;
 
 		// Поиск по меткам
 		const arrSearched = allLabels.filter(
@@ -166,7 +155,7 @@ class Label extends Component {
 							type='text'
 							placeholder='Type a label'
 							value={currentLabel}
-							onChange={(e) => updateStateEvent("currentLabel", e)}
+							onChange={(e) => this.props.handleChange("currentLabel", e.target.value)}
 						/>
 
 						<>

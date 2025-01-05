@@ -12,8 +12,11 @@ class EditTask extends Component {
 		importance: this.props.importance,
 		labels: this.props.labels,
 		time: this.props.time,
+
 		isOpenImportance: false,
-		isOpenLabels: false
+		isOpenLabels: false,
+		currentLabel: "",
+
 	};
 
 	handleChange = (prop, value) => {
@@ -27,7 +30,7 @@ class EditTask extends Component {
 		}
 
 		const updatedTask = {
-			id: this.props.id, // передаем ID задачи для обновления
+			id: this.props.id,
 			task: this.state.task,
 			description: this.state.description,
 			importance: this.state.importance,
@@ -40,7 +43,6 @@ class EditTask extends Component {
 			return;
 		}
 
-		// Вызываем пропс saveTask, чтобы обновить задачу
 		this.props.saveTask(updatedTask);
 	};
 
@@ -53,7 +55,8 @@ class EditTask extends Component {
 	};
 
 	render() {
-		const { task, description, importance, isOpenImportance, isOpenLabels } = this.state;
+		const { task, description, importance, isOpenImportance, isOpenLabels } =
+			this.state;
 
 		const {
 			tasks,
@@ -120,7 +123,7 @@ class EditTask extends Component {
 					updateStateBool={updateStateBool}
 					updateStateEvent={updateStateEvent}
 					addLabel={addLabel}
-					currentLabel={currentLabel}
+					currentLabel={this.state.currentLabel}
 					allLabels={allLabels}
 					chosenLabels={chosenLabels}
 					handleChange={this.handleChange}

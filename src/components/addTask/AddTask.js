@@ -12,6 +12,7 @@ class AddTask extends Component {
 		importance: "Priority",
 		isOpen: false,
 		chosenLabels: [],
+		currentLabel: '',
 		time: "",
 		resetSignal: 0,
 	};
@@ -31,16 +32,16 @@ class AddTask extends Component {
 	};
 
 	defaultState = () => {
-		this.setState({
+		this.setState((prevState) => ({
 			addTask: true,
 			task: "",
 			description: "",
 			importance: "Priority",
-			isOpen: true,
+			isOpen: prevState.isOpen,
 			chosenLabels: [],
 			time: "",
-			resetSignal: this.state.resetSignal + 1, // Увеличиваем сигнал
-		});
+			resetSignal: this.state.resetSignal + 1,
+		}));
 
 		this.textareaRef.current.value = "";
 		this.ref.inputTaskName.current.value = "";
@@ -61,7 +62,6 @@ class AddTask extends Component {
 
 		const {
 			tasks,
-			addTaskState,
 			updateStateEvent,
 			updateStateBool,
 			addLabel,
@@ -129,10 +129,11 @@ class AddTask extends Component {
 
 						<Label
 							addLabel={addLabel}
-							currentLabel={currentLabel}
+							currentLabel={this.state.currentLabel}
 							allLabels={allLabels}
 							updateStateEvent={updateStateEvent}
 							updateStateBool={updateStateBool}
+							handleChange={this.updateState}
 							tasks={tasks}
 							chosenLabels={chosenLabels}
 							updateState={this.updateState}
