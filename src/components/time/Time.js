@@ -16,8 +16,14 @@ class Time extends Component {
 				this.props.handleChange("time", newValue?.format("HH:mm"));
 			}
 		});
-		this.props.updateStateBool("time", newValue?.format("HH:mm"));
+		this.props.updateState("time", newValue?.format("HH:mm"));
 	};
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.resetSignal !== this.props.resetSignal) {
+			this.setState({ time: null }); // Сброс состояния
+		}
+	}
 
 	render() {
 		return (

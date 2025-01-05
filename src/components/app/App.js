@@ -9,12 +9,8 @@ import "./App.scss";
 
 class App extends Component {
 	state = {
-		menuOpen: false,
+		menuOpen: true,
 		countTasks: 11,
-		addTask: false,
-		task: "",
-		description: "",
-		importance: "Priority",
 		tasks: [
 			{
 				id: Date.now() + 9,
@@ -140,7 +136,7 @@ class App extends Component {
 			},
 		],
 		completedTasksCount: 4,
-		addLabel: false,
+		addLabel: true,
 		allLabels: [
 			"Work",
 			"Finance",
@@ -238,8 +234,8 @@ class App extends Component {
 		this.setState({ importance: value });
 	};
 
-	onTask = () => {
-		const { task, description, importance, chosenLabels, time } = this.state;
+	onTask = (stateAddTask) => {
+		const { task, description, importance, chosenLabels, time } = stateAddTask;
 
 		if (!task.trim()) {
 			alert("Task name cannot be empty.");
@@ -258,19 +254,23 @@ class App extends Component {
 			time,
 		};
 
-		this.setState(
-			(prevState) => ({
-				tasks: [...prevState.tasks, newTask],
-				task: "",
-				description: "",
-				countTasks: prevState.tasks.length + 1,
-				addTask: false,
-				addLabel: false,
-				currentLabel: "",
-				chosenLabels: [],
-				time: "",
-			})
-		);
+		stateAddTask = {
+			addTask: true,
+			task: "",
+			description: "",
+			importance: "Priority",
+			isOpen: false,
+			chosenLabels: [],
+			time: "",
+		};
+
+		this.setState((prevState) => ({
+			tasks: [...prevState.tasks, newTask],
+			countTasks: prevState.tasks.length + 1,
+			addLabel: false,
+			currentLabel: "",
+			chosenLabels: [],
+		}));
 	};
 
 	onActionWithTask = (id, action) => {

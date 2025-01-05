@@ -278,7 +278,7 @@ class Task extends Component {
 				)}
 			</div>
 		) : clazz === "completed-tasks-list" ? (
-			<p>No completed tasks yet</p>
+			<p style={{color: "grey"}}>No completed tasks yet</p>
 		) : null;
 	};
 

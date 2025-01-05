@@ -6,11 +6,45 @@ import Time from "../time/Time";
 
 class AddTask extends Component {
 	state = {
-		importance: "Priority", // Установите значение по умолчанию
-		isOpen: false, // Для управления открытием/закрытием селекта
+		addTask: true,
+		task: "",
+		description: "",
+		importance: "Priority",
+		isOpen: false,
+		chosenLabels: [],
+		time: "",
+		resetSignal: 0,
 	};
 
 	textareaRef = createRef();
+
+	ref = {
+		inputTaskName: createRef(),
+		textarea: createRef(),
+	};
+
+	updateState = (prop, value) => {
+		this.setState({ [prop]: value });
+		if (prop === "importance") {
+			this.setState({ [prop]: value, isOpen: false });
+		}
+	};
+
+	defaultState = () => {
+		this.setState({
+			addTask: true,
+			task: "",
+			description: "",
+			importance: "Priority",
+			isOpen: true,
+			chosenLabels: [],
+			time: "",
+			resetSignal: this.state.resetSignal + 1, // Увеличиваем сигнал
+		});
+
+		this.textareaRef.current.value = "";
+		this.ref.inputTaskName.current.value = "";
+	};
 
 	autoResizeTextarea = () => {
 		const textarea = this.textareaRef.current;
@@ -18,17 +52,12 @@ class AddTask extends Component {
 		textarea.style.height = `${textarea.scrollHeight}px`;
 	};
 
-	handleImportanceChange = (value) => {
-		this.setState({ importance: value, isOpen: false });
-		this.props.updateStatePriority(value);
-	};
-
 	toggleDropdown = () => {
 		this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
 	};
 
 	render() {
-		const { importance, isOpen } = this.state;
+		const { addTask, importance, isOpen } = this.state;
 
 		const {
 			tasks,
@@ -51,20 +80,21 @@ class AddTask extends Component {
 
 		return (
 			<div className='add-task'>
-				{addTaskState ? (
+				{addTask ? (
 					<div className='add-task__form'>
 						<input
 							type='text'
 							className='add-task__form__input'
 							placeholder='Task Name'
-							onChange={(e) => updateStateEvent("task", e)}
+							onChange={(e) => this.updateState("task", e.target.value)}
+							ref={this.ref.inputTaskName}
 						/>
 						<textarea
 							className='add-task__form__textarea'
 							placeholder='Description'
 							ref={this.textareaRef}
 							onInput={this.autoResizeTextarea}
-							onChange={(e) => updateStateEvent("description", e)}
+							onChange={(e) => this.updateState("description", e.target.value)}
 						/>
 						<div className='add-task__form__importance'>
 							<div
@@ -80,7 +110,7 @@ class AddTask extends Component {
 											<li
 												key={option.value}
 												onClick={(e) => [
-													this.handleImportanceChange(option.value),
+													this.updateState("importance", option.value),
 												]}
 												className='dropdown-item'>
 												{option.icon}
@@ -92,7 +122,10 @@ class AddTask extends Component {
 							</div>
 						</div>
 
-						<Time updateStateBool={updateStateBool} />
+						<Time
+							updateState={this.updateState}
+							resetSignal={this.state.resetSignal}
+						/>
 
 						<Label
 							addLabel={addLabel}
@@ -102,17 +135,18 @@ class AddTask extends Component {
 							updateStateBool={updateStateBool}
 							tasks={tasks}
 							chosenLabels={chosenLabels}
+							updateState={this.updateState}
 						/>
 
 						<div className='add-task__form__buttons'>
 							<button
 								className='add-task__form__buttons__cancel'
-								onClick={() => updateStateBool("addTask", false)}>
+								onClick={() => this.updateState("addTask", false)}>
 								Cancel
 							</button>
 							<button
 								className='add-task__form__buttons__add'
-								onClick={onTask}>
+								onClick={() => [onTask(this.state), this.defaultState()]}>
 								Add Task
 							</button>
 						</div>
@@ -120,7 +154,7 @@ class AddTask extends Component {
 				) : (
 					<div
 						className='add-task__button'
-						onClick={() => updateStateBool("addTask", true)}>
+						onClick={() => this.updateState("addTask", true)}>
 						<span></span>
 						<p>Add Task</p>
 					</div>

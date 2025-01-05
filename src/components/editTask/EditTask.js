@@ -12,7 +12,8 @@ class EditTask extends Component {
 		importance: this.props.importance,
 		labels: this.props.labels,
 		time: this.props.time,
-		isOpen: false,
+		isOpenImportance: false,
+		isOpenLabels: false
 	};
 
 	handleChange = (prop, value) => {
@@ -43,16 +44,16 @@ class EditTask extends Component {
 		this.props.saveTask(updatedTask);
 	};
 
-	toggleDropdown = () => {
-		this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+	toggleDropdown = (prop) => {
+		this.setState((prevState) => ({ [prop]: !prevState[prop] }));
 	};
 
 	handleImportanceChange = (value) => {
-		this.setState({ importance: value, isOpen: false });
+		this.setState({ importance: value, isOpenImportance: false });
 	};
 
 	render() {
-		const { task, description, importance, isOpen } = this.state;
+		const { task, description, importance, isOpenImportance, isOpenLabels } = this.state;
 
 		const {
 			tasks,
@@ -89,12 +90,12 @@ class EditTask extends Component {
 				<div className='edit-task__form__importance'>
 					<div
 						className='custom-select'
-						onClick={this.toggleDropdown}>
+						onClick={() => this.toggleDropdown("isOpenImportance")}>
 						<div className='selected-option'>
 							{options.find((option) => option.value === importance)?.icon}
 							<span>{importance}</span>
 						</div>
-						{isOpen && (
+						{isOpenImportance && (
 							<ul className='dropdown-list'>
 								{options.map((option) => (
 									<li
@@ -123,6 +124,7 @@ class EditTask extends Component {
 					allLabels={allLabels}
 					chosenLabels={chosenLabels}
 					handleChange={this.handleChange}
+					isOpenLabels={isOpenLabels}
 				/>
 				<div className='edit-task__form__buttons'>
 					<button
