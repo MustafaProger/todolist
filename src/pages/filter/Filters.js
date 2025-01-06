@@ -51,7 +51,6 @@ class Filters extends Component {
 						onSaveTask={onSaveTask}
 						onOpenFilterLabel={onOpenFilterLabel}
 						completedTasks={completedTasks}
-
 					/>
 				</div>
 			</div>

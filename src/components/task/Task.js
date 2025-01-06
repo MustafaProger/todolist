@@ -139,7 +139,7 @@ class Task extends Component {
 										allLabels={allLabels}
 										updateStateEvent={updateStateEvent}
 										updateStateBool={updateStateBool}
-										tasks={tasks}
+										tasks={this.props.allTasks || tasks}
 										onSaveTask={this.props.onSaveTask}
 										completedTasks={completedTasks}
 									/>

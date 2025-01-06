@@ -131,6 +131,7 @@ class Labels extends Component {
 											<Task
 												clazz={"tasks-list"}
 												tasks={filteredTasks}
+												allTasks={tasks}
 												allLabels={allLabels}
 												updateStateBool={updateStateBool}
 												updateStateEvent={updateStateEvent}

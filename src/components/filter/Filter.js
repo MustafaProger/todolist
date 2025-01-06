@@ -92,7 +92,9 @@ class Filter extends Component {
 								{filteredTask.length ? (
 									<Task
 										clazz={"tasks-list"}
+										allTasks={tasks}
 										tasks={filteredTask}
+										filteredTask={filteredTask}
 										onActionWithTask={onActionWithTask}
 										editTaskFunc={editTaskFunc}
 										onSaveTask={onSaveTask}
