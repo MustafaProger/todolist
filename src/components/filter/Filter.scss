@@ -2,8 +2,8 @@
 	.importance {
 		display: grid;
 		align-items: center;
-		grid-template-columns: 25px auto 1fr;
-		padding: 20px 0;
+		grid-template-columns: 30px auto 1fr;
+		padding: 15px 0;
 		cursor: pointer;
 		span {
 			font-size: 25px;
@@ -24,6 +24,10 @@
 
 	.toggle-icon {
 		margin-left: auto;
+		display: flex;
+		align-items: center;
+		width: 60px;
+		justify-content: space-around;
 	}
 
 	.tasks-list {
@@ -43,11 +47,6 @@
 		margin: 0;
 	}
 
-	.toggle-icon {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-	}
 
 	span.task-count {
 		font-size: 18px;

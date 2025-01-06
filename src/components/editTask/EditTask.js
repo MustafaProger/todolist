@@ -10,13 +10,12 @@ class EditTask extends Component {
 		task: this.props.task,
 		description: this.props.description,
 		importance: this.props.importance,
-		labels: this.props.labels,
+		chosenLabels: [...this.props.labels],
 		time: this.props.time,
 
 		isOpenImportance: false,
 		isOpenLabels: false,
 		currentLabel: "",
-		chosenLabels: [...this.props.labels],
 	};
 
 	handleChange = (prop, value) => {
@@ -25,8 +24,12 @@ class EditTask extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (
+			prevProps.allLabels.length !== this.props.allLabels.length ||
+			prevState.task !== this.state.task ||
+			prevState.description !== this.state.description ||
+			prevState.importance !== this.state.importance ||
 			prevState.chosenLabels.length !== this.state.chosenLabels.length ||
-			prevProps.allLabels.length !== this.props.allLabels.length
+			prevState.time !== this.state.time
 		) {
 			this.handleSave();
 		}
@@ -143,9 +146,9 @@ class EditTask extends Component {
 				<div className='edit-task__form__buttons'>
 					<button
 						className='edit-task__form__buttons__add'
-						onClick={this.props.cancelEdit}
+						onClick={() => this.props.cancelEdit()}
 						style={{ padding: "10px 30px" }}>
-						Save
+						Exit
 					</button>
 				</div>
 			</div>

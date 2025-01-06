@@ -111,7 +111,7 @@ class Filter extends Component {
 									</p>
 								)}
 							</div>
-							<hr className='divider' />
+							{/* <hr className='divider' /> */}
 						</div>
 					);
 				})}

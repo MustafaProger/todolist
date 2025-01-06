@@ -36,22 +36,11 @@ class Task extends Component {
 		}));
 	};
 
-	// Сохранить изменения
-	saveTask = (updatedTask) => {
+	// Отмена редактирования
+	cancelEdit = (updatedTask) => {
 		const { editedTask } = this.state;
 		this.props.editTaskFunc(editedTask.id, updatedTask); // Передаем обновленную задачу через пропс
 		this.setState({ editingTaskId: null, editedTask: {} }); // Сбрасываем состояние
-		this.props.updateStateBool("addLabel", false);
-		this.props.updateStateEvent("chosenLabels", []);
-		this.props.updateStateBool("time", "");
-	};
-
-	// Отмена редактирования
-	cancelEdit = () => {
-		this.setState({ editingTaskId: null, editedTask: {} });
-		this.props.updateStateBool("addLabel", false);
-		this.props.updateStateEvent("chosenLabels", []);
-		this.props.updateStateBool("time", "");
 	};
 
 	isTimeExpired = (taskTime) => {
@@ -146,7 +135,6 @@ class Task extends Component {
 										importance={importance}
 										labels={labels}
 										time={time}
-										saveTask={this.saveTask}
 										cancelEdit={this.cancelEdit}
 										allLabels={allLabels}
 										updateStateEvent={updateStateEvent}

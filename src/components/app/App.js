@@ -23,7 +23,7 @@ class App extends Component {
 				id: Date.now() + 10,
 				task: "🧹 Clean Room",
 				description: "Organize desk and vacuum floor",
-				importance: "Medium",
+				importance: "High",
 				labels: ["Work", "Finance", "Job"],
 				time: "13:00",
 			},
@@ -34,6 +34,30 @@ class App extends Component {
 				importance: "Low",
 				labels: ["Work", "Job"],
 				time: "16:00",
+			},
+			{
+				id: Date.now() + 12,
+				task: "📓 Read Book",
+				description: "Finish the last chapter of 'Atomic Habits'",
+				importance: "Medium",
+				labels: ["Self-Development", "Work", "Job"],
+				time: "18:30",
+			},
+			{
+				id: Date.now() + 13,
+				task: "📝 Plan Next Day",
+				description: "Write tasks for tomorrow",
+				importance: "High",
+				labels: ["Self-Development", "Religion"],
+				time: "20:00",
+			},
+			{
+				id: Date.now() + 14,
+				task: "🚶 Evening Walk",
+				description: "30-minute walk in the park",
+				importance: "Low",
+				labels: ["Religion"],
+				time: "19:00",
 			},
 		],
 		// tasks: [
@@ -166,8 +190,8 @@ class App extends Component {
 			"Work",
 			"Finance",
 			"Job",
-			// "Religion",
-			// "Self-Development",
+			"Religion",
+			"Self-Development",
 			// "Routine",
 			// "Health",
 			// "Fitness",
@@ -227,9 +251,9 @@ class App extends Component {
 			theme,
 		};
 
-		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
-			localStorage.setItem("appState", JSON.stringify(stateToSave));
-		}
+		// if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
+		// 	localStorage.setItem("appState", JSON.stringify(stateToSave));
+		// }
 	}
 
 	updateStateBool = (prop, bool) => {
@@ -333,9 +357,7 @@ class App extends Component {
 		const updatedTasks = this.state.tasks.map((task) =>
 			task.id === id ? { ...task, ...updatedTask } : task
 		);
-		this.setState(
-			{ tasks: updatedTasks }
-		);
+		this.setState({ tasks: updatedTasks });
 	};
 
 	onSaveTask = (updatedTask) => {
