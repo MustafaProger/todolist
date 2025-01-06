@@ -70,7 +70,6 @@ class Tasks extends Component {
 						onTask={onTask}
 						allLabels={allLabels}
 						completedTasks={completedTasks}
-						onSaveTask={this.onSaveTask}
 					/>
 				</div>
 			</div>

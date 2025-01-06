@@ -33,7 +33,6 @@ class EditTask extends Component {
 		) {
 			this.handleSave();
 		}
-		console.log(this.props.tasks)
 	}
 
 	handleSave = () => {

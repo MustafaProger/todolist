@@ -94,17 +94,12 @@ class Filter extends Component {
 										clazz={"tasks-list"}
 										allTasks={tasks}
 										tasks={filteredTask}
-										filteredTask={filteredTask}
 										onActionWithTask={onActionWithTask}
 										editTaskFunc={editTaskFunc}
 										onSaveTask={onSaveTask}
-										editingTask={editingTask}
 										updateStateEvent={updateStateEvent}
 										updateStateBool={updateStateBool}
-										addLabel={addLabel}
 										allLabels={allLabels}
-										currentLabel={currentLabel}
-										chosenLabels={chosenLabels}
 										completedTasks={completedTasks}
 									/>
 								) : (
