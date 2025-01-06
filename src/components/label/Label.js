@@ -8,6 +8,7 @@ class Label extends Component {
 		checkedItems: {},
 		isOpenLabels: false,
 		deleteLabels: false,
+		chosenLabels: [...this.props.chosenLabels]
 	};
 
 	checkboxRefs = {};

@@ -10,6 +10,7 @@ class EditTask extends Component {
 		task: this.props.task,
 		description: this.props.description,
 		importance: this.props.importance,
+		labels: this.props.labels,
 		time: this.props.time,
 
 		isOpenImportance: false,
@@ -21,6 +22,15 @@ class EditTask extends Component {
 	handleChange = (prop, value) => {
 		this.setState({ [prop]: value });
 	};
+
+	componentDidUpdate(prevProps, prevState) {
+		if (
+			prevState.chosenLabels.length !== this.state.chosenLabels.length ||
+			prevProps.allLabels.length !== this.props.allLabels.length
+		) {
+			this.handleSave();
+		}
+	}
 
 	handleSave = () => {
 		if (!this.state.task.trim()) {
@@ -42,7 +52,7 @@ class EditTask extends Component {
 			return;
 		}
 
-		this.props.saveTask(updatedTask);
+		this.props.onSaveTask(updatedTask);
 	};
 
 	toggleDropdown = (prop) => {
@@ -61,9 +71,11 @@ class EditTask extends Component {
 			tasks,
 			addLabel,
 			allLabels,
+			currentLabel,
+			chosenLabels,
 			updateStateEvent,
 			updateStateBool,
-			completedTasks
+			completedTasks,
 		} = this.props;
 
 		const options = [
@@ -127,17 +139,12 @@ class EditTask extends Component {
 					handleChange={this.handleChange}
 					isOpenLabels={isOpenLabels}
 					completedTasks={completedTasks}
-
 				/>
 				<div className='edit-task__form__buttons'>
 					<button
-						className='edit-task__form__buttons__cancel'
-						onClick={this.props.cancelEdit}>
-						Cancel
-					</button>
-					<button
 						className='edit-task__form__buttons__add'
-						onClick={this.handleSave}>
+						onClick={this.props.cancelEdit}
+						style={{ padding: "10px 30px" }}>
 						Save
 					</button>
 				</div>

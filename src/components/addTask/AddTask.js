@@ -6,13 +6,13 @@ import Time from "../time/Time";
 
 class AddTask extends Component {
 	state = {
-		addTask: false,
+		addTask: true,
 		task: "",
 		description: "",
 		importance: "Priority",
 		isOpen: false,
 		chosenLabels: [],
-		currentLabel: '',
+		currentLabel: "",
 		time: "",
 		resetSignal: 0,
 	};
@@ -23,6 +23,17 @@ class AddTask extends Component {
 		inputTaskName: createRef(),
 		textarea: createRef(),
 	};
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.allLabels !== this.props.allLabels) {
+			this.props.updateStateBool(
+				"tasks",
+				this.props.tasks.map((task) => {
+					return task;
+				})
+			);
+		}
+	}
 
 	updateState = (prop, value) => {
 		this.setState({ [prop]: value });

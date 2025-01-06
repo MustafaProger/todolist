@@ -152,6 +152,7 @@ class Task extends Component {
 										updateStateEvent={updateStateEvent}
 										updateStateBool={updateStateBool}
 										tasks={tasks}
+										onSaveTask={this.props.onSaveTask}
 										completedTasks={completedTasks}
 									/>
 								) : (

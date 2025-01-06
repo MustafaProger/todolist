@@ -16,7 +16,7 @@ class App extends Component {
 				task: "📚 College Assignment",
 				description: "Complete math homework",
 				importance: "High",
-				labels: ["Education", "College"],
+				labels: ["Work"],
 				time: "10:30",
 			},
 			{
@@ -24,7 +24,7 @@ class App extends Component {
 				task: "🧹 Clean Room",
 				description: "Organize desk and vacuum floor",
 				importance: "Medium",
-				labels: ["Routine"],
+				labels: ["Work", "Finance", "Job"],
 				time: "13:00",
 			},
 			{
@@ -32,74 +32,100 @@ class App extends Component {
 				task: "🛒 Grocery Shopping",
 				description: "Buy vegetables, milk, and bread",
 				importance: "Low",
-				labels: ["Routine", "Chores"],
+				labels: ["Work", "Job"],
 				time: "16:00",
 			},
-			{
-				id: Date.now() + 12,
-				task: "📓 Read Book",
-				description: "Finish the last chapter of 'Atomic Habits'",
-				importance: "Medium",
-				labels: ["Self-Development"],
-				time: "18:30",
-			},
-			{
-				id: Date.now() + 13,
-				task: "📝 Plan Next Day",
-				description: "Write tasks for tomorrow",
-				importance: "High",
-				labels: ["Planning"],
-				time: "20:00",
-			},
-			{
-				id: Date.now() + 14,
-				task: "🚶 Evening Walk",
-				description: "30-minute walk in the park",
-				importance: "Low",
-				labels: ["Health", "Relaxation"],
-				time: "19:00",
-			},
-			{
-				id: Date.now() + 15,
-				task: "📱 Call Family",
-				description: "Check in with parents and siblings",
-				importance: "Priority",
-				labels: ["Family"],
-				time: "17:00",
-			},
-			{
-				id: Date.now() + 16,
-				task: "🌅 Fajr Prayer",
-				description: "",
-				importance: "High",
-				labels: ["Religion"],
-				time: "05:00",
-			},
-			{
-				id: Date.now() + 17,
-				task: "💼 Meeting with Team",
-				description: "Discuss project updates and deadlines",
-				importance: "High",
-				labels: ["Work", "Job"],
-				time: "11:00",
-			},
-			{
-				id: Date.now() + 18,
-				task: "🛏️ Change Bed Sheets",
-				description: "",
-				importance: "Low",
-				labels: ["Routine", "Cleaning"],
-				time: "14:30",
-			},
-			{
-				id: Date.now() + 19,
-				task: "🎮 Play Video Games",
-				description: "Relax with friends online",
-				importance: "Low",
-				labels: ["Relaxation", "Fun"],
-				time: "21:00",
-			},
 		],
+		// tasks: [
+		//  {
+		//      id: Date.now() + 9,
+		//      task: "📚 College Assignment",
+		//      description: "Complete math homework",
+		//      importance: "High",
+		//      labels: ["Education", "College"],
+		//      time: "10:30",
+		//  },
+		//  {
+		//      id: Date.now() + 10,
+		//      task: "🧹 Clean Room",
+		//      description: "Organize desk and vacuum floor",
+		//      importance: "Medium",
+		//      labels: ["Routine"],
+		//      time: "13:00",
+		//  },
+		//  {
+		//      id: Date.now() + 11,
+		//      task: "🛒 Grocery Shopping",
+		//      description: "Buy vegetables, milk, and bread",
+		//      importance: "Low",
+		//      labels: ["Routine", "Chores"],
+		//      time: "16:00",
+		//  },
+		//  {
+		//      id: Date.now() + 12,
+		//      task: "📓 Read Book",
+		//      description: "Finish the last chapter of 'Atomic Habits'",
+		//      importance: "Medium",
+		//      labels: ["Self-Development"],
+		//      time: "18:30",
+		//  },
+		//  {
+		//      id: Date.now() + 13,
+		//      task: "📝 Plan Next Day",
+		//      description: "Write tasks for tomorrow",
+		//      importance: "High",
+		//      labels: ["Planning"],
+		//      time: "20:00",
+		//  },
+		//  {
+		//      id: Date.now() + 14,
+		//      task: "🚶 Evening Walk",
+		//      description: "30-minute walk in the park",
+		//      importance: "Low",
+		//      labels: ["Health", "Relaxation"],
+		//      time: "19:00",
+		//  },
+		//  {
+		//      id: Date.now() + 15,
+		//      task: "📱 Call Family",
+		//      description: "Check in with parents and siblings",
+		//      importance: "Priority",
+		//      labels: ["Family"],
+		//      time: "17:00",
+		//  },
+		//  {
+		//      id: Date.now() + 16,
+		//      task: "🌅 Fajr Prayer",
+		//      description: "",
+		//      importance: "High",
+		//      labels: ["Religion"],
+		//      time: "05:00",
+		//  },
+		//  {
+		//      id: Date.now() + 17,
+		//      task: "💼 Meeting with Team",
+		//      description: "Discuss project updates and deadlines",
+		//      importance: "High",
+		//      labels: ["Work", "Job"],
+		//      time: "11:00",
+		//  },
+		//  {
+		//      id: Date.now() + 18,
+		//      task: "🛏️ Change Bed Sheets",
+		//      description: "",
+		//      importance: "Low",
+		//      labels: ["Routine", "Cleaning"],
+		//      time: "14:30",
+		//  },
+		//  {
+		//      id: Date.now() + 19,
+		//      task: "🎮 Play Video Games",
+		//      description: "Relax with friends online",
+		//      importance: "Low",
+		//      labels: ["Relaxation", "Fun"],
+		//      time: "21:00",
+		//  },
+		// ],
 		tasksCount: 11,
 		completedTasks: [
 			{
@@ -140,30 +166,30 @@ class App extends Component {
 			"Work",
 			"Finance",
 			"Job",
-			"Religion",
-			"Self-Development",
-			"Routine",
-			"Health",
-			"Fitness",
-			"Education",
-			"College",
-			"Food",
-			"Chores",
-			"Planning",
-			"Relaxation",
-			"Family",
-			"Cleaning",
-			"Fun",
+			// "Religion",
+			// "Self-Development",
+			// "Routine",
+			// "Health",
+			// "Fitness",
+			// "Education",
+			// "College",
+			// "Food",
+			// "Chores",
+			// "Planning",
+			// "Relaxation",
+			// "Family",
+			// "Cleaning",
+			// "Fun",
 		],
 		term: "",
 		theme: "light",
 	};
 
 	componentDidMount() {
-		const savedState = JSON.parse(localStorage.getItem("appState"));
-		if (savedState) {
-			this.setState(savedState);
-		}
+		// const savedState = JSON.parse(localStorage.getItem("appState"));
+		// if (savedState) {
+		// 	this.setState(savedState);
+		// }
 
 		// Проверка задач на удаление каждые 10 минут
 		this.interval = setInterval(() => {
@@ -251,7 +277,7 @@ class App extends Component {
 		};
 
 		this.setState((prevState) => ({
-			tasks: [...prevState.tasks, newTask],
+			tasks: [...this.state.tasks, newTask],
 			tasksCount: prevState.tasks.length + 1,
 			addLabel: false,
 			currentLabel: "",
@@ -309,7 +335,6 @@ class App extends Component {
 		);
 		this.setState(
 			{ tasks: updatedTasks }
-			// () => this.updateLocalStorage()
 		);
 	};
 
@@ -318,6 +343,14 @@ class App extends Component {
 			tasks: tasks.map((task) =>
 				task.id === updatedTask.id ? { ...task, ...updatedTask } : task
 			),
+		}));
+	};
+
+	updateTask = () => {
+		this.setState(({ tasks }) => ({
+			tasks: tasks.map((task) => {
+				return task;
+			}),
 		}));
 	};
 
