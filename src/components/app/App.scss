@@ -25,7 +25,7 @@
 	.edit-task__form,
 	.edit-task__form__input,
 	.edit-task__form__textarea,
-	.dropdown-item,
+	.dropdown-list,
 	.time input,
 	.input-label,
 	.checkboxes__item svg path,
@@ -38,7 +38,7 @@
 	.label__name span,
 	.label__name .toggle-icon .task-count,
 	.label__name .toggle-icon svg path {
-		transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+		transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1) !important;
 	}
 
 	.container {
@@ -83,6 +83,7 @@
 			display: flex;
 			align-items: center;
 			gap: 5px;
+			margin-bottom: 10px;
 		}
 		.dropdown-list {
 			display: flex;
@@ -90,25 +91,37 @@
 			background-color: #fff;
 			border: 1px solid rgba(0, 0, 0, 0.1);
 			border-radius: 8px;
-			margin: 20px 0 0 0;
-			
-			max-width: 100%;
+			margin: 0;
+			max-width: 444px;
+			max-height: 80px;
+			opacity: 0;
 			.dropdown-item {
+				height: 0;
 				display: flex;
 				align-items: center;
 				gap: 5px;
-				padding: 10px 20px;
-				transition: all 0.2s;
+				padding: 0 20px;
+				transition: all 0.5s;
 				&:hover {
 					background-color: rgba(0, 0, 0, 0.1);
 				}
-
 				&:nth-child(1):hover {
 					border-radius: 7px 0 0 7px;
 				}
-
 				&:nth-child(4):hover {
 					border-radius: 0 7px 7px 0;
+				}
+			}
+		}
+
+		&.active {
+			.dropdown-list {
+				max-height: 100%;
+				opacity: 1;
+				margin: 20px 0 0 0;
+				.dropdown-item {
+					padding: 10px 20px;
+					height: 40px;
 				}
 			}
 		}

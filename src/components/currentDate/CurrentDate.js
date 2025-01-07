@@ -1,20 +1,61 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { LanguageContext } from "../locales/LanguageContext";
 
 class CurrentDate extends Component {
-    state = {
-        date: new Date()
-    };
+	static contextType = LanguageContext; // Указываем контекст
 
-    render() {
-        const { date } = this.state;
-        const dateArr = date.toDateString().split(' ');
+	state = {
+		date: new Date(),
+	};
 
-        return (
-            <div>
-                <h3 className='current-date'>{dateArr[2]} {dateArr[1]} • {dateArr[0]}</h3>
-            </div>
-        );
-    }
+	render() {
+		const { date } = this.state;
+		const { getTranslation } = this.context; // Получаем getTranslation из контекста
+
+		// Получаем номер месяца (0-11) и дня недели (0-6)
+		const monthIndex = date.getMonth();
+		const dayIndex = date.getDay(); // Получаем день недели
+		const day = date.getDate();
+		const year = date.getFullYear();
+
+		// Массив названий месяцев
+		const monthNames = [
+			"january",
+			"february",
+			"march",
+			"april",
+			"may",
+			"june",
+			"july",
+			"august",
+			"september",
+			"october",
+			"november",
+			"december",
+		];
+
+		// Массив названий дней недели
+		const weekDays = [
+			"sunday",
+			"monday",
+			"tuesday",
+			"wednesday",
+			"thursday",
+			"friday",
+			"saturday",
+		];
+
+		// Форматирование даты в зависимости от языка
+		const formattedDate = `${day} ${getTranslation(
+			monthNames[monthIndex]
+		)}, ${getTranslation(weekDays[dayIndex])} • ${year}`;
+
+		return (
+			<div>
+				<h3 className='current-date'>{formattedDate}</h3>
+			</div>
+		);
+	}
 }
 
 export default CurrentDate;

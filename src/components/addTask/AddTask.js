@@ -4,10 +4,10 @@ import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
 import Time from "../time/Time";
 
-import { LanguageContext } from "../../components/app/LanguageContext";
+import { LanguageContext } from "../locales/LanguageContext";
 
 class AddTask extends Component {
-	static contextType = LanguageContext; // Указываем контекст
+	static contextType = LanguageContext;
 
 	state = {
 		addTask: true,
@@ -75,7 +75,7 @@ class AddTask extends Component {
 	render() {
 		const { addTask, importance, isOpen } = this.state;
 
-		const { language, switchLanguage } = this.context; // Доступ к контексту
+		const { getTranslation } = this.context;
 
 		const {
 			tasks,
@@ -100,40 +100,39 @@ class AddTask extends Component {
 						<input
 							type='text'
 							className='add-task__form__input'
-							placeholder={language === "en" ? "Task name" : "Название задачи"}
+							placeholder={getTranslation("taskName")}
 							onChange={(e) => this.updateState("task", e.target.value)}
 							ref={this.ref.inputTaskName}
 						/>
 						<textarea
 							className='add-task__form__textarea'
-							placeholder={language === "en" ? "Description" : "Description"}
+							placeholder={getTranslation("description")}
 							onInput={this.autoResizeTextarea}
 							onChange={(e) => this.updateState("description", e.target.value)}
 							ref={this.textareaRef}
 						/>
 						<div className='add-task__form__importance'>
 							<div
-								className='custom-select'
+								className={`custom-select ${isOpen ? "active" : ""}`}
 								onClick={this.toggleDropdown}>
 								<div className='selected-option'>
 									{options.find((option) => option.value === importance)?.icon}
 									<span>{importance}</span>
 								</div>
-								{isOpen && (
-									<ul className='dropdown-list'>
-										{options.map((option) => (
-											<li
-												key={option.value}
-												onClick={(e) => [
-													this.updateState("importance", option.value),
-												]}
-												className='dropdown-item'>
-												{option.icon}
-												<span>{option.label}</span>
-											</li>
-										))}
-									</ul>
-								)}
+
+								<ul className='dropdown-list'>
+									{options.map((option) => (
+										<li
+											key={option.value}
+											onClick={(e) => [
+												this.updateState("importance", option.value),
+											]}
+											className='dropdown-item'>
+											{option.icon}
+											<span>{option.label}</span>
+										</li>
+									))}
+								</ul>
 							</div>
 						</div>
 
@@ -158,12 +157,12 @@ class AddTask extends Component {
 							<button
 								className='add-task__form__buttons__cancel'
 								onClick={() => this.updateState("addTask", false)}>
-								{language === "en" ? "Cancel" : "Отмена"}
+								{getTranslation("cancel")}
 							</button>
 							<button
 								className='add-task__form__buttons__add'
 								onClick={() => [onTask(this.state), this.defaultState()]}>
-								{language === "en" ? "Add Task" : "Добавить задачу"}
+								{getTranslation("addTask")}
 							</button>
 						</div>
 					</div>
@@ -172,7 +171,7 @@ class AddTask extends Component {
 						className='add-task__button'
 						onClick={() => this.updateState("addTask", true)}>
 						<span></span>
-						<p>{language === "en" ? "Add Task" : "Добавить задачу"}</p>
+						<p>{getTranslation("addTask")}</p>
 					</div>
 				)}
 			</div>
