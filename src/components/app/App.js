@@ -9,7 +9,7 @@ import "./App.scss";
 
 class App extends Component {
 	state = {
-		menuOpen: false,
+		menuOpen: true,
 		tasks: [
 			{
 				id: Date.now() + 9,
@@ -156,7 +156,8 @@ class App extends Component {
 			"Fun",
 		],
 		term: "",
-		theme: "light",
+		theme: "dark",
+		language: "en",
 	};
 
 	componentDidMount() {
@@ -189,6 +190,7 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
+			language,
 		} = this.state;
 
 		const stateToSave = {
@@ -199,6 +201,7 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
+			language
 		};
 
 		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
@@ -206,8 +209,8 @@ class App extends Component {
 		}
 	}
 
-	updateStateBool = (prop, bool) => {
-		this.setState(() => ({ [prop]: bool }));
+	updateStateBool = (prop, value) => {
+		this.setState(() => ({ [prop]: value }));
 	};
 
 	updateStateEvent = (prop, event) => {

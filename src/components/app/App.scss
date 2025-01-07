@@ -193,7 +193,8 @@
 body.dark {
 	#menu {
 		background-color: #1e1e1e;
-		li a {
+		li a,
+		li .languages__item {
 			color: white;
 			svg path {
 				fill: white;

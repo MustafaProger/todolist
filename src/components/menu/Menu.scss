@@ -1,7 +1,6 @@
 .menu {
 	position: relative;
 
-
 	li a {
 		display: flex;
 		align-items: center;
@@ -19,7 +18,9 @@
 	}
 
 	#menuToggle a,
-	#menuToggle a svg path {
+	#menuToggle a svg path,
+	#menuToggle li .languages__item,
+	#menuToggle li .languages__item svg path {
 		text-decoration: none;
 		color: #232323;
 		fill: #232323;
@@ -28,7 +29,8 @@
 	}
 
 	#menuToggle a:hover,
-	#menuToggle a:hover svg path {
+	#menuToggle a:hover svg path,
+	#menuToggle li .languages__item:hover {
 		color: tomato;
 		fill: tomato;
 	}
@@ -105,10 +107,48 @@
 	#menuToggle input.active ~ ul {
 		transform: none;
 	}
+
+	#menuToggle .languages {
+
+		&__items {
+			margin: 20px 0 0 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+			// display: none;
+			max-height: 0;
+			opacity: 0;
+			transition: all 0.7s;
+		}
+
+		&__item {
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 7.5px;
+			span {
+				background: transparent;
+				width: 100%;
+				height: 20px;
+			}
+		}
+
+		&.active {
+			.languages__items {
+				// display: flex;
+				opacity: 1;
+				max-height: 195px;
+			}
+		}
+
+	}
+
+
 }
 
 .mode__container {
-	margin: 100px 20px 0 0;
+	margin: 50px 20px 0 0;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
