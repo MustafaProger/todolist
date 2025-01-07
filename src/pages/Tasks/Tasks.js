@@ -7,7 +7,10 @@ import Task from "../../components/task/Task";
 import check from "../../assets/icon/check-circle.svg";
 import Search from "../../components/search/Search";
 
+import { LanguageContext } from "../../components/app/LanguageContext"; // Импортируем контекст
+
 class Tasks extends Component {
+	static contextType = LanguageContext; // Указываем контекст
 	render() {
 		const {
 			menuOpen,
@@ -23,8 +26,10 @@ class Tasks extends Component {
 			allLabels,
 			search,
 			theme,
-			completedTasks
+			completedTasks,
 		} = this.props;
+
+		const { language, switchLanguage } = this.context; // Доступ к контексту
 
 		return (
 			<div className='tasks'>
@@ -32,21 +37,20 @@ class Tasks extends Component {
 					updateStateBool={updateStateBool}
 					menuOpen={menuOpen}
 					theme={theme}
-
 				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
-					<h1 className='title'>Tasks</h1>
+					<h1 className='title'>{language === "en" ? "Tasks" : "Задачи"}</h1>
 					<p className='count-tasks'>
 						<img
 							src={check}
 							alt=''
 						/>
-						{tasksCount} tasks
+						{tasksCount} {language === "en" ? "tasks" : "задач"}
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
 					<Search
-						placeholder={"Type a taskname"}
+						placeholder={language === "en" ? "Type a taskname" : "Введите название задачи"}
 						updateStateEvent={updateStateEvent}
 					/>
 					<Task

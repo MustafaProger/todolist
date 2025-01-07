@@ -1,6 +1,7 @@
-import { Component } from "react";
+import { Component, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
+import { LanguageContext } from "./LanguageContext"; // Импортируем контекст
 import Completed from "../../pages/completed/Completed";
 import Filters from "../../pages/filter/Filters";
 import Labels from "../../pages/labels/Labels";
@@ -160,6 +161,10 @@ class App extends Component {
 		language: "en",
 	};
 
+	switchLanguage = (language) => {
+		this.setState({ language });
+	};
+
 	componentDidMount() {
 		// const savedState = JSON.parse(localStorage.getItem("appState"));
 		// if (savedState) {
@@ -201,7 +206,7 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
-			language
+			language,
 		};
 
 		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
@@ -383,82 +388,88 @@ class App extends Component {
 		return (
 			<div className='App'>
 				<BrowserRouter basename='/todolist'>
-					<Routes>
-						<Route
-							path='/'
-							element={
-								<Tasks
-									menuOpen={menuOpen}
-									tasksCount={tasksCount}
-									tasks={tasks}
-									allLabels={allLabels}
-									updateStateEvent={this.updateStateEvent}
-									updateStatePriority={this.updateStatePriority}
-									onTask={this.onTask}
-									onActionWithTask={this.onActionWithTask}
-									updateStateBool={this.updateStateBool}
-									editTaskFunc={this.editTaskFunc}
-									onSaveTask={this.onSaveTask}
-									search={this.search}
-									theme={theme}
-									completedTasks={completedTasks}
-								/>
-							}
-						/>
-						<Route
-							path='/completed'
-							element={
-								<Completed
-									menuOpen={menuOpen}
-									completedTasks={completedTasks}
-									completedTasksCount={completedTasksCount}
-									updateStateBool={this.updateStateBool}
-									onActionWithTask={this.onActionWithTask}
-									theme={theme}
-								/>
-							}
-						/>
-						<Route
-							path='/filter'
-							element={
-								<Filters
-									menuOpen={menuOpen}
-									tasksCount={tasksCount}
-									tasks={tasks}
-									allLabels={allLabels}
-									updateStateBool={this.updateStateBool}
-									updateStateEvent={this.updateStateEvent}
-									onActionWithTask={this.onActionWithTask}
-									editTaskFunc={this.editTaskFunc}
-									onSaveTask={this.onSaveTask}
-									onOpenFilterLabel={this.onOpenFilterLabel}
-									theme={theme}
-									completedTasks={completedTasks}
-								/>
-							}
-						/>
+					<LanguageContext.Provider
+						value={{
+							language: this.state.language,
+							switchLanguage: this.switchLanguage,
+						}}>
+						<Routes>
+							<Route
+								path='/'
+								element={
+									<Tasks
+										menuOpen={menuOpen}
+										tasksCount={tasksCount}
+										tasks={tasks}
+										allLabels={allLabels}
+										updateStateEvent={this.updateStateEvent}
+										updateStatePriority={this.updateStatePriority}
+										onTask={this.onTask}
+										onActionWithTask={this.onActionWithTask}
+										updateStateBool={this.updateStateBool}
+										editTaskFunc={this.editTaskFunc}
+										onSaveTask={this.onSaveTask}
+										search={this.search}
+										theme={theme}
+										completedTasks={completedTasks}
+									/>
+								}
+							/>
+							<Route
+								path='/completed'
+								element={
+									<Completed
+										menuOpen={menuOpen}
+										completedTasks={completedTasks}
+										completedTasksCount={completedTasksCount}
+										updateStateBool={this.updateStateBool}
+										onActionWithTask={this.onActionWithTask}
+										theme={theme}
+									/>
+								}
+							/>
+							<Route
+								path='/filter'
+								element={
+									<Filters
+										menuOpen={menuOpen}
+										tasksCount={tasksCount}
+										tasks={tasks}
+										allLabels={allLabels}
+										updateStateBool={this.updateStateBool}
+										updateStateEvent={this.updateStateEvent}
+										onActionWithTask={this.onActionWithTask}
+										editTaskFunc={this.editTaskFunc}
+										onSaveTask={this.onSaveTask}
+										onOpenFilterLabel={this.onOpenFilterLabel}
+										theme={theme}
+										completedTasks={completedTasks}
+									/>
+								}
+							/>
 
-						<Route
-							path='/labels'
-							element={
-								<Labels
-									menuOpen={menuOpen}
-									tasksCount={tasksCount}
-									tasks={tasks}
-									allLabels={allLabels}
-									updateStateEvent={this.updateStateEvent}
-									updateStateBool={this.updateStateBool}
-									onActionWithTask={this.onActionWithTask}
-									editTaskFunc={this.editTaskFunc}
-									onSaveTask={this.onSaveTask}
-									onOpenFilterLabel={this.onOpenFilterLabel}
-									search={this.search}
-									theme={theme}
-									completedTasks={completedTasks}
-								/>
-							}
-						/>
-					</Routes>
+							<Route
+								path='/labels'
+								element={
+									<Labels
+										menuOpen={menuOpen}
+										tasksCount={tasksCount}
+										tasks={tasks}
+										allLabels={allLabels}
+										updateStateEvent={this.updateStateEvent}
+										updateStateBool={this.updateStateBool}
+										onActionWithTask={this.onActionWithTask}
+										editTaskFunc={this.editTaskFunc}
+										onSaveTask={this.onSaveTask}
+										onOpenFilterLabel={this.onOpenFilterLabel}
+										search={this.search}
+										theme={theme}
+										completedTasks={completedTasks}
+									/>
+								}
+							/>
+						</Routes>
+					</LanguageContext.Provider>
 				</BrowserRouter>
 			</div>
 		);

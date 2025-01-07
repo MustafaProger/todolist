@@ -4,7 +4,11 @@ import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
 import Time from "../time/Time";
 
+import { LanguageContext } from "../../components/app/LanguageContext";
+
 class AddTask extends Component {
+	static contextType = LanguageContext; // Указываем контекст
+
 	state = {
 		addTask: true,
 		task: "",
@@ -71,6 +75,8 @@ class AddTask extends Component {
 	render() {
 		const { addTask, importance, isOpen } = this.state;
 
+		const { language, switchLanguage } = this.context; // Доступ к контексту
+
 		const {
 			tasks,
 			updateStateEvent,
@@ -94,13 +100,13 @@ class AddTask extends Component {
 						<input
 							type='text'
 							className='add-task__form__input'
-							placeholder='Task Name'
+							placeholder={language === "en" ? "Task name" : "Название задачи"}
 							onChange={(e) => this.updateState("task", e.target.value)}
 							ref={this.ref.inputTaskName}
 						/>
 						<textarea
 							className='add-task__form__textarea'
-							placeholder='Description'
+							placeholder={language === "en" ? "Description" : "Description"}
 							onInput={this.autoResizeTextarea}
 							onChange={(e) => this.updateState("description", e.target.value)}
 							ref={this.textareaRef}
@@ -152,12 +158,12 @@ class AddTask extends Component {
 							<button
 								className='add-task__form__buttons__cancel'
 								onClick={() => this.updateState("addTask", false)}>
-								Cancel
+								{language === "en" ? "Cancel" : "Отмена"}
 							</button>
 							<button
 								className='add-task__form__buttons__add'
 								onClick={() => [onTask(this.state), this.defaultState()]}>
-								Add Task
+								{language === "en" ? "Add Task" : "Добавить задачу"}
 							</button>
 						</div>
 					</div>
@@ -166,7 +172,7 @@ class AddTask extends Component {
 						className='add-task__button'
 						onClick={() => this.updateState("addTask", true)}>
 						<span></span>
-						<p>Add Task</p>
+						<p>{language === "en" ? "Add Task" : "Добавить задачу"}</p>
 					</div>
 				)}
 			</div>
