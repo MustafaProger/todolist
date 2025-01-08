@@ -13,22 +13,24 @@ class AddTask extends Component {
 		addTask: true,
 		task: "",
 		description: "",
-		importance: "Priority",
+		importance: this.context.getTranslation("priority"),
 		isOpen: false,
 		chosenLabels: [],
 		currentLabel: "",
 		time: "",
 		resetSignal: 0,
+		updateImportance: 0,
+		prevLanguage: this.context.language,
 	};
-
-	textareaRef = createRef();
 
 	ref = {
 		inputTaskName: createRef(),
 		textarea: createRef(),
 	};
 
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(prevProps, prevState, prevContext) {
+		const { language, getTranslation } = this.context;
+
 		if (prevProps.allLabels !== this.props.allLabels) {
 			this.props.updateStateBool(
 				"tasks",
@@ -36,6 +38,32 @@ class AddTask extends Component {
 					return task;
 				})
 			);
+		}
+
+		if (prevState.prevLanguage !== language) {
+			const translationKeys = {
+				Priority: "priority",
+				Low: "low",
+				Medium: "medium",
+				High: "high",
+				Приоритет: "priority",
+				Низкий: "low",
+				Средний: "medium",
+				Высокий: "high",
+			};
+
+			const currentKey = Object.keys(translationKeys).find(
+				(key) =>
+					key === this.state.importance ||
+					getTranslation(translationKeys[key]) === this.state.importance
+			);
+
+			if (currentKey) {
+				this.setState({
+					importance: getTranslation(translationKeys[currentKey]),
+					prevLanguage: language,
+				});
+			}
 		}
 	}
 
@@ -51,19 +79,19 @@ class AddTask extends Component {
 			addTask: true,
 			task: "",
 			description: "",
-			importance: "Priority",
+			importance: this.context.getTranslation("priority"),
 			isOpen: prevState.isOpen,
 			chosenLabels: [],
 			time: "",
 			resetSignal: this.state.resetSignal + 1,
 		}));
 
-		this.textareaRef.current.value = "";
+		this.ref.textarea.current.value = "";
 		this.ref.inputTaskName.current.value = "";
 	};
 
 	autoResizeTextarea = () => {
-		const textarea = this.textareaRef.current;
+		const textarea = this.ref.textarea.current;
 		textarea.style.height = "auto";
 		textarea.style.height = `${textarea.scrollHeight}px`;
 	};
@@ -77,6 +105,29 @@ class AddTask extends Component {
 
 		const { getTranslation } = this.context;
 
+		const options = [
+			{
+				value: getTranslation("priority"),
+				label: getTranslation("priority"),
+				icon: <Flag theme='#CDCDCD' />,
+			},
+			{
+				value: getTranslation("low"),
+				label: getTranslation("low"),
+				icon: <Flag theme='#5390F5' />,
+			},
+			{
+				value: getTranslation("medium"),
+				label: getTranslation("medium"),
+				icon: <Flag theme='orange' />,
+			},
+			{
+				value: getTranslation("high"),
+				label: getTranslation("high"),
+				icon: <Flag theme='#FF6247' />,
+			},
+		];
+
 		const {
 			tasks,
 			updateStateEvent,
@@ -85,13 +136,6 @@ class AddTask extends Component {
 			onTask,
 			completedTasks,
 		} = this.props;
-
-		const options = [
-			{ value: "Priority", label: "Priority", icon: <Flag theme='#CDCDCD' /> },
-			{ value: "Low", label: "Low", icon: <Flag theme='#5390F5' /> },
-			{ value: "Medium", label: "Medium", icon: <Flag theme='orange' /> },
-			{ value: "High", label: "High", icon: <Flag theme='#FF6247' /> },
-		];
 
 		return (
 			<div className='add-task'>
@@ -109,15 +153,21 @@ class AddTask extends Component {
 							placeholder={getTranslation("description")}
 							onInput={this.autoResizeTextarea}
 							onChange={(e) => this.updateState("description", e.target.value)}
-							ref={this.textareaRef}
+							ref={this.ref.textarea}
 						/>
 						<div className='add-task__form__importance'>
 							<div
 								className={`custom-select ${isOpen ? "active" : ""}`}
 								onClick={this.toggleDropdown}>
 								<div className='selected-option'>
-									{options.find((option) => option.value === importance)?.icon}
-									<span>{importance}</span>
+									{
+										options.find(
+											(option) =>
+												getTranslation(`${option.value}`) ===
+												getTranslation(`${importance}`)
+										)?.icon
+									}
+									<span>{getTranslation(`${importance}`)}</span>
 								</div>
 
 								<ul className='dropdown-list'>

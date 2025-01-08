@@ -22,8 +22,6 @@
 		fill: tomato;
 	}
 
-	// 	// #F5F5F5
-
 	.MuiOutlinedInput-root {
 		gap: 3px;
 
@@ -37,7 +35,7 @@
 		left: -3px;
 	}
 
-	// 	// input time
+	// input time
 	.MuiInputBase-input {
 		padding: 0;
 	}
@@ -46,7 +44,7 @@
 		border: none !important;
 	}
 
-	// 	// container of the time button
+	// container of the time button
 	.MuiInputAdornment-root {
 		margin: 0;
 		button {
@@ -67,4 +65,15 @@
 			left: 25px;
 		}
 	}
+}
+
+.css-1aj8kjr-MuiTimePickerToolbar-amPmSelection
+	.MuiTimePickerToolbar-ampmLabel {
+	color: grey;
+	font-weight: 100;
+}
+
+.css-1tht8iq-MuiTypography-root-MuiPickersToolbarText-root.Mui-selected {
+	color: black;
+	font-weight: 600;
 }

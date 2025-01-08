@@ -86,13 +86,15 @@
 			margin-bottom: 10px;
 		}
 		.dropdown-list {
+			box-sizing: content-box;
 			display: flex;
 			list-style: none;
 			background-color: #fff;
 			border: 1px solid rgba(0, 0, 0, 0.1);
 			border-radius: 8px;
 			margin: 0;
-			max-width: 444px;
+			width: max-content; /* Устанавливает ширину по содержимому */
+			max-width: 100%; /* Не позволяет выйти за пределы контейнера */
 			max-height: 80px;
 			opacity: 0;
 			.dropdown-item {
@@ -189,6 +191,7 @@
 				.custom-select {
 					.dropdown-list {
 						flex-direction: column;
+						width: 100%;
 						.dropdown-item {
 							&:nth-child(1) {
 								border-radius: 7px 7px 0 0;
@@ -341,7 +344,18 @@ body.dark {
 	// For mobile
 	.MuiPickersLayout-root {
 		* {
-			color: white !important;
+			color: white;
+		}
+
+		.css-1aj8kjr-MuiTimePickerToolbar-amPmSelection
+			.MuiTimePickerToolbar-ampmLabel {
+			color: grey;
+			font-weight: 100;
+		}
+
+		.css-1tht8iq-MuiTypography-root-MuiPickersToolbarText-root.Mui-selected {
+			color: white;
+			font-weight: 600;
 		}
 	}
 }

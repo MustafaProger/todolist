@@ -15,6 +15,11 @@ const translations = {
 		description: "Description",
 		addTask: "Add Task",
 		cancel: "Cancel",
+		// importance
+		priority: "Priority",
+		low: "Low",
+		medium: "Medium",
+		high: "High",
 		// month
 		january: "January",
 		february: "February",
@@ -36,6 +41,10 @@ const translations = {
 		thursday: "Thursday",
 		friday: "Friday",
 		saturday: "Saturday",
+		// label
+		searchLabel: "Type a label",
+		labelNotFound: "Label not found",
+		createLabel: "Create a label",
 	},
 	ru: {
 		tasks: "Задачи",
@@ -51,6 +60,11 @@ const translations = {
 		description: "Описание",
 		addTask: "Добавить задачу",
 		cancel: "Отмена",
+		// importance
+		priority: "Приоритет",
+		low: "Низкий",
+		medium: "Средний",
+		high: "Высокий",
 		// month
 		january: "Январь",
 		february: "Февраль",
@@ -72,6 +86,10 @@ const translations = {
 		thursday: "Четверг",
 		friday: "Пятница",
 		saturday: "Суббота",
+		// label
+		searchLabel: "Введите метку",
+		labelNotFound: "Метка не найдена",
+		createLabel: "Создать метку",
 	},
 };
 

@@ -2,13 +2,26 @@
 	margin: 0 0 20px 3px;
 	display: flex;
 	flex-direction: column;
-	gap: 15px;
+	gap: 0px;
+	transition: all 0.5s;
+
+	&.active {
+		gap: 15px;
+		.edit-task__form__labels__input__checkboxes {
+			max-height: 100%;
+			opacity: 1;
+			padding: 10px;
+		}
+	}
 
 	&__input__checkboxes {
 		max-width: 300px;
 		border: 1px solid rgba(0, 0, 0, 0.1);
 		border-radius: 8px;
-		padding: 10px;
+		padding: 0px;
+		max-height: 35px;
+		opacity: 0;
+		transition: all 0.5s;
 
 		.input-label {
 			width: 100%;
@@ -120,6 +133,12 @@
 			display: grid;
 			grid-template-columns: 20px 1fr;
 			gap: 5px;
+
+			p {
+				width: 240px;
+				word-wrap: break-word; /* Переносит слова, если они длиннее контейнера */
+				overflow-wrap: break-word; /* Современный аналог для переноса */
+			}
 			span {
 				position: relative;
 				width: 20px;

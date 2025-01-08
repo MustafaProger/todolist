@@ -6,7 +6,11 @@ import trash from "../../assets/icon/trash.svg";
 import refresh from "../../assets/icon/refresh.svg";
 import EditTask from "../editTask/EditTask";
 
+import { LanguageContext } from "../locales/LanguageContext";
+
 class Task extends Component {
+	static contextType = LanguageContext;
+
 	state = {
 		editingTaskId: null, // ID редактируемой задачи
 		editedTask: {}, // Данные редактируемой задачи
@@ -65,21 +69,24 @@ class Task extends Component {
 			updateStateBool,
 			completedTasks,
 		} = this.props;
+
 		const { editingTaskId } = this.state;
 
+		const { getTranslation } = this.context;
+
 		const importanceColors = {
-			Priority: "#CDCDCD",
-			Low: "#5390F5",
-			Medium: "orange",
-			High: "#FF6247",
+			[getTranslation("priority")]: "#CDCDCD",
+			[getTranslation("low")]: "#5390F5",
+			[getTranslation("medium")]: "orange",
+			[getTranslation("high")]: "#FF6247",
 		};
 
 		// Задаём порядок важности
 		const importanceOrder = {
-			High: 1,
-			Medium: 2,
-			Low: 3,
-			Priority: 4, // Меньший приоритет, чем у остальных
+			[getTranslation("high")]: 1,
+			[getTranslation("medium")]: 2,
+			[getTranslation("low")]: 3,
+			[getTranslation("priority")]: 4, // Меньший приоритет, чем у остальных
 		};
 
 		// Сортируем задачи по времени и важности
