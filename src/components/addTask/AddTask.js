@@ -13,7 +13,7 @@ class AddTask extends Component {
 		addTask: true,
 		task: "",
 		description: "",
-		importance: this.context.getTranslation("priority"),
+		importance: "Priority",
 		isOpen: false,
 		chosenLabels: [],
 		currentLabel: "",
@@ -29,8 +29,6 @@ class AddTask extends Component {
 	};
 
 	componentDidUpdate(prevProps, prevState, prevContext) {
-		const { language, getTranslation } = this.context;
-
 		if (prevProps.allLabels !== this.props.allLabels) {
 			this.props.updateStateBool(
 				"tasks",
@@ -38,32 +36,6 @@ class AddTask extends Component {
 					return task;
 				})
 			);
-		}
-
-		if (prevState.prevLanguage !== language) {
-			const translationKeys = {
-				Priority: "priority",
-				Low: "low",
-				Medium: "medium",
-				High: "high",
-				Приоритет: "priority",
-				Низкий: "low",
-				Средний: "medium",
-				Высокий: "high",
-			};
-
-			const currentKey = Object.keys(translationKeys).find(
-				(key) =>
-					key === this.state.importance ||
-					getTranslation(translationKeys[key]) === this.state.importance
-			);
-
-			if (currentKey) {
-				this.setState({
-					importance: getTranslation(translationKeys[currentKey]),
-					prevLanguage: language,
-				});
-			}
 		}
 	}
 
@@ -79,7 +51,7 @@ class AddTask extends Component {
 			addTask: true,
 			task: "",
 			description: "",
-			importance: this.context.getTranslation("priority"),
+			importance: "Priority",
 			isOpen: prevState.isOpen,
 			chosenLabels: [],
 			time: "",
@@ -107,22 +79,22 @@ class AddTask extends Component {
 
 		const options = [
 			{
-				value: getTranslation("priority"),
+				value: "Priority",
 				label: getTranslation("priority"),
 				icon: <Flag theme='#CDCDCD' />,
 			},
 			{
-				value: getTranslation("low"),
+				value: "Low",
 				label: getTranslation("low"),
 				icon: <Flag theme='#5390F5' />,
 			},
 			{
-				value: getTranslation("medium"),
+				value: "Medium",
 				label: getTranslation("medium"),
 				icon: <Flag theme='orange' />,
 			},
 			{
-				value: getTranslation("high"),
+				value: "High",
 				label: getTranslation("high"),
 				icon: <Flag theme='#FF6247' />,
 			},
@@ -160,14 +132,10 @@ class AddTask extends Component {
 								className={`custom-select ${isOpen ? "active" : ""}`}
 								onClick={this.toggleDropdown}>
 								<div className='selected-option'>
-									{
-										options.find(
-											(option) =>
-												getTranslation(`${option.value}`) ===
-												getTranslation(`${importance}`)
-										)?.icon
-									}
-									<span>{getTranslation(`${importance}`)}</span>
+									{options.find((option) => option.value === importance)?.icon}
+									<span>
+										{getTranslation(`${importance.toLocaleLowerCase()}`)}
+									</span>
 								</div>
 
 								<ul className='dropdown-list'>
