@@ -4,7 +4,11 @@ import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
 import Time from "../time/Time";
 
+import { LanguageContext } from "../locales/LanguageContext";
+
 class EditTask extends Component {
+	static contextType = LanguageContext;
+
 	state = {
 		id: this.props.id,
 		task: this.props.task,
@@ -50,10 +54,10 @@ class EditTask extends Component {
 			time: this.state.time,
 		};
 
-		if (this.state.time === "Invalid Date") {
-			alert("Enter the time correctly");
-			return;
-		}
+		// if (this.state.time === "Invalid Date") {
+		// 	alert("Enter the time correctly");
+		// 	return;
+		// }
 
 		this.props.onSaveTask(updatedTask);
 	};
@@ -74,18 +78,34 @@ class EditTask extends Component {
 			tasks,
 			addLabel,
 			allLabels,
-			currentLabel,
-			chosenLabels,
 			updateStateEvent,
 			updateStateBool,
 			completedTasks,
 		} = this.props;
 
+		const { getTranslation } = this.context;
+
 		const options = [
-			{ value: "Priority", label: "Priority", icon: <Flag theme='#CDCDCD' /> },
-			{ value: "Low", label: "Low", icon: <Flag theme='#5390F5' /> },
-			{ value: "Medium", label: "Medium", icon: <Flag theme='orange' /> },
-			{ value: "High", label: "High", icon: <Flag theme='#FF6247' /> },
+			{
+				value: "Priority",
+				label: getTranslation("priority"),
+				icon: <Flag theme='#CDCDCD' />,
+			},
+			{
+				value: "Low",
+				label: getTranslation("low"),
+				icon: <Flag theme='#5390F5' />,
+			},
+			{
+				value: "Medium",
+				label: getTranslation("medium"),
+				icon: <Flag theme='orange' />,
+			},
+			{
+				value: "High",
+				label: getTranslation("high"),
+				icon: <Flag theme='#FF6247' />,
+			},
 		];
 
 		return (
@@ -95,35 +115,33 @@ class EditTask extends Component {
 					className='edit-task__form__input'
 					value={task}
 					onChange={(e) => this.handleChange("task", e.target.value)}
-					placeholder='Task name'
+					placeholder={getTranslation("taskName")}
 				/>
 				<textarea
 					className='edit-task__form__textarea'
 					value={description}
 					onChange={(e) => this.handleChange("description", e.target.value)}
-					placeholder='Description'
+					placeholder={getTranslation("description")}
 				/>
 				<div className='edit-task__form__importance'>
 					<div
-						className='custom-select'
+						className={`custom-select ${isOpenImportance ? "active" : ""}`}
 						onClick={() => this.toggleDropdown("isOpenImportance")}>
 						<div className='selected-option'>
 							{options.find((option) => option.value === importance)?.icon}
-							<span>{importance}</span>
+							<span>{getTranslation(`${importance.toLocaleLowerCase()}`)}</span>
 						</div>
-						{isOpenImportance && (
-							<ul className='dropdown-list'>
-								{options.map((option) => (
-									<li
-										key={option.value}
-										onClick={() => this.handleImportanceChange(option.value)}
-										className='dropdown-item'>
-										{option.icon}
-										<span>{option.label}</span>
-									</li>
-								))}
-							</ul>
-						)}
+						<ul className='dropdown-list'>
+							{options.map((option) => (
+								<li
+									key={option.value}
+									onClick={() => this.handleImportanceChange(option.value)}
+									className='dropdown-item'>
+									{option.icon}
+									<span>{option.label}</span>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 				<Time

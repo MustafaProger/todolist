@@ -3,7 +3,11 @@ import "./Filter.scss";
 import Flag from "../../assets/icon/flag";
 import Task from "../task/Task";
 
+import { LanguageContext } from "../locales/LanguageContext";
+
 class Filter extends Component {
+	static contextType = LanguageContext;
+
 	state = {
 		openCategory: null, // Открытая категория
 		isOpen: false, // Состояние открытости
@@ -30,18 +34,16 @@ class Filter extends Component {
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
-			editingTask,
 			updateStateBool,
 			updateStateEvent,
-			addLabel,
 			allLabels,
-			currentLabel,
-			chosenLabels,
 			onOpenFilterLabel,
-			completedTasks
+			completedTasks,
 		} = this.props;
 
 		const { openCategory, isOpen } = this.state;
+
+		const { getTranslation } = this.context;
 
 		return (
 			<div className='filtered'>
@@ -59,9 +61,9 @@ class Filter extends Component {
 								className='importance'
 								onClick={() => {
 									this.handleToggleCategory(value);
-									onOpenFilterLabel(value, "filtered-task"); // Вызываем переданный пропс
+									onOpenFilterLabel(value, "filtered-task");
 								}}>
-								{icon} <span>{value}</span>
+								{icon} <span>{getTranslation(`${value.toLocaleLowerCase()}`)}</span>
 								<div className='toggle-icon'>
 									<span className='task-count'>{taskCount}</span>
 									{openCategory === value ? (
@@ -104,11 +106,10 @@ class Filter extends Component {
 									/>
 								) : (
 									<p className='no-task'>
-										So far, we don't have any tasks from this category.
+										{getTranslation("noCategoryTasksYet")}
 									</p>
 								)}
 							</div>
-							{/* <hr className='divider' /> */}
 						</div>
 					);
 				})}

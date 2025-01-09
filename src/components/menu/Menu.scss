@@ -109,13 +109,11 @@
 	}
 
 	#menuToggle .languages {
-
 		&__items {
 			margin: 20px 0 0 20px;
 			display: flex;
 			flex-direction: column;
-			gap: 15px;
-			// display: none;
+			gap: 0px;
 			max-height: 0;
 			opacity: 0;
 			transition: all 0.7s;
@@ -127,6 +125,7 @@
 			justify-content: center;
 			align-items: center;
 			gap: 7.5px;
+
 			span {
 				background: transparent;
 				width: 100%;
@@ -136,15 +135,15 @@
 
 		&.active {
 			.languages__items {
-				// display: flex;
 				opacity: 1;
 				max-height: 195px;
+				gap: 15px;
+			}
+
+			.languages__item {
 			}
 		}
-
 	}
-
-
 }
 
 .mode__container {

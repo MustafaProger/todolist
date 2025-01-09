@@ -20,7 +20,6 @@ class AddTask extends Component {
 		time: "",
 		resetSignal: 0,
 		updateImportance: 0,
-		prevLanguage: this.context.language,
 	};
 
 	ref = {

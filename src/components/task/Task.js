@@ -75,18 +75,18 @@ class Task extends Component {
 		const { getTranslation } = this.context;
 
 		const importanceColors = {
-			[getTranslation("priority")]: "#CDCDCD",
-			[getTranslation("low")]: "#5390F5",
-			[getTranslation("medium")]: "orange",
-			[getTranslation("high")]: "#FF6247",
+			Priority: "#CDCDCD",
+			Low: "#5390F5",
+			Medium: "orange",
+			High: "#FF6247",
 		};
 
 		// Задаём порядок важности
 		const importanceOrder = {
-			[getTranslation("high")]: 1,
-			[getTranslation("medium")]: 2,
-			[getTranslation("low")]: 3,
-			[getTranslation("priority")]: 4, // Меньший приоритет, чем у остальных
+			High: 1,
+			Medium: 2,
+			Low: 3,
+			Priority: 4, // Меньший приоритет, чем у остальных
 		};
 
 		// Сортируем задачи по времени и важности
@@ -274,7 +274,7 @@ class Task extends Component {
 				)}
 			</div>
 		) : clazz === "completed-tasks-list" ? (
-			<p style={{ color: "grey" }}>No completed tasks yet</p>
+			<p style={{ color: "grey" }}>{getTranslation("noCompletedTasksYet")}</p>
 		) : null;
 	};
 

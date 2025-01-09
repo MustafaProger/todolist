@@ -5,7 +5,11 @@ import CurrentDate from "../../components/currentDate/CurrentDate";
 
 import check from "../../assets/icon/check-circle.svg";
 
+import { LanguageContext } from "../../components/locales/LanguageContext";
+
 class Completed extends Component {
+	static contextType = LanguageContext;
+
 	render() {
 		const {
 			menuOpen,
@@ -15,6 +19,9 @@ class Completed extends Component {
 			onActionWithTask,
 			theme,
 		} = this.props;
+
+		const { getTranslation } = this.context;
+
 		return (
 			<div className='done-tasks'>
 				<Menu
@@ -23,13 +30,13 @@ class Completed extends Component {
 					theme={theme}
 				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
-					<h1 className='title'>Completed</h1>
+					<h1 className='title'>{getTranslation("completed")}</h1>
 					<p className='count-tasks'>
 						<img
 							src={check}
 							alt=''
 						/>
-						{completedTasksCount} completed
+						{completedTasksCount} {getTranslation("countTasksCompleted")}
 					</p>
 					<CurrentDate />
 					<hr className='divider' />
