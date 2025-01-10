@@ -53,112 +53,112 @@ class App extends Component {
 				labels: ["Planning"],
 				time: "20:00",
 			},
-			// {
-			// 	id: Date.now() + 14,
-			// 	task: "🚶 Evening Walk",
-			// 	description: "30-minute walk in the park",
-			// 	importance: "Low",
-			// 	labels: ["Health", "Relaxation"],
-			// 	time: "19:00",
-			// },
-			// {
-			// 	id: Date.now() + 15,
-			// 	task: "📱 Call Family",
-			// 	description: "Check in with parents and siblings",
-			// 	importance: "Priority",
-			// 	labels: ["Family"],
-			// 	time: "17:00",
-			// },
-			// {
-			// 	id: Date.now() + 16,
-			// 	task: "🌅 Fajr Prayer",
-			// 	description: "",
-			// 	importance: "High",
-			// 	labels: ["Religion"],
-			// 	time: "05:00",
-			// },
-			// {
-			// 	id: Date.now() + 17,
-			// 	task: "💼 Meeting with Team",
-			// 	description: "Discuss project updates and deadlines",
-			// 	importance: "High",
-			// 	labels: ["Work", "Job"],
-			// 	time: "11:00",
-			// },
-			// {
-			// 	id: Date.now() + 18,
-			// 	task: "🛏️ Change Bed Sheets",
-			// 	description: "",
-			// 	importance: "Low",
-			// 	labels: ["Routine", "Cleaning"],
-			// 	time: "14:30",
-			// },
-			// {
-			// 	id: Date.now() + 19,
-			// 	task: "🎮 Play Video Games",
-			// 	description: "Relax with friends online",
-			// 	importance: "Low",
-			// 	labels: ["Relaxation", "Fun"],
-			// 	time: "21:00",
-			// },
+			{
+				id: Date.now() + 14,
+				task: "🚶 Evening Walk",
+				description: "30-minute walk in the park",
+				importance: "Low",
+				labels: ["Health", "Relaxation"],
+				time: "19:00",
+			},
+			{
+				id: Date.now() + 15,
+				task: "📱 Call Family",
+				description: "Check in with parents and siblings",
+				importance: "Priority",
+				labels: ["Family"],
+				time: "17:00",
+			},
+			{
+				id: Date.now() + 16,
+				task: "🌅 Fajr Prayer",
+				description: "",
+				importance: "High",
+				labels: ["Religion"],
+				time: "05:00",
+			},
+			{
+				id: Date.now() + 17,
+				task: "💼 Meeting with Team",
+				description: "Discuss project updates and deadlines",
+				importance: "High",
+				labels: ["Work", "Job"],
+				time: "11:00",
+			},
+			{
+				id: Date.now() + 18,
+				task: "🛏️ Change Bed Sheets",
+				description: "",
+				importance: "Low",
+				labels: ["Routine", "Cleaning"],
+				time: "14:30",
+			},
+			{
+				id: Date.now() + 19,
+				task: "🎮 Play Video Games",
+				description: "Relax with friends online",
+				importance: "Low",
+				labels: ["Relaxation", "Fun"],
+				time: "21:00",
+			},
 		],
 		tasksCount: 11,
 		completedTasks: [
-			// 	{
-			// 		id: Date.now() + 5,
-			// 		task: "🏋️ Gym",
-			// 		description: "Complete a 45-minute workout",
-			// 		importance: "High",
-			// 		labels: ["Health", "Fitness"],
-			// 		time: "08:30",
-			// 	},
-			// 	{
-			// 		id: Date.now() + 6,
-			// 		task: "📖 Quran Study",
-			// 		description: "Memorize Surah Al-Mulk",
-			// 		importance: "Priority",
-			// 		labels: ["Religion", "Self-Development"],
-			// 		time: "06:00",
-			// 	},
-			// 	{
-			// 		id: Date.now() + 7,
-			// 		task: "📧 Check Emails",
-			// 		description: "Respond to work and personal emails",
-			// 		importance: "Medium",
-			// 		labels: ["Work", "Routine"],
-			// 		time: "09:00",
-			// 	},
-			// 	{
-			// 		id: Date.now() + 8,
-			// 		task: "🍳 Cook Breakfast",
-			// 		description: "Prepare omelette and coffee",
-			// 		importance: "Low",
-			// 		labels: ["Routine", "Food"],
-			// 		time: "07:15",
-			// 	},
+				{
+					id: Date.now() + 5,
+					task: "🏋️ Gym",
+					description: "Complete a 45-minute workout",
+					importance: "High",
+					labels: ["Health", "Fitness"],
+					time: "08:30",
+				},
+				{
+					id: Date.now() + 6,
+					task: "📖 Quran Study",
+					description: "Memorize Surah Al-Mulk",
+					importance: "Priority",
+					labels: ["Religion", "Self-Development"],
+					time: "06:00",
+				},
+				{
+					id: Date.now() + 7,
+					task: "📧 Check Emails",
+					description: "Respond to work and personal emails",
+					importance: "Medium",
+					labels: ["Work", "Routine"],
+					time: "09:00",
+				},
+				{
+					id: Date.now() + 8,
+					task: "🍳 Cook Breakfast",
+					description: "Prepare omelette and coffee",
+					importance: "Low",
+					labels: ["Routine", "Food"],
+					time: "07:15",
+				},
 		],
 		completedTasksCount: 4,
 		allLabels: [
-			// "Work",
-			// "Finance",
-			// "Job",
-			// "Religion",
-			// "Self-Development",
-			// "Routine",
-			// "Health",
-			// "Fitness",
-			// "Education",
-			// "College",
-			// "Food",
-			// "Chores",
-			// "Planning",
-			// "Relaxation",
-			// "Family",
-			// "Cleaning",
-			// "Fun",
+			"Work",
+			"Finance",
+			"Job",
+			"Religion",
+			"Self-Development",
+			"Routine",
+			"Health",
+			"Fitness",
+			"Education",
+			"College",
+			"Food",
+			"Chores",
+			"Planning",
+			"Relaxation",
+			"Family",
+			"Cleaning",
+			"Fun",
 		],
 		term: "",
-		theme: "dark",
+		theme: "light",
 		language: "en",
 	};
 
@@ -167,10 +167,10 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		// const savedState = JSON.parse(localStorage.getItem("appState"));
-		// if (savedState) {
-		// 	this.setState(savedState);
-		// }
+		const savedState = JSON.parse(localStorage.getItem("appState"));
+		if (savedState) {
+			this.setState(savedState);
+		}
 
 		// Проверка задач на удаление каждые 10 минут
 		this.interval = setInterval(() => {
@@ -215,7 +215,7 @@ class App extends Component {
 		}
 	}
 
-	updateStateBool = (prop, value) => {
+	updateStateApp = (prop, value) => {
 		this.setState(() => ({ [prop]: value }));
 	};
 
@@ -403,7 +403,7 @@ class App extends Component {
 										updateStatePriority={this.updateStatePriority}
 										onTask={this.onTask}
 										onActionWithTask={this.onActionWithTask}
-										updateStateBool={this.updateStateBool}
+										updateStateApp={this.updateStateApp}
 										editTaskFunc={this.editTaskFunc}
 										onSaveTask={this.onSaveTask}
 										search={this.search}
@@ -419,7 +419,7 @@ class App extends Component {
 										menuOpen={menuOpen}
 										completedTasks={completedTasks}
 										completedTasksCount={completedTasksCount}
-										updateStateBool={this.updateStateBool}
+										updateStateApp={this.updateStateApp}
 										onActionWithTask={this.onActionWithTask}
 										theme={theme}
 									/>
@@ -433,7 +433,7 @@ class App extends Component {
 										tasksCount={tasksCount}
 										tasks={tasks}
 										allLabels={allLabels}
-										updateStateBool={this.updateStateBool}
+										updateStateApp={this.updateStateApp}
 										updateStateEvent={this.updateStateEvent}
 										onActionWithTask={this.onActionWithTask}
 										editTaskFunc={this.editTaskFunc}
@@ -454,7 +454,7 @@ class App extends Component {
 										tasks={tasks}
 										allLabels={allLabels}
 										updateStateEvent={this.updateStateEvent}
-										updateStateBool={this.updateStateBool}
+										updateStateApp={this.updateStateApp}
 										onActionWithTask={this.onActionWithTask}
 										editTaskFunc={this.editTaskFunc}
 										onSaveTask={this.onSaveTask}

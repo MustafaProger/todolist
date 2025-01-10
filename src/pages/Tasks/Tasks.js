@@ -16,7 +16,7 @@ class Tasks extends Component {
 			menuOpen,
 			tasks,
 			tasksCount,
-			updateStateBool,
+			updateStateApp,
 			updateStateEvent,
 			updateStatePriority,
 			onTask,
@@ -34,7 +34,7 @@ class Tasks extends Component {
 		return (
 			<div className='tasks'>
 				<Menu
-					updateStateBool={updateStateBool}
+					updateStateApp={updateStateApp}
 					menuOpen={menuOpen}
 					theme={theme}
 				/>
@@ -51,7 +51,7 @@ class Tasks extends Component {
 					<hr className='divider' />
 					<Search
 						placeholder={getTranslation("searchTask")}
-						updateStateEvent={updateStateEvent}
+						updateStateApp={updateStateApp}
 					/>
 					<Task
 						clazz={"tasks-list"}
@@ -59,7 +59,7 @@ class Tasks extends Component {
 						onActionWithTask={onActionWithTask}
 						editTaskFunc={editTaskFunc}
 						onSaveTask={onSaveTask}
-						updateStateBool={updateStateBool}
+						updateStateApp={updateStateApp}
 						updateStateEvent={updateStateEvent}
 						allLabels={allLabels}
 						search={search}
@@ -68,7 +68,7 @@ class Tasks extends Component {
 					/>
 					<AddTask
 						tasks={tasks}
-						updateStateBool={updateStateBool}
+						updateStateApp={updateStateApp}
 						updateStateEvent={updateStateEvent}
 						updateStatePriority={updateStatePriority}
 						onTask={onTask}

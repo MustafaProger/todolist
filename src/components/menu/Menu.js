@@ -35,8 +35,10 @@ class Menu extends Component {
 				// Сохраняем тему в localStorage
 				if (this.state.isDark) {
 					localStorage.setItem("theme", "dark");
+					this.props.updateStateApp("theme", "dark");
 				} else {
 					localStorage.setItem("theme", "light");
+					this.props.updateStateApp("theme", "light");
 				}
 			}
 		);
@@ -44,7 +46,7 @@ class Menu extends Component {
 
 	handleCheckboxChange = () => {
 		const newMenuOpen = !this.props.menuOpen;
-		this.props.updateStateBool("menuOpen", newMenuOpen);
+		this.props.updateStateApp("menuOpen", newMenuOpen);
 	};
 
 	toggleOpenLanguage = () => {
@@ -194,8 +196,7 @@ class Menu extends Component {
 													fontFamily='Arial, sans-serif'
 													fill='black'
 													fontWeight='bold'
-													textAnchor='middle'
-													>
+													textAnchor='middle'>
 													AR
 												</text>
 											</svg>

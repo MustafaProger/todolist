@@ -79,7 +79,7 @@ class EditTask extends Component {
 			addLabel,
 			allLabels,
 			updateStateEvent,
-			updateStateBool,
+			updateStateApp,
 			completedTasks,
 		} = this.props;
 
@@ -145,13 +145,13 @@ class EditTask extends Component {
 					</div>
 				</div>
 				<Time
-					updateStateBool={updateStateBool}
+					updateStateApp={updateStateApp}
 					handleChange={this.handleChange}
 				/>
 				<Label
 					tasks={tasks}
 					labels={this.props.labels}
-					updateStateBool={updateStateBool}
+					updateStateApp={updateStateApp}
 					updateStateEvent={updateStateEvent}
 					addLabel={addLabel}
 					currentLabel={this.state.currentLabel}

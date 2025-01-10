@@ -36,7 +36,7 @@ class Search extends Component {
 						<div className='container__input'>
 							<input
 								placeholder={placeholder}
-								onChange={(e) => this.props.updateStateEvent("term", e)}
+								onChange={(e) => this.props.updateStateApp("term", e.target.value)}
 							/>
 						</div>
 					</div>

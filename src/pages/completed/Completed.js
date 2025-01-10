@@ -15,7 +15,7 @@ class Completed extends Component {
 			menuOpen,
 			completedTasks,
 			completedTasksCount,
-			updateStateBool,
+			updateStateApp,
 			onActionWithTask,
 			theme,
 		} = this.props;
@@ -25,7 +25,7 @@ class Completed extends Component {
 		return (
 			<div className='done-tasks'>
 				<Menu
-					updateStateBool={updateStateBool}
+					updateStateApp={updateStateApp}
 					menuOpen={menuOpen}
 					theme={theme}
 				/>

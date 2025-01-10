@@ -15,7 +15,7 @@ class Filters extends Component {
 			tasksCount,
 			tasks,
 			allLabels,
-			updateStateBool,
+			updateStateApp,
 			updateStateEvent,
 			onActionWithTask,
 			editTaskFunc,
@@ -30,7 +30,7 @@ class Filters extends Component {
 		return (
 			<div className='filter'>
 				<Menu
-					updateStateBool={updateStateBool}
+					updateStateApp={updateStateApp}
 					menuOpen={menuOpen}
 					theme={theme}
 				/>
@@ -50,7 +50,7 @@ class Filters extends Component {
 						tasks={tasks}
 						tasksCount={tasksCount}
 						allLabels={allLabels}
-						updateStateBool={updateStateBool}
+						updateStateApp={updateStateApp}
 						updateStateEvent={updateStateEvent}
 						onActionWithTask={onActionWithTask}
 						editTaskFunc={editTaskFunc}

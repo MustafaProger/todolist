@@ -17,8 +17,8 @@ class Task extends Component {
 	};
 
 	componentDidMount() {
-		if (this.props.updateStateBool && this.props.sortedBy === "task") {
-			this.props.updateStateBool("term", "");
+		if (this.props.updateStateApp && this.props.sortedBy === "task") {
+			this.props.updateStateApp("term", "");
 		}
 	}
 
@@ -66,7 +66,7 @@ class Task extends Component {
 			clazz,
 			allLabels,
 			updateStateEvent,
-			updateStateBool,
+			updateStateApp,
 			completedTasks,
 		} = this.props;
 
@@ -145,7 +145,7 @@ class Task extends Component {
 										cancelEdit={this.cancelEdit}
 										allLabels={allLabels}
 										updateStateEvent={updateStateEvent}
-										updateStateBool={updateStateBool}
+										updateStateApp={updateStateApp}
 										tasks={this.props.allTasks || tasks}
 										onSaveTask={this.props.onSaveTask}
 										completedTasks={completedTasks}

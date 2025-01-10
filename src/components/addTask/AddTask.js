@@ -29,7 +29,7 @@ class AddTask extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.allLabels !== this.props.allLabels) {
-			this.props.updateStateBool(
+			this.props.updateStateApp(
 				"tasks",
 				this.props.tasks.map((task) => task)
 			);
@@ -58,10 +58,6 @@ class AddTask extends Component {
 		) {
 			// Останавливаем стандартное поведение, чтобы избежать ненужного ввода
 			e.preventDefault();
-
-			setTimeout(() => {
-				window.scrollBy({ top: 100, left: 0, behavior: "smooth" });
-			}, 200);
 
 			// Если фокус на inputTaskName, перемещаем его на textarea
 			this.ref.textarea.current.focus();
@@ -125,7 +121,7 @@ class AddTask extends Component {
 		const {
 			tasks,
 			updateStateEvent,
-			updateStateBool,
+			updateStateApp,
 			allLabels,
 			onTask,
 			completedTasks,
@@ -187,7 +183,7 @@ class AddTask extends Component {
 							allLabels={allLabels}
 							currentLabel={this.state.currentLabel}
 							updateStateEvent={updateStateEvent}
-							updateStateBool={updateStateBool}
+							updateStateApp={updateStateApp}
 							handleChange={this.updateState}
 							chosenLabels={this.state.chosenLabels}
 							updateState={this.updateState}

@@ -15,7 +15,7 @@ class Label extends Component {
 
 	checkboxRefs = {};
 
-	updateStateBool = (prop) => {
+	updateStateApp = (prop) => {
 		this.setState({ [prop]: !this.state[prop] });
 	};
 
@@ -62,11 +62,11 @@ class Label extends Component {
 	};
 
 	deleteCheckbox = (label) => {
-		const { allLabels, updateStateBool, tasks, completedTasks } = this.props;
+		const { allLabels, updateStateApp, tasks, completedTasks } = this.props;
 
 		const newArr = allLabels.filter((item) => item !== label);
 
-		updateStateBool("allLabels", newArr);
+		updateStateApp("allLabels", newArr);
 
 		this.setState(
 			(prevState) => {
@@ -142,7 +142,7 @@ class Label extends Component {
 				className={`edit-task__form__labels ${isOpenLabels ? "active" : ""}`}>
 				<div
 					className='edit-task__button edit-task__form__labels__button'
-					onClick={() => this.updateStateBool("isOpenLabels")}>
+					onClick={() => this.updateStateApp("isOpenLabels")}>
 					<span></span>
 					<p>{getTranslation("labels")}</p>
 				</div>
@@ -240,7 +240,7 @@ class Label extends Component {
 							{arrSearched.length ? (
 								<div
 									className='delete-labels'
-									onClick={() => this.updateStateBool("deleteLabels")}>
+									onClick={() => this.updateStateApp("deleteLabels")}>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
 										fill='white'

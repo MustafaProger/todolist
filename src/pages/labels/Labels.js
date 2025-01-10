@@ -17,7 +17,7 @@ class Labels extends Component {
 	};
 
 	componentDidMount() {
-		this.props.updateStateBool("term", "");
+		this.props.updateStateApp("term", "");
 	}
 
 	toggleLabel = (label) => {
@@ -32,7 +32,7 @@ class Labels extends Component {
 			tasksCount,
 			tasks,
 			allLabels,
-			updateStateBool,
+			updateStateApp,
 			updateStateEvent,
 			onActionWithTask,
 			editTaskFunc,
@@ -52,7 +52,7 @@ class Labels extends Component {
 		return (
 			<div className='labels'>
 				<Menu
-					updateStateBool={updateStateBool}
+					updateStateApp={updateStateApp}
 					menuOpen={menuOpen}
 					theme={theme}
 				/>
@@ -72,7 +72,7 @@ class Labels extends Component {
 
 					<Search
 						placeholder={getTranslation("searchLabel")}
-						updateStateEvent={updateStateEvent}
+						updateStateApp={updateStateApp}
 					/>
 
 					<div className='labels__wrapper'>
@@ -140,7 +140,7 @@ class Labels extends Component {
 													tasks={filteredTasks}
 													allTasks={tasks}
 													allLabels={allLabels}
-													updateStateBool={updateStateBool}
+													updateStateApp={updateStateApp}
 													updateStateEvent={updateStateEvent}
 													onActionWithTask={onActionWithTask}
 													editTaskFunc={editTaskFunc}
