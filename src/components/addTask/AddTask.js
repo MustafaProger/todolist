@@ -10,7 +10,7 @@ class AddTask extends Component {
 	static contextType = LanguageContext;
 
 	state = {
-		addTask: true,
+		addTask: false,
 		task: "",
 		description: "",
 		importance: "Priority",
@@ -27,14 +27,19 @@ class AddTask extends Component {
 		textarea: createRef(),
 	};
 
-	componentDidUpdate(prevProps, prevState, prevContext) {
+	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.allLabels !== this.props.allLabels) {
 			this.props.updateStateBool(
 				"tasks",
-				this.props.tasks.map((task) => {
-					return task;
-				})
+				this.props.tasks.map((task) => task)
 			);
+		}
+
+		if (
+			prevState.addTask !== this.state.addTask &&
+			this.state.addTask === true
+		) {
+			this.ref.inputTaskName.current.focus();
 		}
 	}
 
@@ -42,6 +47,24 @@ class AddTask extends Component {
 		this.setState({ [prop]: value });
 		if (prop === "importance") {
 			this.setState({ [prop]: value, isOpen: false });
+		}
+	};
+
+	handleKeyDown = (e) => {
+		// Проверяем, если нажата клавиша Enter и inputTaskName находится в фокусе
+		if (
+			e.key === "Enter" &&
+			document.activeElement === this.ref.inputTaskName.current
+		) {
+			// Останавливаем стандартное поведение, чтобы избежать ненужного ввода
+			e.preventDefault();
+
+			setTimeout(() => {
+				window.scrollBy({ top: 100, left: 0, behavior: "smooth" });
+			}, 200);
+
+			// Если фокус на inputTaskName, перемещаем его на textarea
+			this.ref.textarea.current.focus();
 		}
 	};
 
@@ -118,6 +141,7 @@ class AddTask extends Component {
 							placeholder={getTranslation("taskName")}
 							onChange={(e) => this.updateState("task", e.target.value)}
 							ref={this.ref.inputTaskName}
+							onKeyDown={this.handleKeyDown}
 						/>
 						<textarea
 							className='add-task__form__textarea'

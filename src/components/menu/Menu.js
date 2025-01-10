@@ -190,11 +190,12 @@ class Menu extends Component {
 												<text
 													x='9.5'
 													y='12'
-													font-size='9'
-													font-family='Arial, sans-serif'
-													fill='white'
-													font-weight='bold'
-													text-anchor='middle'>
+													fontSize='9'
+													fontFamily='Arial, sans-serif'
+													fill='black'
+													fontWeight='bold'
+													textAnchor='middle'
+													>
 													AR
 												</text>
 											</svg>

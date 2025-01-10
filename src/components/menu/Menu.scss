@@ -20,7 +20,8 @@
 	#menuToggle a,
 	#menuToggle a svg path,
 	#menuToggle li .languages__item,
-	#menuToggle li .languages__item svg path {
+	#menuToggle li .languages__item svg path,
+	#menuToggle li .languages__item svg text {
 		text-decoration: none;
 		color: #232323;
 		fill: #232323;
@@ -138,9 +139,6 @@
 				opacity: 1;
 				max-height: 195px;
 				gap: 15px;
-			}
-
-			.languages__item {
 			}
 		}
 	}

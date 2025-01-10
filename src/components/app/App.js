@@ -11,7 +11,7 @@ import "./App.scss";
 
 class App extends Component {
 	state = {
-		menuOpen: true,
+		menuOpen: false,
 		tasks: [
 			{
 				id: Date.now() + 9,
