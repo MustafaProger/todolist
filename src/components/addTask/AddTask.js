@@ -51,15 +51,12 @@ class AddTask extends Component {
 	};
 
 	handleKeyDown = (e) => {
-		// Проверяем, если нажата клавиша Enter и inputTaskName находится в фокусе
 		if (
 			e.key === "Enter" &&
 			document.activeElement === this.ref.inputTaskName.current
 		) {
-			// Останавливаем стандартное поведение, чтобы избежать ненужного ввода
 			e.preventDefault();
 
-			// Если фокус на inputTaskName, перемещаем его на textarea
 			this.ref.textarea.current.focus();
 		}
 	};

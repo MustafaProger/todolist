@@ -21,7 +21,6 @@ class Filters extends Component {
 			editTaskFunc,
 			onSaveTask,
 			onOpenFilterLabel,
-			theme,
 			completedTasks,
 		} = this.props;
 
@@ -29,11 +28,6 @@ class Filters extends Component {
 
 		return (
 			<div className='filter'>
-				<Menu
-					updateStateApp={updateStateApp}
-					menuOpen={menuOpen}
-					theme={theme}
-				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
 					<h1 className='title'>{getTranslation("filter")}</h1>
 					<p className='count-tasks'>

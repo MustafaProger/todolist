@@ -18,14 +18,12 @@ class Tasks extends Component {
 			tasksCount,
 			updateStateApp,
 			updateStateEvent,
-			updateStatePriority,
 			onTask,
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
 			allLabels,
 			search,
-			theme,
 			completedTasks,
 		} = this.props;
 
@@ -33,11 +31,6 @@ class Tasks extends Component {
 
 		return (
 			<div className='tasks'>
-				<Menu
-					updateStateApp={updateStateApp}
-					menuOpen={menuOpen}
-					theme={theme}
-				/>
 				<div className={`container${menuOpen ? " menu-active" : ""}`}>
 					<h1 className='title'>{getTranslation('tasks')}</h1>
 					<p className='count-tasks'>
@@ -70,7 +63,6 @@ class Tasks extends Component {
 						tasks={tasks}
 						updateStateApp={updateStateApp}
 						updateStateEvent={updateStateEvent}
-						updateStatePriority={updateStatePriority}
 						onTask={onTask}
 						allLabels={allLabels}
 						completedTasks={completedTasks}

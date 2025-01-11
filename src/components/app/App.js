@@ -8,6 +8,7 @@ import Labels from "../../pages/labels/Labels";
 import LanguageProvider from "../locales/LanguageContext";
 
 import "./App.scss";
+import Menu from "../menu/Menu";
 
 class App extends Component {
 	state = {
@@ -104,38 +105,38 @@ class App extends Component {
 		],
 		tasksCount: 11,
 		completedTasks: [
-				{
-					id: Date.now() + 5,
-					task: "🏋️ Gym",
-					description: "Complete a 45-minute workout",
-					importance: "High",
-					labels: ["Health", "Fitness"],
-					time: "08:30",
-				},
-				{
-					id: Date.now() + 6,
-					task: "📖 Quran Study",
-					description: "Memorize Surah Al-Mulk",
-					importance: "Priority",
-					labels: ["Religion", "Self-Development"],
-					time: "06:00",
-				},
-				{
-					id: Date.now() + 7,
-					task: "📧 Check Emails",
-					description: "Respond to work and personal emails",
-					importance: "Medium",
-					labels: ["Work", "Routine"],
-					time: "09:00",
-				},
-				{
-					id: Date.now() + 8,
-					task: "🍳 Cook Breakfast",
-					description: "Prepare omelette and coffee",
-					importance: "Low",
-					labels: ["Routine", "Food"],
-					time: "07:15",
-				},
+			{
+				id: Date.now() + 5,
+				task: "🏋️ Gym",
+				description: "Complete a 45-minute workout",
+				importance: "High",
+				labels: ["Health", "Fitness"],
+				time: "08:30",
+			},
+			{
+				id: Date.now() + 6,
+				task: "📖 Quran Study",
+				description: "Memorize Surah Al-Mulk",
+				importance: "Priority",
+				labels: ["Religion", "Self-Development"],
+				time: "06:00",
+			},
+			{
+				id: Date.now() + 7,
+				task: "📧 Check Emails",
+				description: "Respond to work and personal emails",
+				importance: "Medium",
+				labels: ["Work", "Routine"],
+				time: "09:00",
+			},
+			{
+				id: Date.now() + 8,
+				task: "🍳 Cook Breakfast",
+				description: "Prepare omelette and coffee",
+				importance: "Low",
+				labels: ["Routine", "Food"],
+				time: "07:15",
+			},
 		],
 		completedTasksCount: 4,
 		allLabels: [
@@ -159,11 +160,6 @@ class App extends Component {
 		],
 		term: "",
 		theme: "light",
-		language: "en",
-	};
-
-	switchLanguage = (language) => {
-		this.setState({ language });
 	};
 
 	componentDidMount() {
@@ -233,10 +229,6 @@ class App extends Component {
 		) {
 			this.setState({ [prop]: event });
 		}
-	};
-
-	updateStatePriority = (value) => {
-		this.setState({ importance: value });
 	};
 
 	onTask = (stateAddTask) => {
@@ -390,6 +382,11 @@ class App extends Component {
 			<div className='App'>
 				<BrowserRouter basename='/todolist'>
 					<LanguageProvider>
+						<Menu
+							updateStateApp={this.updateStateApp}
+							menuOpen={menuOpen}
+							theme={theme}
+						/>
 						<Routes>
 							<Route
 								path='/'
@@ -400,14 +397,12 @@ class App extends Component {
 										tasks={tasks}
 										allLabels={allLabels}
 										updateStateEvent={this.updateStateEvent}
-										updateStatePriority={this.updateStatePriority}
 										onTask={this.onTask}
 										onActionWithTask={this.onActionWithTask}
 										updateStateApp={this.updateStateApp}
 										editTaskFunc={this.editTaskFunc}
 										onSaveTask={this.onSaveTask}
 										search={this.search}
-										theme={theme}
 										completedTasks={completedTasks}
 									/>
 								}
@@ -421,7 +416,6 @@ class App extends Component {
 										completedTasksCount={completedTasksCount}
 										updateStateApp={this.updateStateApp}
 										onActionWithTask={this.onActionWithTask}
-										theme={theme}
 									/>
 								}
 							/>
@@ -439,7 +433,6 @@ class App extends Component {
 										editTaskFunc={this.editTaskFunc}
 										onSaveTask={this.onSaveTask}
 										onOpenFilterLabel={this.onOpenFilterLabel}
-										theme={theme}
 										completedTasks={completedTasks}
 									/>
 								}
@@ -460,7 +453,6 @@ class App extends Component {
 										onSaveTask={this.onSaveTask}
 										onOpenFilterLabel={this.onOpenFilterLabel}
 										search={this.search}
-										theme={theme}
 										completedTasks={completedTasks}
 									/>
 								}
