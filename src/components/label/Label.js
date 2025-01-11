@@ -15,7 +15,7 @@ class Label extends Component {
 
 	checkboxRefs = {};
 
-	updateStateApp = (prop) => {
+	updateState = (prop) => {
 		this.setState({ [prop]: !this.state[prop] });
 	};
 
@@ -50,9 +50,6 @@ class Label extends Component {
 			},
 			() => {
 				// После обновления локального состояния обновляем родительское
-				if (this.props.handleChange) {
-					this.props.handleChange("chosenLabels", this.state.chosenLabels);
-				}
 
 				if (this.props.updateState) {
 					this.props.updateState("chosenLabels", this.state.chosenLabels);
@@ -83,9 +80,7 @@ class Label extends Component {
 					(item, index) => checkedItemsValues[index]
 				);
 
-				if (this.props.handleChange) {
-					this.props.handleChange("chosenLabels", newArr);
-				}
+				this.props.updateState("chosenLabels", newArr);
 
 				delete this.checkboxRefs[label];
 
@@ -127,7 +122,7 @@ class Label extends Component {
 	render() {
 		const { checkedItems, deleteLabels, isOpenLabels } = this.state;
 
-		const { updateStateEvent, allLabels, currentLabel } = this.props;
+		const { updateStateApp, allLabels, currentLabel } = this.props;
 
 		const { getTranslation } = this.context;
 
@@ -142,7 +137,7 @@ class Label extends Component {
 				className={`edit-task__form__labels ${isOpenLabels ? "active" : ""}`}>
 				<div
 					className='edit-task__button edit-task__form__labels__button'
-					onClick={() => this.updateStateApp("isOpenLabels")}>
+					onClick={() => this.updateState("isOpenLabels")}>
 					<span></span>
 					<p>{getTranslation("labels")}</p>
 				</div>
@@ -154,7 +149,7 @@ class Label extends Component {
 						placeholder={getTranslation("searchLabel")}
 						value={currentLabel}
 						onChange={(e) =>
-							this.props.handleChange("currentLabel", e.target.value)
+							this.props.updateState("currentLabel", e.target.value)
 						}
 					/>
 
@@ -230,17 +225,18 @@ class Label extends Component {
 										<span></span>
 										<p
 											onClick={() =>
-												updateStateEvent("allLabels", currentLabel.trim())
+												updateStateApp("allLabels", currentLabel.trim())
 											}>
 											{getTranslation("createLabel")} "{currentLabel.trim()}"
 										</p>
+									
 									</div>
 								)}
 
 							{arrSearched.length ? (
 								<div
 									className='delete-labels'
-									onClick={() => this.updateStateApp("deleteLabels")}>
+									onClick={() => this.updateState("deleteLabels")}>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
 										fill='white'

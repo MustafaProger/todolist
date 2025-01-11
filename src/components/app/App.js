@@ -163,10 +163,10 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		const savedState = JSON.parse(localStorage.getItem("appState"));
-		if (savedState) {
-			this.setState(savedState);
-		}
+		// const savedState = JSON.parse(localStorage.getItem("appState"));
+		// if (savedState) {
+		// 	this.setState(savedState);
+		// }
 
 		// Проверка задач на удаление каждые 10 минут
 		this.interval = setInterval(() => {
@@ -180,7 +180,7 @@ class App extends Component {
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.interval); // Очищаем интервал при размонтировании компонента
+		clearInterval(this.interval);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -192,7 +192,6 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
-			language,
 		} = this.state;
 
 		const stateToSave = {
@@ -203,7 +202,6 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
-			language,
 		};
 
 		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
@@ -212,22 +210,10 @@ class App extends Component {
 	}
 
 	updateStateApp = (prop, value) => {
-		this.setState(() => ({ [prop]: value }));
-	};
-
-	updateStateEvent = (prop, event) => {
-		if (typeof this.state[prop] === "string") {
-			this.setState({ [prop]: event.target.value });
-		} else if (
-			typeof this.state[prop] === "object" &&
-			prop !== "chosenLabels"
-		) {
-			this.setState({ [prop]: [...this.state[prop], event] });
-		} else if (
-			typeof this.state[prop] === "object" &&
-			prop === "chosenLabels"
-		) {
-			this.setState({ [prop]: event });
+		if (prop === "allLabels" && typeof value === "string") {
+			this.setState({ [prop]: [...this.state[prop], value] });
+		} else {
+			this.setState(() => ({ [prop]: value }));
 		}
 	};
 
@@ -303,14 +289,6 @@ class App extends Component {
 		});
 	};
 
-	editTaskFunc = (id, updatedTask) => {
-		// Логика обновления задачи в состоянии родительского компонента
-		const updatedTasks = this.state.tasks.map((task) =>
-			task.id === id ? { ...task, ...updatedTask } : task
-		);
-		this.setState({ tasks: updatedTasks });
-	};
-
 	onSaveTask = (updatedTask) => {
 		this.setState(({ tasks }) => ({
 			tasks: tasks.map((task) =>
@@ -331,20 +309,18 @@ class App extends Component {
 		this.setState((prevState) => {
 			const isSameLabel = prevState.openLabel === label;
 
-			// Закрытие всех меток
 			const allTasks = document.querySelectorAll(`.${clazz}`);
 			allTasks.forEach((task) => {
 				task.style.maxHeight = "0px";
 			});
 
-			// Открытие текущей метки, если она не совпадает с предыдущей
 			const content = document.querySelector(`.${clazz}-${label}`);
 			if (content && !isSameLabel) {
 				content.style.maxHeight = `${content.scrollHeight * 1}px`;
 			}
 
 			return {
-				openLabel: isSameLabel ? null : label, // Закрываем, если метка совпадает
+				openLabel: isSameLabel ? null : label,
 			};
 		});
 	};
@@ -396,11 +372,9 @@ class App extends Component {
 										tasksCount={tasksCount}
 										tasks={tasks}
 										allLabels={allLabels}
-										updateStateEvent={this.updateStateEvent}
 										onTask={this.onTask}
 										onActionWithTask={this.onActionWithTask}
 										updateStateApp={this.updateStateApp}
-										editTaskFunc={this.editTaskFunc}
 										onSaveTask={this.onSaveTask}
 										search={this.search}
 										completedTasks={completedTasks}
@@ -428,9 +402,7 @@ class App extends Component {
 										tasks={tasks}
 										allLabels={allLabels}
 										updateStateApp={this.updateStateApp}
-										updateStateEvent={this.updateStateEvent}
 										onActionWithTask={this.onActionWithTask}
-										editTaskFunc={this.editTaskFunc}
 										onSaveTask={this.onSaveTask}
 										onOpenFilterLabel={this.onOpenFilterLabel}
 										completedTasks={completedTasks}
@@ -446,10 +418,8 @@ class App extends Component {
 										tasksCount={tasksCount}
 										tasks={tasks}
 										allLabels={allLabels}
-										updateStateEvent={this.updateStateEvent}
 										updateStateApp={this.updateStateApp}
 										onActionWithTask={this.onActionWithTask}
-										editTaskFunc={this.editTaskFunc}
 										onSaveTask={this.onSaveTask}
 										onOpenFilterLabel={this.onOpenFilterLabel}
 										search={this.search}

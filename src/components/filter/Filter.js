@@ -35,7 +35,6 @@ class Filter extends Component {
 			editTaskFunc,
 			onSaveTask,
 			updateStateApp,
-			updateStateEvent,
 			allLabels,
 			onOpenFilterLabel,
 			completedTasks,
@@ -99,7 +98,6 @@ class Filter extends Component {
 										onActionWithTask={onActionWithTask}
 										editTaskFunc={editTaskFunc}
 										onSaveTask={onSaveTask}
-										updateStateEvent={updateStateEvent}
 										updateStateApp={updateStateApp}
 										allLabels={allLabels}
 										completedTasks={completedTasks}

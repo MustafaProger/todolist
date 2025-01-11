@@ -12,13 +12,8 @@ class Time extends Component {
 
 	handleTimeChange = (newValue) => {
 		this.setState({ time: newValue }, () => {
-			if (this.props.handleChange) {
-				this.props.handleChange("time", newValue?.format("HH:mm"));
-			}
-		});
-		if (this.props.updateState) {
 			this.props.updateState("time", newValue?.format("HH:mm"));
-		}
+		});
 	};
 
 	componentDidUpdate(prevProps) {

@@ -22,7 +22,7 @@ class EditTask extends Component {
 		currentLabel: "",
 	};
 
-	handleChange = (prop, value) => {
+	updateState = (prop, value) => {
 		this.setState({ [prop]: value });
 	};
 
@@ -78,7 +78,6 @@ class EditTask extends Component {
 			tasks,
 			addLabel,
 			allLabels,
-			updateStateEvent,
 			updateStateApp,
 			completedTasks,
 		} = this.props;
@@ -114,13 +113,13 @@ class EditTask extends Component {
 					type='text'
 					className='edit-task__form__input'
 					value={task}
-					onChange={(e) => this.handleChange("task", e.target.value)}
+					onChange={(e) => this.updateState("task", e.target.value)}
 					placeholder={getTranslation("taskName")}
 				/>
 				<textarea
 					className='edit-task__form__textarea'
 					value={description}
-					onChange={(e) => this.handleChange("description", e.target.value)}
+					onChange={(e) => this.updateState("description", e.target.value)}
 					placeholder={getTranslation("description")}
 				/>
 				<div className='edit-task__form__importance'>
@@ -146,18 +145,17 @@ class EditTask extends Component {
 				</div>
 				<Time
 					updateStateApp={updateStateApp}
-					handleChange={this.handleChange}
+					updateState={this.updateState}
 				/>
 				<Label
 					tasks={tasks}
 					labels={this.props.labels}
 					updateStateApp={updateStateApp}
-					updateStateEvent={updateStateEvent}
 					addLabel={addLabel}
 					currentLabel={this.state.currentLabel}
 					allLabels={allLabels}
 					chosenLabels={this.state.chosenLabels}
-					handleChange={this.handleChange}
+					updateState={this.updateState}
 					isOpenLabels={isOpenLabels}
 					completedTasks={completedTasks}
 				/>

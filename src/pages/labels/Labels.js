@@ -33,7 +33,6 @@ class Labels extends Component {
 			tasks,
 			allLabels,
 			updateStateApp,
-			updateStateEvent,
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
@@ -141,7 +140,6 @@ class Labels extends Component {
 													allTasks={tasks}
 													allLabels={allLabels}
 													updateStateApp={updateStateApp}
-													updateStateEvent={updateStateEvent}
 													onActionWithTask={onActionWithTask}
 													editTaskFunc={editTaskFunc}
 													onSaveTask={onSaveTask}

@@ -117,7 +117,6 @@ class AddTask extends Component {
 
 		const {
 			tasks,
-			updateStateEvent,
 			updateStateApp,
 			allLabels,
 			onTask,
@@ -179,9 +178,7 @@ class AddTask extends Component {
 							tasks={tasks}
 							allLabels={allLabels}
 							currentLabel={this.state.currentLabel}
-							updateStateEvent={updateStateEvent}
 							updateStateApp={updateStateApp}
-							handleChange={this.updateState}
 							chosenLabels={this.state.chosenLabels}
 							updateState={this.updateState}
 							completedTasks={completedTasks}

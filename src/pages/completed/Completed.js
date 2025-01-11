@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Menu from "../../components/menu/Menu";
 import Task from "../../components/task/Task";
 import CurrentDate from "../../components/currentDate/CurrentDate";
 

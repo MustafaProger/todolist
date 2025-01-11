@@ -40,11 +40,8 @@ class Task extends Component {
 		}));
 	};
 
-	// Отмена редактирования
-	cancelEdit = (updatedTask) => {
-		const { editedTask } = this.state;
-		this.props.editTaskFunc(editedTask.id, updatedTask); // Передаем обновленную задачу через пропс
-		this.setState({ editingTaskId: null, editedTask: {} }); // Сбрасываем состояние
+	cancelEdit = () => {
+		this.setState({ editingTaskId: null, editedTask: {} });
 	};
 
 	isTimeExpired = (taskTime) => {
@@ -57,7 +54,7 @@ class Task extends Component {
 			taskHours,
 			taskMinutes
 		);
-		return currentTime > taskDate; // Возвращает true, если текущее время больше времени задачи
+		return currentTime > taskDate;
 	};
 
 	renderItem = () => {
@@ -65,9 +62,9 @@ class Task extends Component {
 			tasks,
 			clazz,
 			allLabels,
-			updateStateEvent,
 			updateStateApp,
 			completedTasks,
+			onSaveTask
 		} = this.props;
 
 		const { editingTaskId } = this.state;
@@ -81,15 +78,13 @@ class Task extends Component {
 			High: "#FF6247",
 		};
 
-		// Задаём порядок важности
 		const importanceOrder = {
 			High: 1,
 			Medium: 2,
 			Low: 3,
-			Priority: 4, // Меньший приоритет, чем у остальных
+			Priority: 4,
 		};
 
-		// Сортируем задачи по времени и важности
 		const sortedTasks = [...tasks].sort((a, b) => {
 			// Проверяем наличие времени
 			const timeA = a.time ? new Date(`1970-01-01T${a.time}:00`) : null;
@@ -144,10 +139,9 @@ class Task extends Component {
 										time={time}
 										cancelEdit={this.cancelEdit}
 										allLabels={allLabels}
-										updateStateEvent={updateStateEvent}
 										updateStateApp={updateStateApp}
 										tasks={this.props.allTasks || tasks}
-										onSaveTask={this.props.onSaveTask}
+										onSaveTask={onSaveTask}
 										completedTasks={completedTasks}
 									/>
 								) : (

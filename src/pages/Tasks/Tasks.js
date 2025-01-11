@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Menu from "../../components/menu/Menu";
 import CurrentDate from "../../components/currentDate/CurrentDate";
 import AddTask from "../../components/addTask/AddTask";
 import Task from "../../components/task/Task";
@@ -17,7 +16,6 @@ class Tasks extends Component {
 			tasks,
 			tasksCount,
 			updateStateApp,
-			updateStateEvent,
 			onTask,
 			onActionWithTask,
 			editTaskFunc,
@@ -53,7 +51,6 @@ class Tasks extends Component {
 						editTaskFunc={editTaskFunc}
 						onSaveTask={onSaveTask}
 						updateStateApp={updateStateApp}
-						updateStateEvent={updateStateEvent}
 						allLabels={allLabels}
 						search={search}
 						sortedBy={"task"}
@@ -62,7 +59,6 @@ class Tasks extends Component {
 					<AddTask
 						tasks={tasks}
 						updateStateApp={updateStateApp}
-						updateStateEvent={updateStateEvent}
 						onTask={onTask}
 						allLabels={allLabels}
 						completedTasks={completedTasks}

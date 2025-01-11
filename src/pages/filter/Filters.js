@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Menu from "../../components/menu/Menu";
 import Filter from "../../components/filter/Filter";
 import countTask from "../../assets/icon/check-circle.svg";
 import CurrentDate from "../../components/currentDate/CurrentDate";
@@ -16,7 +15,6 @@ class Filters extends Component {
 			tasks,
 			allLabels,
 			updateStateApp,
-			updateStateEvent,
 			onActionWithTask,
 			editTaskFunc,
 			onSaveTask,
@@ -45,7 +43,6 @@ class Filters extends Component {
 						tasksCount={tasksCount}
 						allLabels={allLabels}
 						updateStateApp={updateStateApp}
-						updateStateEvent={updateStateEvent}
 						onActionWithTask={onActionWithTask}
 						editTaskFunc={editTaskFunc}
 						onSaveTask={onSaveTask}
