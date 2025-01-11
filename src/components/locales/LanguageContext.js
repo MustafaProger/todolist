@@ -169,11 +169,23 @@ export const LanguageContext = createContext();
 
 class LanguageProvider extends Component {
 	state = {
-		language: "en",
+		language: this.props.language,
 	};
 
+	componentDidMount() {
+		const appState = JSON.parse(localStorage.getItem("appState"));
+
+		if (appState && appState.language) {
+			this.setState({ language: appState.language });
+		} else {
+			this.setState({ language: "en" }); // Установка языка по умолчанию
+		}
+	}
+
 	switchLanguage = (language) => {
-		this.setState({ language });
+		this.setState({ language }, () =>
+			this.props.updateStateApp("language", language)
+		);
 	};
 
 	getTranslation = (key) => {

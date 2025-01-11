@@ -160,13 +160,14 @@ class App extends Component {
 		],
 		term: "",
 		theme: "light",
+		language: "en",
 	};
 
 	componentDidMount() {
-		// const savedState = JSON.parse(localStorage.getItem("appState"));
-		// if (savedState) {
-		// 	this.setState(savedState);
-		// }
+		const savedState = JSON.parse(localStorage.getItem("appState"));
+		if (savedState) {
+			this.setState(savedState);
+		}
 
 		// Проверка задач на удаление каждые 10 минут
 		this.interval = setInterval(() => {
@@ -192,6 +193,7 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
+			language,
 		} = this.state;
 
 		const stateToSave = {
@@ -202,6 +204,7 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
+			language,
 		};
 
 		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
@@ -352,12 +355,13 @@ class App extends Component {
 			completedTasksCount,
 			allLabels,
 			theme,
+			language
 		} = this.state;
 
 		return (
 			<div className='App'>
 				<BrowserRouter basename='/todolist'>
-					<LanguageProvider>
+					<LanguageProvider updateStateApp={this.updateStateApp} language={language}>
 						<Menu
 							updateStateApp={this.updateStateApp}
 							menuOpen={menuOpen}
