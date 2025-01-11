@@ -14,16 +14,22 @@
 		<meta
 			name="description"
 			content="Web site created using create-react-app" />
+
+		<!-- Apple Touch Icon -->
 		<link
 			rel="apple-touch-icon"
-			href="taskflow.svg" />
+			sizes="180x180"
+			href="./icons/180.png" />
+
+		<!-- Normalize CSS -->
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
 			integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer" />
-		<!-- Primary Meta Tags -->
+
+		<!-- Meta Tags -->
 		<title>
 			TaskFlow - Task Management App with Priorities, Labels, and Sorting
 		</title>
@@ -39,7 +45,7 @@
 			property="og:type"
 			content="website" />
 		<meta
-			property="og:url"https://i.ibb.co/JnpNT6J/taskflow.png
+			property="og:url"
 			content="https://mustafaproger.github.io/todolist/" />
 		<meta
 			property="og:title"
@@ -49,7 +55,7 @@
 			content="TaskFlow is an intuitive task management app that helps you organize, prioritize, and track tasks efficiently. Add detailed tasks with priorities, labels, and due times, sort them by urgency, and filter tasks by category. With powerful search features, easily find and manage your tasks and completed work. Stay productive and organized with TaskFlow" />
 		<meta
 			property="og:image"
-			content="taskflow.svg" />
+			content="https://i.ibb.co/JnpNT6J/taskflow.png" />
 
 		<!-- Twitter -->
 		<meta
@@ -66,39 +72,23 @@
 			content="TaskFlow is an intuitive task management app that helps you organize, prioritize, and track tasks efficiently. Add detailed tasks with priorities, labels, and due times, sort them by urgency, and filter tasks by category. With powerful search features, easily find and manage your tasks and completed work. Stay productive and organized with TaskFlow" />
 		<meta
 			property="twitter:image"
-			content="taskflow.svg" />
+			content="https://i.ibb.co/JnpNT6J/taskflow.png" />
 
-		<!-- Meta Tags Generated with https://metatags.io -->
-		<!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+		<!-- Manifest -->
 		<link
 			rel="manifest"
 			href="%PUBLIC_URL%/manifest.json" />
-		<!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-		<title>TaskFlow</title>
+		<!-- Additional iOS Meta Tags -->
+		<meta
+			name="apple-mobile-web-app-capable"
+			content="yes" />
+		<meta
+			name="apple-mobile-web-app-status-bar-style"
+			content="black-translucent" />
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
-		<!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
 	</body>
 </html>
