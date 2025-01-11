@@ -101,13 +101,13 @@
 	}
 }
 
-.task-description {
+.task-description__container {
 	color: #666;
 	font-size: 14px;
 	margin: 5px 0 0 30px;
 }
 
-.task-labels {
+.task-labels__container {
 	margin: 10px 0 0 30px;
 	display: flex;
 	flex-wrap: wrap;
@@ -120,7 +120,7 @@
 	}
 }
 
-.task-time {
+.task-time__container {
 	margin: 10px 0 0 30px;
 	display: flex;
 	gap: 5px;
@@ -158,14 +158,14 @@
 		opacity: 0;
 	}
 
-	.task-description {
+	.task-description__container {
 		color: #555;
 		margin-left: 0px;
 		text-decoration: line-through; /* зачёркивание текста для завершённых задач */
 		font-size: 16px;
 	}
 
-	.task-labels {
+	.task-labels__container {
 		text-decoration: none;
 		margin: 10px 0 0 0;
 		p {
@@ -173,7 +173,7 @@
 		}
 	}
 
-	.task-time {
+	.task-time__container {
 		margin: 10px 0 0 0;
 	}
 }

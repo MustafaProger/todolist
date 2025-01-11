@@ -64,7 +64,7 @@ class Task extends Component {
 			allLabels,
 			updateStateApp,
 			completedTasks,
-			onSaveTask
+			onSaveTask,
 		} = this.props;
 
 		const { editingTaskId } = this.state;
@@ -211,22 +211,29 @@ class Task extends Component {
 												)}
 											</div>
 										</div>
-										<p className='task-description'>
-											{description.length > window.innerWidth / 20
-												? description.slice(0, window.innerWidth / 20) + "..."
-												: description}
-										</p>
+										<div className='task-description'>
+											{description.length ? (
+												<div className='task-description__container'>
+													{description.length > window.innerWidth / 20
+														? description.slice(0, window.innerWidth / 20) +
+														  "..."
+														: description}
+												</div>
+											) : null}
+										</div>
 										<div className='task-labels'>
-											{labels.length
-												? labels.map((item, index) => (
+											{labels.length ? (
+												<div className='task-labels__container'>
+													{labels.map((item, index) => (
 														<p key={`${item}-${index}`}>{item}</p>
-												  ))
-												: null}
+													))}
+												</div>
+											) : null}
 										</div>
 
 										<div className='task-time'>
 											{time ? (
-												<>
+												<div className='task-time__container'>
 													{!isExpired ? (
 														<svg
 															id='Layer_1'
@@ -257,7 +264,7 @@ class Task extends Component {
 													<p style={{ color: !isExpired ? "green" : "red" }}>
 														{time}
 													</p>
-												</>
+												</div>
 											) : null}
 										</div>
 									</div>
