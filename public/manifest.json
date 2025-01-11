@@ -3,22 +3,22 @@
   "name": "TaskFlow - Task Management App with Priorities, Labels, and Sorting",
   "icons": [
     {
-      "src": "/taskflow.png",
+      "src": "./icons/16.png",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "/taskflow.png",
+      "src": "./icons/32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/taskflow.png",
-      "sizes": "192x192",
+      "src": "./icons/196.png",
+      "sizes": "196x196",
       "type": "image/png"
     },
     {
-      "src": "/taskflow.png",
+      "src": "./icons/512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
