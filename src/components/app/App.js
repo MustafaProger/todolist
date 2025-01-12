@@ -247,7 +247,9 @@ class App extends Component {
 			<div className='App'>
 				{this.state.showPortal && (
 					<PortalTaskAddedSuccess>
-						<p>Task {this.state.taskMessage} added</p>
+						<p>
+							Task «<strong>{this.state.taskMessage}</strong>» added
+						</p>
 					</PortalTaskAddedSuccess>
 				)}
 				<BrowserRouter basename='/todolist'>
