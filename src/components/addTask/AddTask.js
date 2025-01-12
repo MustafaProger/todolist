@@ -75,6 +75,7 @@ class AddTask extends Component {
 
 		this.ref.textarea.current.value = "";
 		this.ref.inputTaskName.current.value = "";
+		this.ref.inputTaskName.current.focus();
 	};
 
 	autoResizeTextarea = () => {
@@ -115,88 +116,91 @@ class AddTask extends Component {
 			},
 		];
 
-		const {
-			tasks,
-			updateStateApp,
-			allLabels,
-			onTask,
-			completedTasks,
-		} = this.props;
+		const { tasks, updateStateApp, allLabels, onTask, completedTasks } =
+			this.props;
 
 		return (
 			<div className='add-task'>
 				{addTask ? (
-					<div className='add-task__form'>
-						<input
-							type='text'
-							className='add-task__form__input'
-							placeholder={getTranslation("taskName")}
-							onChange={(e) => this.updateState("task", e.target.value)}
-							ref={this.ref.inputTaskName}
-							onKeyDown={this.handleKeyDown}
-						/>
-						<textarea
-							className='add-task__form__textarea'
-							placeholder={getTranslation("description")}
-							onInput={this.autoResizeTextarea}
-							onChange={(e) => this.updateState("description", e.target.value)}
-							ref={this.ref.textarea}
-						/>
-						<div className='add-task__form__importance'>
-							<div
-								className={`custom-select ${isOpen ? "active" : ""}`}
-								onClick={this.toggleDropdown}>
-								<div className='selected-option'>
-									{options.find((option) => option.value === importance)?.icon}
-									<span>
-										{getTranslation(`${importance.toLocaleLowerCase()}`)}
-									</span>
-								</div>
+					<>
+						<div className='add-task__overlay'></div>
+						<div className='add-task__form'>
+							<input
+								type='text'
+								className='add-task__form__input'
+								placeholder={getTranslation("taskName")}
+								onChange={(e) => this.updateState("task", e.target.value)}
+								ref={this.ref.inputTaskName}
+								onKeyDown={this.handleKeyDown}
+							/>
+							<textarea
+								className='add-task__form__textarea'
+								placeholder={getTranslation("description")}
+								onInput={this.autoResizeTextarea}
+								onChange={(e) =>
+									this.updateState("description", e.target.value)
+								}
+								ref={this.ref.textarea}
+							/>
+							<div className='add-task__form__importance'>
+								<div
+									className={`custom-select ${isOpen ? "active" : ""}`}
+									onClick={this.toggleDropdown}>
+									<div className='selected-option'>
+										{
+											options.find((option) => option.value === importance)
+												?.icon
+										}
+										<span>
+											{getTranslation(`${importance.toLocaleLowerCase()}`)}
+										</span>
+									</div>
 
-								<ul className='dropdown-list'>
-									{options.map((option) => (
-										<li
-											key={option.value}
-											onClick={(e) => [
-												this.updateState("importance", option.value),
-											]}
-											className='dropdown-item'>
-											{option.icon}
-											<span>{option.label}</span>
-										</li>
-									))}
-								</ul>
+									<ul className='dropdown-list'>
+										{options.map((option) => (
+											<li
+												key={option.value}
+												onClick={(e) => [
+													this.updateState("importance", option.value),
+												]}
+												className='dropdown-item'>
+												{option.icon}
+												<span>{option.label}</span>
+											</li>
+										))}
+									</ul>
+								</div>
+							</div>
+
+							<Time
+								updateState={this.updateState}
+								resetSignal={this.state.resetSignal}
+							/>
+
+							<Label
+								tasks={tasks}
+								allLabels={allLabels}
+								currentLabel={this.state.currentLabel}
+								updateStateApp={updateStateApp}
+								chosenLabels={this.state.chosenLabels}
+								updateState={this.updateState}
+								completedTasks={completedTasks}
+							/>
+
+							<div className='add-task__form__buttons'>
+								<button
+									className='add-task__form__buttons__cancel'
+									onClick={() => this.updateState("addTask", false)}>
+									{getTranslation("cancel")}
+								</button>
+								<button
+									className='add-task__form__buttons__add'
+									onClick={() => [onTask(this.state), this.defaultState()]}>
+									{getTranslation("addTask")}
+								</button>
 							</div>
 						</div>
-
-						<Time
-							updateState={this.updateState}
-							resetSignal={this.state.resetSignal}
-						/>
-
-						<Label
-							tasks={tasks}
-							allLabels={allLabels}
-							currentLabel={this.state.currentLabel}
-							updateStateApp={updateStateApp}
-							chosenLabels={this.state.chosenLabels}
-							updateState={this.updateState}
-							completedTasks={completedTasks}
-						/>
-
-						<div className='add-task__form__buttons'>
-							<button
-								className='add-task__form__buttons__cancel'
-								onClick={() => this.updateState("addTask", false)}>
-								{getTranslation("cancel")}
-							</button>
-							<button
-								className='add-task__form__buttons__add'
-								onClick={() => [onTask(this.state), this.defaultState()]}>
-								{getTranslation("addTask")}
-							</button>
-						</div>
-					</div>
+					</>
 				) : (
 					<div
 						className='add-task__button'

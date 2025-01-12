@@ -187,6 +187,9 @@
 	.App {
 		.add-task,
 		.edit-task {
+			&__form {
+				width: 80%;
+			}
 			&__form__importance {
 				.custom-select {
 					.dropdown-list {

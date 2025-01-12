@@ -79,6 +79,15 @@ class App extends Component {
 		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
 			localStorage.setItem("appState", JSON.stringify(stateToSave));
 		}
+		const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+		if (themeColorMeta) {
+			if (this.state.theme === "dark") {
+				themeColorMeta.setAttribute("content", "#191919");
+			} else {
+				themeColorMeta.setAttribute("content", "tomato");
+			}
+		}
 	}
 
 	updateStateApp = (prop, value) => {

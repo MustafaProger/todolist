@@ -74,13 +74,8 @@ class EditTask extends Component {
 		const { task, description, importance, isOpenImportance, isOpenLabels } =
 			this.state;
 
-		const {
-			tasks,
-			addLabel,
-			allLabels,
-			updateStateApp,
-			completedTasks,
-		} = this.props;
+		const { tasks, addLabel, allLabels, updateStateApp, completedTasks } =
+			this.props;
 
 		const { getTranslation } = this.context;
 
@@ -108,66 +103,71 @@ class EditTask extends Component {
 		];
 
 		return (
-			<div className='edit-task__form'>
-				<input
-					type='text'
-					className='edit-task__form__input'
-					value={task}
-					onChange={(e) => this.updateState("task", e.target.value)}
-					placeholder={getTranslation("taskName")}
-				/>
-				<textarea
-					className='edit-task__form__textarea'
-					value={description}
-					onChange={(e) => this.updateState("description", e.target.value)}
-					placeholder={getTranslation("description")}
-				/>
-				<div className='edit-task__form__importance'>
-					<div
-						className={`custom-select ${isOpenImportance ? "active" : ""}`}
-						onClick={() => this.toggleDropdown("isOpenImportance")}>
-						<div className='selected-option'>
-							{options.find((option) => option.value === importance)?.icon}
-							<span>{getTranslation(`${importance.toLocaleLowerCase()}`)}</span>
+			<>
+				<div className='edit-task__overlay'></div>
+				<div className='edit-task__form'>
+					<input
+						type='text'
+						className='edit-task__form__input'
+						value={task}
+						onChange={(e) => this.updateState("task", e.target.value)}
+						placeholder={getTranslation("taskName")}
+					/>
+					<textarea
+						className='edit-task__form__textarea'
+						value={description}
+						onChange={(e) => this.updateState("description", e.target.value)}
+						placeholder={getTranslation("description")}
+					/>
+					<div className='edit-task__form__importance'>
+						<div
+							className={`custom-select ${isOpenImportance ? "active" : ""}`}
+							onClick={() => this.toggleDropdown("isOpenImportance")}>
+							<div className='selected-option'>
+								{options.find((option) => option.value === importance)?.icon}
+								<span>
+									{getTranslation(`${importance.toLocaleLowerCase()}`)}
+								</span>
+							</div>
+							<ul className='dropdown-list'>
+								{options.map((option) => (
+									<li
+										key={option.value}
+										onClick={() => this.handleImportanceChange(option.value)}
+										className='dropdown-item'>
+										{option.icon}
+										<span>{option.label}</span>
+									</li>
+								))}
+							</ul>
 						</div>
-						<ul className='dropdown-list'>
-							{options.map((option) => (
-								<li
-									key={option.value}
-									onClick={() => this.handleImportanceChange(option.value)}
-									className='dropdown-item'>
-									{option.icon}
-									<span>{option.label}</span>
-								</li>
-							))}
-						</ul>
+					</div>
+					<Time
+						updateStateApp={updateStateApp}
+						updateState={this.updateState}
+					/>
+					<Label
+						tasks={tasks}
+						labels={this.props.labels}
+						updateStateApp={updateStateApp}
+						addLabel={addLabel}
+						currentLabel={this.state.currentLabel}
+						allLabels={allLabels}
+						chosenLabels={this.state.chosenLabels}
+						updateState={this.updateState}
+						isOpenLabels={isOpenLabels}
+						completedTasks={completedTasks}
+					/>
+					<div className='edit-task__form__buttons'>
+						<button
+							className='edit-task__form__buttons__add'
+							onClick={() => this.props.cancelEdit()}
+							style={{ padding: "10px 30px" }}>
+							Exit
+						</button>
 					</div>
 				</div>
-				<Time
-					updateStateApp={updateStateApp}
-					updateState={this.updateState}
-				/>
-				<Label
-					tasks={tasks}
-					labels={this.props.labels}
-					updateStateApp={updateStateApp}
-					addLabel={addLabel}
-					currentLabel={this.state.currentLabel}
-					allLabels={allLabels}
-					chosenLabels={this.state.chosenLabels}
-					updateState={this.updateState}
-					isOpenLabels={isOpenLabels}
-					completedTasks={completedTasks}
-				/>
-				<div className='edit-task__form__buttons'>
-					<button
-						className='edit-task__form__buttons__add'
-						onClick={() => this.props.cancelEdit()}
-						style={{ padding: "10px 30px" }}>
-						Exit
-					</button>
-				</div>
-			</div>
+			</>
 		);
 	}
 }

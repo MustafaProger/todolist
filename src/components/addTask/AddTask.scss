@@ -53,25 +53,35 @@
 		}
 	}
 
-	&__form__labels__button {
-		gap: 7px;
-		span {
-			width: 15px;
-			height: 15px;
-			&::before,
-			&::after {
-				width: 10px;
-			}
-		}
+	&__overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.3);
+		z-index: 999;
+		backdrop-filter: blur(5px);
+		transition: all 0.5s;
 	}
 
 	&__form {
+		max-width: 700px;
+		width: 100%;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		z-index: 1000;
+		transform: translate(-50%, -50%);
 		display: flex;
 		flex-direction: column;
 		background-color: white;
 		padding: 20px;
 		border-radius: 8px;
 		border: 1px solid rgba(0, 0, 0, 0.1);
+		overflow-y: auto;
+		max-height: 400px;
+		height: 100%;
 
 		&__input,
 		&__textarea {
@@ -94,7 +104,7 @@
 
 		&__textarea {
 			padding: 0 10px 0px 0;
-			height: 37px;
+			min-height: 37px;
 			margin: 10px 0;
 			font-size: 16px;
 			resize: none;
@@ -151,6 +161,18 @@
 				transform: translateY(-50%);
 				width: 20px;
 				height: 20px;
+			}
+		}
+
+		&__labels__button {
+			gap: 7px;
+			span {
+				width: 15px;
+				height: 15px;
+				&::before,
+				&::after {
+					width: 10px;
+				}
 			}
 		}
 
