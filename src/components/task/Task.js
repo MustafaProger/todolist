@@ -157,11 +157,7 @@ class Task extends Component {
 												}}>
 												<Check color={importanceColors[importance]} />
 											</div>
-											<h3 className='task-name'>
-												{task.length > window.innerWidth / 30
-													? task.slice(0, window.innerWidth / 30) + "..."
-													: task}
-											</h3>
+											<h4 className='task-name'>{task}</h4>
 											<div className='menu-trigger'>
 												{clazz === "completed-tasks-list" ? null : (
 													<>
@@ -214,10 +210,7 @@ class Task extends Component {
 										<div className='task-description'>
 											{description.length ? (
 												<div className='task-description__container'>
-													{description.length > window.innerWidth / 20
-														? description.slice(0, window.innerWidth / 20) +
-														  "..."
-														: description}
+													{description}
 												</div>
 											) : null}
 										</div>

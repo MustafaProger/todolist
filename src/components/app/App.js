@@ -1,4 +1,5 @@
 import { Component } from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
@@ -6,6 +7,7 @@ import Filters from "../../pages/filter/Filters";
 import Labels from "../../pages/labels/Labels";
 
 import LanguageProvider from "../locales/LanguageContext";
+import PortalTaskAddedSuccess from "../portal-taskAdded/PortalTaskAddedSuccess";
 
 import "./App.scss";
 import Menu from "../menu/Menu";
@@ -30,6 +32,8 @@ class App extends Component {
 		term: "",
 		theme: "light",
 		language: "en",
+		showPortal: false,
+		taskMessage: null,
 	};
 
 	componentDidMount() {
@@ -107,6 +111,8 @@ class App extends Component {
 		} else if (time === "Invalid Date") {
 			alert("Enter the time correctly");
 			return;
+		} else {
+			this.setState({ showPortal: true, taskMessage: task });
 		}
 
 		const newTask = {
@@ -121,10 +127,11 @@ class App extends Component {
 		this.setState((prevState) => ({
 			tasks: [...this.state.tasks, newTask],
 			tasksCount: prevState.tasks.length + 1,
-			addLabel: false,
-			currentLabel: "",
-			chosenLabels: [],
 		}));
+
+		setTimeout(() => {
+			this.setState({ showPortal: false, taskMessage: null });
+		}, 2000);
 	};
 
 	onActionWithTask = (id, action) => {
@@ -238,6 +245,11 @@ class App extends Component {
 
 		return (
 			<div className='App'>
+				{this.state.showPortal && (
+					<PortalTaskAddedSuccess>
+						<p>Task {this.state.taskMessage} added</p>
+					</PortalTaskAddedSuccess>
+				)}
 				<BrowserRouter basename='/todolist'>
 					<LanguageProvider
 						updateStateApp={this.updateStateApp}

@@ -1,0 +1,26 @@
+.task-added {
+	position: fixed;
+	top: 30px;
+	right: 50%;
+    transform: translateX(50%);
+	background-color: var(--background-color);
+	color: var(--text-color);
+	padding: 10px 20px;
+	border-radius: 20px;
+	transition: all 0.5s ease;
+	z-index: 1000;
+}
+
+body .task-added {
+	background-color: #fff;
+	color: black;
+	text-align: center;
+	margin: 0 auto;
+	display: block;
+	transition: all 0.3s;
+}
+
+body.dark .task-added {
+	background-color: #333;
+	color: white;
+}
