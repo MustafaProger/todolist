@@ -80,7 +80,7 @@
 		border-radius: 8px;
 		border: 1px solid rgba(0, 0, 0, 0.1);
 		overflow-y: auto;
-		max-height: 400px;
+		max-height: 450px;
 		height: 100%;
 
 		&__input,
@@ -180,6 +180,7 @@
 			display: flex;
 			justify-content: flex-end;
 			gap: 10px;
+			margin-top: auto;
 
 			&__cancel {
 				padding: 8px 16px;

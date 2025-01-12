@@ -29,7 +29,6 @@ class Menu extends Component {
 		this.setState(
 			(prevState) => ({ isDark: !prevState.isDark }),
 			() => {
-				// Меняем класс на body в зависимости от состояния
 				document.body.classList.toggle("dark");
 
 				// Сохраняем тему в localStorage
