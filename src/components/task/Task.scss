@@ -51,15 +51,14 @@
 }
 
 .menu-trigger {
+	display: flex;
+	gap: 15px;
 	font-size: 18px;
 	padding: 0 5px;
 	text-align-last: left;
 	margin: 0 0 0 auto;
 	img {
 		cursor: pointer;
-	}
-	img:nth-child(2) {
-		margin-left: 15px;
 	}
 }
 
