@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from "react";
+import { Component, useContext, useEffect, useState } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
@@ -11,6 +11,7 @@ import LanguageProvider from "../locales/LanguageContext";
 import PortalTaskAddedSuccess from "../portal-taskAdded/PortalTaskAddedSuccess";
 
 import "./App.scss";
+import MyContext from "../context/Context";
 
 const App = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -85,6 +86,7 @@ const App = () => {
 		} else {
 			if (prop === "theme") setTheme(value);
 			if (prop === "language") setLanguage(value);
+			if (prop === "menuOpen") setMenuOpen(value);
 		}
 	};
 
@@ -196,91 +198,92 @@ const App = () => {
 	};
 
 	return (
-		<div className='App'>
-			{showPortal && (
-				<PortalTaskAddedSuccess>
-					<p>
-						Task «<strong>{taskMessage}</strong>» added
-					</p>
-				</PortalTaskAddedSuccess>
-			)}
-			<BrowserRouter basename='/todolist'>
-				<LanguageProvider
-					updateStateApp={updateStateApp}
-					language={language}>
-					<Menu
+		<MyContext.Provider value={{ menuOpen, tasksCount }}>
+			<div className='App'>
+				{showPortal && (
+					<PortalTaskAddedSuccess>
+						<p>
+							Task «<strong>{taskMessage}</strong>» added
+						</p>
+					</PortalTaskAddedSuccess>
+				)}
+				<BrowserRouter basename='/todolist'>
+					<LanguageProvider
 						updateStateApp={updateStateApp}
-						menuOpen={menuOpen}
-						theme={theme}
-					/>
-					<Routes>
-						<Route
-							path='/'
-							element={
-								<Tasks
-									menuOpen={menuOpen}
-									tasksCount={tasksCount}
-									tasks={tasks}
-									allLabels={allLabels}
-									onTask={onTask}
-									onActionWithTask={onActionWithTask}
-									updateStateApp={updateStateApp}
-									onSaveTask={onSaveTask}
-									search={search}
-									completedTasks={completedTasks}
-								/>
-							}
+						language={language}>
+						<Menu
+							updateStateApp={updateStateApp}
+							menuOpen={menuOpen}
+							theme={theme}
 						/>
-						<Route
-							path='/completed'
-							element={
-								<Completed
-									menuOpen={menuOpen}
-									completedTasks={completedTasks}
-									completedTasksCount={completedTasksCount}
-									updateStateApp={updateStateApp}
-									onActionWithTask={onActionWithTask}
-								/>
-							}
-						/>
-						<Route
-							path='/filter'
-							element={
-								<Filters
-									menuOpen={menuOpen}
-									tasksCount={tasksCount}
-									tasks={tasks}
-									allLabels={allLabels}
-									updateStateApp={updateStateApp}
-									onActionWithTask={onActionWithTask}
-									onSaveTask={onSaveTask}
-									// onOpenFilterLabel={onOpenFilterLabel}
-									completedTasks={completedTasks}
-								/>
-							}
-						/>
+						<Routes>
+							<Route
+								path='/'
+								element={
+									<Tasks
+										// menuOpen={menuOpen}
+										// tasksCount={tasksCount}
+										tasks={tasks}
+										allLabels={allLabels}
+										onTask={onTask}
+										onActionWithTask={onActionWithTask}
+										updateStateApp={updateStateApp}
+										onSaveTask={onSaveTask}
+										search={search}
+										completedTasks={completedTasks}
+									/>
+								}
+							/>
+							<Route
+								path='/completed'
+								element={
+									<Completed
+										// menuOpen={menuOpen}
+										completedTasks={completedTasks}
+										completedTasksCount={completedTasksCount}
+										updateStateApp={updateStateApp}
+										onActionWithTask={onActionWithTask}
+									/>
+								}
+							/>
+							<Route
+								path='/filter'
+								element={
+									<Filters
+										// menuOpen={menuOpen}
+										// tasksCount={tasksCount}
+										tasks={tasks}
+										allLabels={allLabels}
+										updateStateApp={updateStateApp}
+										onActionWithTask={onActionWithTask}
+										onSaveTask={onSaveTask}
+										completedTasks={completedTasks}
+									/>
+								}
+							/>
 
-						<Route
-							path='/labels'
-							element={
-								<Labels
-									menuOpen={menuOpen}
-									tasksCount={tasksCount}
-									tasks={tasks}
-									allLabels={allLabels}
-									updateStateApp={updateStateApp}
-									onActionWithTask={onActionWithTask}
-									onSaveTask={onSaveTask}
-									// onOpenFilterLabel={onOpenFilterLabel}
-									search={search}
-									completedTasks={completedTasks}
-								/>
-							}
-						/>
-					</Routes>
-				</LanguageProvider>
-			</BrowserRouter>
-		</div>
+							<Route
+								path='/labels'
+								element={
+									<Labels
+										// menuOpen={menuOpen}
+										// tasksCount={tasksCount}
+										tasks={tasks}
+										allLabels={allLabels}
+										updateStateApp={updateStateApp}
+										onActionWithTask={onActionWithTask}
+										onSaveTask={onSaveTask}
+										// onOpenFilterLabel={onOpenFilterLabel}
+										search={search}
+										completedTasks={completedTasks}
+									/>
+								}
+							/>
+						</Routes>
+					</LanguageProvider>
+				</BrowserRouter>
+			</div>
+		</MyContext.Provider>
 	);
 };
 

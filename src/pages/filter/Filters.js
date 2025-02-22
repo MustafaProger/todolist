@@ -4,10 +4,9 @@ import countTask from "../../assets/icon/check-circle.svg";
 import CurrentDate from "../../components/currentDate/CurrentDate";
 
 import { LanguageContext } from "../../components/locales/LanguageContext";
+import MyContext from "../../components/context/Context";
 
 const Filters = ({
-	menuOpen,
-	tasksCount,
 	tasks,
 	allLabels,
 	updateStateApp,
@@ -17,7 +16,9 @@ const Filters = ({
 	onOpenFilterLabel,
 	completedTasks,
 }) => {
+	// Получаем значения из контекста
 	const { getTranslation } = useContext(LanguageContext);
+	const { menuOpen, tasksCount } = useContext(MyContext);
 
 	return (
 		<div className='filter'>
@@ -35,7 +36,6 @@ const Filters = ({
 
 				<Filter
 					tasks={tasks}
-					tasksCount={tasksCount}
 					allLabels={allLabels}
 					updateStateApp={updateStateApp}
 					onActionWithTask={onActionWithTask}
@@ -50,4 +50,3 @@ const Filters = ({
 };
 
 export default Filters;
-	

@@ -2,16 +2,14 @@ import React, { useContext, useState, useEffect } from "react";
 import "./Labels.scss";
 import Task from "../../components/task/Task";
 
-import Menu from "../../components/menu/Menu";
 import countTask from "../../assets/icon/check-circle.svg";
 import CurrentDate from "../../components/currentDate/CurrentDate";
 import Search from "../../components/search/Search";
 
 import { LanguageContext } from "../../components/locales/LanguageContext";
+import MyContext from "../../components/context/Context";
 
 const Labels = ({
-	menuOpen,
-	tasksCount,
 	tasks,
 	allLabels,
 	updateStateApp,
@@ -23,6 +21,7 @@ const Labels = ({
 	completedTasks,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
+	const { menuOpen, tasksCount } = useContext(MyContext);
 	const [openLabel, setOpenLabel] = useState(null);
 
 	// Вызов updateStateApp при монтировании компонента
@@ -53,11 +52,6 @@ const Labels = ({
 
 	return (
 		<div className='labels'>
-			<Menu
-				updateStateApp={updateStateApp}
-				menuOpen={menuOpen}
-				theme={theme}
-			/>
 			<div className={`container${menuOpen ? " menu-active" : ""}`}>
 				<h1 className='title'>{getTranslation("labels")}</h1>
 				<p className='count-tasks'>
