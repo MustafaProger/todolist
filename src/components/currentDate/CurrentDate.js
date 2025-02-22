@@ -1,61 +1,58 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { LanguageContext } from "../locales/LanguageContext";
 
-class CurrentDate extends Component {
-	static contextType = LanguageContext; // Указываем контекст
+const CurrentDate = () => {
+	const { getTranslation } = useContext(LanguageContext);
 
-	state = {
-		date: new Date(),
-	};
+	const [date, setDate] = useState(new Date());
 
-	render() {
-		const { date } = this.state;
-		const { getTranslation } = this.context; // Получаем getTranslation из контекста
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setDate(new Date());
+		}, 1000);
 
-		// Получаем номер месяца (0-11) и дня недели (0-6)
-		const monthIndex = date.getMonth();
-		const dayIndex = date.getDay(); // Получаем день недели
-		const day = date.getDate();
-		const year = date.getFullYear();
+		return () => clearInterval(interval);
+	}, []);
 
-		// Массив названий месяцев
-		const monthNames = [
-			"january",
-			"february",
-			"march",
-			"april",
-			"may",
-			"june",
-			"july",
-			"august",
-			"september",
-			"october",
-			"november",
-			"december",
-		];
+	const monthIndex = date.getMonth();
+	const dayIndex = date.getDay();
+	const day = date.getDate();
+	const year = date.getFullYear();
 
-		// Массив названий дней недели
-		const weekDays = [
-			"sunday",
-			"monday",
-			"tuesday",
-			"wednesday",
-			"thursday",
-			"friday",
-			"saturday",
-		];
+	const monthNames = [
+		"january",
+		"february",
+		"march",
+		"april",
+		"may",
+		"june",
+		"july",
+		"august",
+		"september",
+		"october",
+		"november",
+		"december",
+	];
 
-		// Форматирование даты в зависимости от языка
-		const formattedDate = `${day} ${getTranslation(
-			monthNames[monthIndex]
-		)}, ${getTranslation(weekDays[dayIndex])} • ${year}`;
+	const weekDays = [
+		"sunday",
+		"monday",
+		"tuesday",
+		"wednesday",
+		"thursday",
+		"friday",
+		"saturday",
+	];
 
-		return (
-			<div>
-				<h3 className='current-date'>{formattedDate}</h3>
-			</div>
-		);
-	}
-}
+	const formattedDate = `${day} ${getTranslation(
+		monthNames[monthIndex]
+	)}, ${getTranslation(weekDays[dayIndex])} • ${year}`;
+
+	return (
+		<div>
+			<h3 className='current-date'>{formattedDate}</h3>
+		</div>
+	);
+};
 
 export default CurrentDate;
