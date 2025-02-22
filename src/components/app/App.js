@@ -198,7 +198,7 @@ const App = () => {
 	};
 
 	return (
-		<MyContext.Provider value={{ menuOpen, tasksCount }}>
+		<MyContext.Provider value={{ menuOpen, tasksCount, tasks }}>
 			<div className='App'>
 				{showPortal && (
 					<PortalTaskAddedSuccess>
@@ -252,7 +252,7 @@ const App = () => {
 									<Filters
 										// menuOpen={menuOpen}
 										// tasksCount={tasksCount}
-										tasks={tasks}
+										// tasks={tasks}
 										allLabels={allLabels}
 										updateStateApp={updateStateApp}
 										onActionWithTask={onActionWithTask}
@@ -268,7 +268,7 @@ const App = () => {
 									<Labels
 										// menuOpen={menuOpen}
 										// tasksCount={tasksCount}
-										tasks={tasks}
+										// tasks={tasks}
 										allLabels={allLabels}
 										updateStateApp={updateStateApp}
 										onActionWithTask={onActionWithTask}

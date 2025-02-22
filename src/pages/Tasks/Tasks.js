@@ -10,7 +10,6 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Tasks = ({
-	tasks,
 	updateStateApp,
 	onTask,
 	onActionWithTask,
@@ -22,7 +21,7 @@ const Tasks = ({
 }) => {
 	// Получаем значения из контекста
 	const { getTranslation } = useContext(LanguageContext);
-	const { menuOpen, tasksCount } = useContext(MyContext);
+	const { menuOpen, tasksCount, tasks } = useContext(MyContext);
 
 	return (
 		<div className='tasks'>

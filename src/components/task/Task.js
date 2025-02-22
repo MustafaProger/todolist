@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Task.scss";
 import Check from "../../assets/icon/check";
 import pencil from "../../assets/icon/pencil.svg";
@@ -7,44 +7,48 @@ import refresh from "../../assets/icon/refresh.svg";
 import EditTask from "../editTask/EditTask";
 
 import { LanguageContext } from "../locales/LanguageContext";
+import MyContext from "../context/Context";
 
-class Task extends Component {
-	static contextType = LanguageContext;
+const Task = ({
+	tasks,
+	clazz,
+	allLabels,
+	updateStateApp,
+	completedTasks,
+	onActionWithTask,
+	onSaveTask,
+	sortedBy,
+	search,
+}) => {
+	const [editingTaskId, setEditingTaskId] = useState(null);
+	const [editedTask, setEditedTask] = useState({});
 
-	state = {
-		editingTaskId: null, // ID редактируемой задачи
-		editedTask: {}, // Данные редактируемой задачи
-	};
+	const { translations } = useContext(LanguageContext);
 
-	componentDidMount() {
-		if (this.props.updateStateApp && this.props.sortedBy === "task") {
-			this.props.updateStateApp("term", "");
+	useEffect(() => {
+		if (updateStateApp && sortedBy === "task") {
+			updateStateApp("term", "");
 		}
-	}
+	}, [updateStateApp, sortedBy]);
 
-	// Включить режим редактирования
-	startEditing = (id, taskData) => {
-		this.setState({
-			editingTaskId: id,
-			editedTask: { ...taskData },
-		});
+	const startEditing = (id, taskData) => {
+		setEditingTaskId(id);
+		setEditedTask({ ...taskData });
 	};
 
-	// Обновление данных редактируемой задачи
-	handleEditChange = (field, value) => {
-		this.setState((prevState) => ({
-			editedTask: {
-				...prevState.editedTask,
-				[field]: value,
-			},
+	const handleEditChange = (field, value) => {
+		setEditedTask((prevState) => ({
+			...prevState,
+			[field]: value,
 		}));
 	};
 
-	cancelEdit = () => {
-		this.setState({ editingTaskId: null, editedTask: {} });
+	const cancelEdit = () => {
+		setEditingTaskId(null);
+		setEditedTask({});
 	};
 
-	isTimeExpired = (taskTime) => {
+	const isTimeExpired = (taskTime) => {
 		const currentTime = new Date();
 		const [taskHours, taskMinutes] = taskTime.split(":").map(Number);
 		const taskDate = new Date(
@@ -57,65 +61,46 @@ class Task extends Component {
 		return currentTime > taskDate;
 	};
 
-	renderItem = () => {
-		const {
-			tasks,
-			clazz,
-			allLabels,
-			updateStateApp,
-			completedTasks,
-			onSaveTask,
-		} = this.props;
+	const importanceColors = {
+		Priority: "#CDCDCD",
+		Low: "#5390F5",
+		Medium: "orange",
+		High: "#FF6247",
+	};
 
-		const { editingTaskId } = this.state;
+	const importanceOrder = {
+		High: 1,
+		Medium: 2,
+		Low: 3,
+		Priority: 4,
+	};
 
-		const { getTranslation } = this.context;
+	const sortedTasks = [...tasks].sort((a, b) => {
+		const timeA = a.time ? new Date(`1970-01-01T${a.time}:00`) : null;
+		const timeB = b.time ? new Date(`1970-01-01T${b.time}:00`) : null;
 
-		const importanceColors = {
-			Priority: "#CDCDCD",
-			Low: "#5390F5",
-			Medium: "orange",
-			High: "#FF6247",
-		};
+		if (!timeA && timeB) return 1;
+		if (timeA && !timeB) return -1;
 
-		const importanceOrder = {
-			High: 1,
-			Medium: 2,
-			Low: 3,
-			Priority: 4,
-		};
-
-		const sortedTasks = [...tasks].sort((a, b) => {
-			// Проверяем наличие времени
-			const timeA = a.time ? new Date(`1970-01-01T${a.time}:00`) : null;
-			const timeB = b.time ? new Date(`1970-01-01T${b.time}:00`) : null;
-
-			// Если у a нет времени, а у b есть - a идет ниже
-			if (!timeA && timeB) return 1;
-			if (timeA && !timeB) return -1;
-
-			// Если оба имеют время, сортируем по времени
-			if (timeA && timeB) {
-				if (timeA - timeB !== 0) {
-					return timeA - timeB;
-				}
+		if (timeA && timeB) {
+			if (timeA - timeB !== 0) {
+				return timeA - timeB;
 			}
+		}
 
-			// Если времена одинаковы, сортируем по важности
-			return importanceOrder[a.importance] - importanceOrder[b.importance];
-		});
+		return importanceOrder[a.importance] - importanceOrder[b.importance];
+	});
 
-		const sortedBySearch =
-			this.props.sortedBy === "task"
-				? this.props.search(sortedTasks, "task")
-				: sortedTasks;
+	const sortedBySearch =
+		sortedBy === "task" ? search(sortedTasks, "task") : sortedTasks;
 
+	const renderItem = () => {
 		return sortedBySearch.length > 0 ? (
 			<div className={clazz}>
 				{sortedBySearch.map(
 					({ id, task, description, importance, labels, time }) => {
 						const isEditing = editingTaskId === id;
-						const isExpired = time ? this.isTimeExpired(time) : false;
+						const isExpired = time ? isTimeExpired(time) : false;
 
 						return (
 							<div
@@ -137,10 +122,10 @@ class Task extends Component {
 										importance={importance}
 										labels={labels}
 										time={time}
-										cancelEdit={this.cancelEdit}
+										cancelEdit={cancelEdit}
 										allLabels={allLabels}
 										updateStateApp={updateStateApp}
-										tasks={this.props.allTasks || tasks}
+										tasks={tasks}
 										onSaveTask={onSaveTask}
 										completedTasks={completedTasks}
 									/>
@@ -149,9 +134,7 @@ class Task extends Component {
 										<div className='task-header'>
 											<div
 												className='importance-circle'
-												onClick={() =>
-													this.props.onActionWithTask(id, "completed")
-												}
+												onClick={() => onActionWithTask(id, "completed")}
 												style={{
 													border: `2px solid ${importanceColors[importance]}`,
 												}}>
@@ -165,7 +148,7 @@ class Task extends Component {
 															src={pencil}
 															alt='pencil'
 															onClick={() =>
-																this.startEditing(id, {
+																startEditing(id, {
 																	id,
 																	task,
 																	description,
@@ -177,9 +160,7 @@ class Task extends Component {
 														<img
 															src={trash}
 															alt='trash'
-															onClick={() =>
-																this.props.onActionWithTask(id, "remove")
-															}
+															onClick={() => onActionWithTask(id, "remove")}
 														/>
 													</>
 												)}
@@ -189,18 +170,13 @@ class Task extends Component {
 														<img
 															src={refresh}
 															alt='refresh'
-															onClick={() =>
-																this.props.onActionWithTask(id, "refresh")
-															}
+															onClick={() => onActionWithTask(id, "refresh")}
 														/>
 														<img
 															src={trash}
 															alt='trash'
 															onClick={() =>
-																this.props.onActionWithTask(
-																	id,
-																	"remove-completed"
-																)
+																onActionWithTask(id, "remove-completed")
 															}
 														/>
 													</>
@@ -253,7 +229,6 @@ class Task extends Component {
 															/>
 														</svg>
 													)}
-
 													<p style={{ color: !isExpired ? "green" : "red" }}>
 														{time}
 													</p>
@@ -267,14 +242,14 @@ class Task extends Component {
 					}
 				)}
 			</div>
-		) : clazz === "completed-tasks-list" ? (
-			<p style={{ color: "grey" }}>{getTranslation("noCompletedTasksYet")}</p>
-		) : null;
+		) : (
+			<div className='no-task-found'>
+				<div className='no-task-found'>{translations}</div>;
+			</div>
+		);
 	};
 
-	render() {
-		return <>{this.renderItem()}</>;
-	}
-}
+	return renderItem();
+};
 
 export default Task;

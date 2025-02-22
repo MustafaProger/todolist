@@ -7,7 +7,7 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Filters = ({
-	tasks,
+	// tasks,
 	allLabels,
 	updateStateApp,
 	onActionWithTask,
@@ -35,7 +35,7 @@ const Filters = ({
 				<hr className='divider' />
 
 				<Filter
-					tasks={tasks}
+					// tasks={tasks}
 					allLabels={allLabels}
 					updateStateApp={updateStateApp}
 					onActionWithTask={onActionWithTask}
