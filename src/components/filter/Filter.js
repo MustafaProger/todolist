@@ -21,6 +21,26 @@ class Filter extends Component {
 		}));
 	};
 
+	onOpenFilterLabel = (label, clazz) => {
+		this.setState((prevState) => {
+			const isSameLabel = prevState.openLabel === label;
+
+			const allTasks = document.querySelectorAll(`.${clazz}`);
+			allTasks.forEach((task) => {
+				task.style.maxHeight = "0px";
+			});
+
+			const content = document.querySelector(`.${clazz}-${label}`);
+			if (content && !isSameLabel) {
+				content.style.maxHeight = `${content.scrollHeight * 1}px`;
+			}
+
+			return {
+				openLabel: isSameLabel ? null : label,
+			};
+		});
+	};
+
 	render() {
 		const options = [
 			{ value: "High", icon: <Flag theme='#FF6247' /> },
@@ -36,7 +56,6 @@ class Filter extends Component {
 			onSaveTask,
 			updateStateApp,
 			allLabels,
-			onOpenFilterLabel,
 			completedTasks,
 		} = this.props;
 
@@ -60,7 +79,7 @@ class Filter extends Component {
 								className='importance'
 								onClick={() => {
 									this.handleToggleCategory(value);
-									onOpenFilterLabel(value, "filtered-task");
+									this.onOpenFilterLabel(value, "filtered-task");
 								}}>
 								{icon} <span>{getTranslation(`${value.toLocaleLowerCase()}`)}</span>
 								<div className='toggle-icon'>

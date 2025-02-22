@@ -22,7 +22,7 @@ class Label extends Component {
 	componentDidMount() {
 		const { allLabels, chosenLabels } = this.props;
 		const initialCheckedState = allLabels.reduce((acc, label) => {
-			acc[label] = chosenLabels.includes(label); // Проверяем, если метка в chosenLabels, то true, иначе false
+			acc[label] = chosenLabels.includes(label);
 			return acc;
 		}, {});
 

@@ -1,119 +1,108 @@
-import { Component } from "react";
+import { Component, useEffect, useState } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
 import Filters from "../../pages/filter/Filters";
 import Labels from "../../pages/labels/Labels";
+import Menu from "../menu/Menu";
 
 import LanguageProvider from "../locales/LanguageContext";
 import PortalTaskAddedSuccess from "../portal-taskAdded/PortalTaskAddedSuccess";
 
 import "./App.scss";
-import Menu from "../menu/Menu";
 
-class App extends Component {
-	state = {
-		menuOpen: false,
-		tasks: [],
-		tasksCount: 0,
-		completedTasks: [],
-		completedTasksCount: 0,
-		allLabels: [
-			"Finance",
-			"Job",
-			"Religion",
-			"Self-Development",
-			"Routine",
-			"Health",
-			"Education",
-			"Relaxation",
-		],
-		term: "",
-		theme: "light",
-		language: "en",
-		showPortal: false,
-		taskMessage: null,
-	};
+const App = () => {
+	const [menuOpen, setMenuOpen] = useState(false);
+	const [tasks, setTasks] = useState([]);
+	const [tasksCount, setTasksCount] = useState(0);
+	const [completedTasks, setCompletedTasks] = useState([]);
+	const [completedTasksCount, setCompletedTasksCount] = useState(0);
+	const [allLabels, setAllLabels] = useState([
+		"Finance",
+		"Job",
+		"Religion",
+		"Self-Development",
+		"Routine",
+		"Health",
+		"Education",
+		"Relaxation",
+	]);
+	const [term, setTerm] = useState("");
+	const [theme, setTheme] = useState("light");
+	const [language, setLanguage] = useState("en");
+	const [showPortal, setShowPortal] = useState(false);
+	const [taskMessage, setTaskMessage] = useState(null);
 
-	componentDidMount() {
+	useEffect(() => {
 		const savedState = JSON.parse(localStorage.getItem("appState"));
 		if (savedState) {
-			this.setState(savedState);
+			setMenuOpen(savedState.menuOpen);
+			setTasks(savedState.tasks);
+			setTasksCount(savedState.tasksCount);
+			setCompletedTasks(savedState.completedTasks);
+			setCompletedTasksCount(savedState.completedTasksCount);
+			setAllLabels(savedState.allLabels);
+			setTheme(savedState.theme);
+			setLanguage(savedState.language);
 		}
+	}, []);
 
-		// Проверка задач на удаление каждые 10 минут
-		this.interval = setInterval(() => {
-			const { completedTasks } = this.state;
-			const now = Date.now();
-			const filteredTasks = completedTasks.filter(
-				(task) => now - task.completedAt < 24 * 60 * 60 * 1000 // Задачи, завершенные менее 24 часов назад
-			);
-			this.setState({ completedTasks: filteredTasks });
-		}, 10 * 60 * 1000); // каждые 10 минут
-	}
-
-	componentWillUnmount() {
-		clearInterval(this.interval);
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		const {
-			menuOpen,
-			tasksCount,
-			tasks,
-			completedTasks,
-			completedTasksCount,
-			allLabels,
-			theme,
-			language,
-		} = this.state;
-
+	useEffect(() => {
 		const stateToSave = {
 			menuOpen,
-			tasksCount,
 			tasks,
+			tasksCount,
 			completedTasks,
 			completedTasksCount,
 			allLabels,
 			theme,
 			language,
 		};
+		localStorage.setItem("appState", JSON.stringify(stateToSave));
 
-		if (JSON.stringify(prevState) !== JSON.stringify(stateToSave)) {
-			localStorage.setItem("appState", JSON.stringify(stateToSave));
-		}
 		const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-
 		if (themeColorMeta) {
-			if (this.state.theme === "dark") {
-				themeColorMeta.setAttribute("content", "#191919");
-			} else {
-				themeColorMeta.setAttribute("content", "tomato");
-			}
+			themeColorMeta.setAttribute(
+				"content",
+				theme === "dark" ? "#191919" : "tomato"
+			);
 		}
-	}
+	}, [
+		menuOpen,
+		tasks,
+		tasksCount,
+		completedTasks,
+		completedTasksCount,
+		allLabels,
+		theme,
+		language,
+	]);
 
-	updateStateApp = (prop, value) => {
+	const updateStateApp = (prop, value) => {
 		if (prop === "allLabels" && typeof value === "string") {
-			this.setState({ [prop]: [...this.state[prop], value] });
+			setAllLabels((prev) => [...prev, value]);
 		} else {
-			this.setState(() => ({ [prop]: value }));
+			if (prop === "theme") setTheme(value);
+			if (prop === "language") setLanguage(value);
 		}
 	};
 
-	onTask = (stateAddTask) => {
+	const onTask = (stateAddTask) => {
 		const { task, description, importance, chosenLabels, time } = stateAddTask;
-
-		if (!task.trim()) {
-			alert("Task name cannot be empty.");
+		if (!task.trim() || time === "Invalid Date") {
+			alert(
+				!task.trim() ? "Task name cannot be empty." : "Enter the time correctly"
+			);
 			return;
-		} else if (time === "Invalid Date") {
-			alert("Enter the time correctly");
-			return;
-		} else {
-			this.setState({ showPortal: true, taskMessage: task });
 		}
+
+		setShowPortal(true);
+		setTaskMessage(task);
+		setTimeout(() => {
+			setShowPortal(false);
+			setTaskMessage(null);
+		}, 2000);
 
 		const newTask = {
 			id: Date.now(),
@@ -123,214 +112,176 @@ class App extends Component {
 			labels: [...chosenLabels],
 			time,
 		};
-
-		this.setState((prevState) => ({
-			tasks: [...this.state.tasks, newTask],
-			tasksCount: prevState.tasks.length + 1,
-		}));
-
-		setTimeout(() => {
-			this.setState({ showPortal: false, taskMessage: null });
-		}, 2000);
+		setTasks((prev) => [...prev, newTask]);
+		setTasksCount((prev) => prev + 1);
 	};
 
-	onActionWithTask = (id, action) => {
-		this.setState(({ tasks, completedTasks }) => {
-			const newArr = tasks.filter((item) => item.id !== id);
-			const completedTask = tasks.find((item) => item.id === id);
-			const removeCompletedTask = completedTasks.filter(
-				(item) => item.id !== id
-			);
-			const returnCompletedTask = completedTasks.filter(
-				(item) => item.id === id
-			);
+	const onActionWithTask = (id, action) => {
+		setTasks((prevTasks) => {
+			const newArr = prevTasks.filter((item) => item.id !== id);
+			const completedTask = prevTasks.find((item) => item.id === id);
+			const newCompletedTasks = [...completedTasks];
 
 			if (action === "remove") {
-				return {
-					tasks: newArr,
-					tasksCount: tasks.length - 1,
-				};
+				setTasksCount((prevCount) => prevCount - 1);
+				return newArr;
 			} else if (action === "completed") {
-				const taskWithTimestamp = {
-					...completedTask,
-					completedAt: Date.now(),
-				};
-				return {
-					tasks: newArr,
-					completedTasks: [...completedTasks, taskWithTimestamp],
-					tasksCount: tasks.length - 1,
-					completedTasksCount: completedTasks.length + 1,
-				};
+				const taskWithTimestamp = { ...completedTask, completedAt: Date.now() };
+				newCompletedTasks.push(taskWithTimestamp);
+				setCompletedTasks(newCompletedTasks);
+				setCompletedTasksCount((prevCount) => prevCount + 1);
+				setTasksCount((prevCount) => prevCount - 1);
+				return newArr;
 			} else if (action === "remove-completed") {
-				return {
-					completedTasks: removeCompletedTask,
-					completedTasksCount: completedTasks.length - 1,
-				};
+				setCompletedTasks(newCompletedTasks.filter((item) => item.id !== id));
+				setCompletedTasksCount((prevCount) => prevCount - 1);
+				return newArr;
 			} else if (action === "refresh") {
-				return {
-					tasks: [...tasks, ...returnCompletedTask],
-					tasksCount: tasks.length + 1,
-					completedTasks: removeCompletedTask,
-					completedTasksCount: completedTasks.length - 1,
-				};
+				newCompletedTasks.splice(newCompletedTasks.indexOf(completedTask), 1);
+				setCompletedTasks(newCompletedTasks);
+				setCompletedTasksCount((prevCount) => prevCount - 1);
+				setTasks([...prevTasks, completedTask]);
+				setTasksCount((prevCount) => prevCount + 1);
+				return newArr;
 			}
+
+			return prevTasks;
 		});
 	};
 
-	onSaveTask = (updatedTask) => {
-		this.setState(({ tasks }) => ({
-			tasks: tasks.map((task) =>
+	const onSaveTask = (updatedTask) => {
+		setTasks((prevTasks) =>
+			prevTasks.map((task) =>
 				task.id === updatedTask.id ? { ...task, ...updatedTask } : task
-			),
-		}));
+			)
+		);
 	};
 
-	updateTask = () => {
-		this.setState(({ tasks }) => ({
-			tasks: tasks.map((task) => {
-				return task;
-			}),
-		}));
+	const updateTask = () => {
+		setTasks((prevTasks) => [...prevTasks]);
 	};
 
-	onOpenFilterLabel = (label, clazz) => {
-		this.setState((prevState) => {
-			const isSameLabel = prevState.openLabel === label;
+	// const onOpenFilterLabel = (label, clazz) => {
+	// 	setOpenLabel((prevLabel) => {
+	// 		const isSameLabel = prevLabel === label;
 
-			const allTasks = document.querySelectorAll(`.${clazz}`);
-			allTasks.forEach((task) => {
-				task.style.maxHeight = "0px";
-			});
+	// 		const allTasks = document.querySelectorAll(`.${clazz}`);
+	// 		allTasks.forEach((task) => {
+	// 			task.style.maxHeight = "0px";
+	// 		});
 
-			const content = document.querySelector(`.${clazz}-${label}`);
-			if (content && !isSameLabel) {
-				content.style.maxHeight = `${content.scrollHeight * 1}px`;
-			}
+	// 		const content = document.querySelector(`.${clazz}-${label}`);
+	// 		if (content && !isSameLabel) {
+	// 			content.style.maxHeight = `${content.scrollHeight}px`;
+	// 		}
 
-			return {
-				openLabel: isSameLabel ? null : label,
-			};
-		});
-	};
+	// 		return isSameLabel ? null : label;
+	// 	});
+	// };
 
-	search = (tasks, nameSearch) => {
-		if (this.state.term.length === 0) return tasks;
+	const search = (tasks, nameSearch) => {
+		if (!term.length) return tasks;
 
 		if (nameSearch === "task") {
-			return tasks.filter((item) => {
-				return (
-					item[nameSearch]
-						.toLowerCase()
-						.indexOf(this.state.term.toLowerCase()) > -1
-				);
-			});
+			return tasks.filter((item) =>
+				item[nameSearch].toLowerCase().includes(term.toLowerCase())
+			);
 		} else if (nameSearch === "label") {
-			return tasks.filter(
-				(item) => item.toLowerCase().indexOf(this.state.term.toLowerCase()) > -1
+			return tasks.filter((item) =>
+				item.toLowerCase().includes(term.toLowerCase())
 			);
 		}
+
+		return tasks;
 	};
 
-	render() {
-		const {
-			menuOpen,
-			tasks,
-			tasksCount,
-			completedTasks,
-			completedTasksCount,
-			allLabels,
-			theme,
-			language,
-		} = this.state;
-
-		return (
-			<div className='App'>
-				{this.state.showPortal && (
-					<PortalTaskAddedSuccess>
-						<p>
-							Task «<strong>{this.state.taskMessage}</strong>» added
-						</p>
-					</PortalTaskAddedSuccess>
-				)}
-				<BrowserRouter basename='/todolist'>
-					<LanguageProvider
-						updateStateApp={this.updateStateApp}
-						language={language}>
-						<Menu
-							updateStateApp={this.updateStateApp}
-							menuOpen={menuOpen}
-							theme={theme}
+	return (
+		<div className='App'>
+			{showPortal && (
+				<PortalTaskAddedSuccess>
+					<p>
+						Task «<strong>{taskMessage}</strong>» added
+					</p>
+				</PortalTaskAddedSuccess>
+			)}
+			<BrowserRouter basename='/todolist'>
+				<LanguageProvider
+					updateStateApp={updateStateApp}
+					language={language}>
+					<Menu
+						updateStateApp={updateStateApp}
+						menuOpen={menuOpen}
+						theme={theme}
+					/>
+					<Routes>
+						<Route
+							path='/'
+							element={
+								<Tasks
+									menuOpen={menuOpen}
+									tasksCount={tasksCount}
+									tasks={tasks}
+									allLabels={allLabels}
+									onTask={onTask}
+									onActionWithTask={onActionWithTask}
+									updateStateApp={updateStateApp}
+									onSaveTask={onSaveTask}
+									search={search}
+									completedTasks={completedTasks}
+								/>
+							}
 						/>
-						<Routes>
-							<Route
-								path='/'
-								element={
-									<Tasks
-										menuOpen={menuOpen}
-										tasksCount={tasksCount}
-										tasks={tasks}
-										allLabels={allLabels}
-										onTask={this.onTask}
-										onActionWithTask={this.onActionWithTask}
-										updateStateApp={this.updateStateApp}
-										onSaveTask={this.onSaveTask}
-										search={this.search}
-										completedTasks={completedTasks}
-									/>
-								}
-							/>
-							<Route
-								path='/completed'
-								element={
-									<Completed
-										menuOpen={menuOpen}
-										completedTasks={completedTasks}
-										completedTasksCount={completedTasksCount}
-										updateStateApp={this.updateStateApp}
-										onActionWithTask={this.onActionWithTask}
-									/>
-								}
-							/>
-							<Route
-								path='/filter'
-								element={
-									<Filters
-										menuOpen={menuOpen}
-										tasksCount={tasksCount}
-										tasks={tasks}
-										allLabels={allLabels}
-										updateStateApp={this.updateStateApp}
-										onActionWithTask={this.onActionWithTask}
-										onSaveTask={this.onSaveTask}
-										onOpenFilterLabel={this.onOpenFilterLabel}
-										completedTasks={completedTasks}
-									/>
-								}
-							/>
+						<Route
+							path='/completed'
+							element={
+								<Completed
+									menuOpen={menuOpen}
+									completedTasks={completedTasks}
+									completedTasksCount={completedTasksCount}
+									updateStateApp={updateStateApp}
+									onActionWithTask={onActionWithTask}
+								/>
+							}
+						/>
+						<Route
+							path='/filter'
+							element={
+								<Filters
+									menuOpen={menuOpen}
+									tasksCount={tasksCount}
+									tasks={tasks}
+									allLabels={allLabels}
+									updateStateApp={updateStateApp}
+									onActionWithTask={onActionWithTask}
+									onSaveTask={onSaveTask}
+									// onOpenFilterLabel={onOpenFilterLabel}
+									completedTasks={completedTasks}
+								/>
+							}
+						/>
 
-							<Route
-								path='/labels'
-								element={
-									<Labels
-										menuOpen={menuOpen}
-										tasksCount={tasksCount}
-										tasks={tasks}
-										allLabels={allLabels}
-										updateStateApp={this.updateStateApp}
-										onActionWithTask={this.onActionWithTask}
-										onSaveTask={this.onSaveTask}
-										onOpenFilterLabel={this.onOpenFilterLabel}
-										search={this.search}
-										completedTasks={completedTasks}
-									/>
-								}
-							/>
-						</Routes>
-					</LanguageProvider>
-				</BrowserRouter>
-			</div>
-		);
-	}
-}
+						<Route
+							path='/labels'
+							element={
+								<Labels
+									menuOpen={menuOpen}
+									tasksCount={tasksCount}
+									tasks={tasks}
+									allLabels={allLabels}
+									updateStateApp={updateStateApp}
+									onActionWithTask={onActionWithTask}
+									onSaveTask={onSaveTask}
+									// onOpenFilterLabel={onOpenFilterLabel}
+									search={search}
+									completedTasks={completedTasks}
+								/>
+							}
+						/>
+					</Routes>
+				</LanguageProvider>
+			</BrowserRouter>
+		</div>
+	);
+};
 
 export default App;
