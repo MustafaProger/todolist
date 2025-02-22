@@ -1,217 +1,180 @@
-import { Component, createRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "./AddTask.scss";
 import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
 import Time from "../time/Time";
-
 import { LanguageContext } from "../locales/LanguageContext";
+import MyContext from "../context/Context";
 
-class AddTask extends Component {
-	static contextType = LanguageContext;
+const AddTask = ({
+	updateStateApp,
+	onTask,
+	completedTasks,
+}) => {
+	const { getTranslation } = useContext(LanguageContext);
+	const { tasks, allLabels } = useContext(MyContext);
 
-	state = {
-		addTask: false,
-		task: "",
-		description: "",
-		importance: "Priority",
-		isOpen: false,
-		chosenLabels: [],
-		currentLabel: "",
-		time: "",
-		resetSignal: 0,
-		updateImportance: 0,
-	};
+	const [addTask, setAddTask] = useState(false);
+	const [task, setTask] = useState("");
+	const [description, setDescription] = useState("");
+	const [importance, setImportance] = useState("Priority");
+	const [isOpen, setIsOpen] = useState(false);
+	const [chosenLabels, setChosenLabels] = useState([]);
+	const [currentLabel, setCurrentLabel] = useState("");
+	const [time, setTime] = useState("");
+	const [resetSignal, setResetSignal] = useState(0);
 
-	ref = {
-		inputTaskName: createRef(),
-		textarea: createRef(),
-	};
+	const inputTaskName = useRef(null);
+	const textarea = useRef(null);
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.allLabels !== this.props.allLabels) {
-			this.props.updateStateApp(
-				"tasks",
-				this.props.tasks.map((task) => task)
-			);
+	useEffect(() => {
+		if (addTask) {
+			inputTaskName.current.focus();
 		}
+	}, [addTask]);
 
-		if (
-			prevState.addTask !== this.state.addTask &&
-			this.state.addTask === true
-		) {
-			this.ref.inputTaskName.current.focus();
-		}
-	}
+	useEffect(() => {
+		updateStateApp(
+			"tasks",
+			tasks.map((task) => task)
+		);
+	}, [allLabels, tasks, updateStateApp]);
 
-	updateState = (prop, value) => {
-		this.setState({ [prop]: value });
-		if (prop === "importance") {
-			this.setState({ [prop]: value, isOpen: false });
-		}
-	};
-
-	handleKeyDown = (e) => {
-		if (
-			e.key === "Enter" &&
-			document.activeElement === this.ref.inputTaskName.current
-		) {
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter" && document.activeElement === inputTaskName.current) {
 			e.preventDefault();
-
-			this.ref.textarea.current.focus();
+			textarea.current.focus();
 		}
 	};
 
-	defaultState = () => {
-		this.setState((prevState) => ({
-			addTask: true,
-			task: "",
-			description: "",
-			importance: "Priority",
-			isOpen: prevState.isOpen,
-			chosenLabels: [],
-			time: "",
-			resetSignal: this.state.resetSignal + 1,
-		}));
-
-		this.ref.textarea.current.value = "";
-		this.ref.inputTaskName.current.value = "";
-		this.ref.inputTaskName.current.focus();
+	const defaultState = () => {
+		setAddTask(true);
+		setTask("");
+		setDescription("");
+		setImportance("Priority");
+		setChosenLabels([]);
+		setTime("");
+		setResetSignal((prev) => prev + 1);
+		textarea.current.value = "";
+		inputTaskName.current.value = "";
+		inputTaskName.current.focus();
 	};
 
-	autoResizeTextarea = () => {
-		const textarea = this.ref.textarea.current;
-		textarea.style.height = "auto";
-		textarea.style.height = `${textarea.scrollHeight}px`;
+	const autoResizeTextarea = () => {
+		textarea.current.style.height = "auto";
+		textarea.current.style.height = `${textarea.current.scrollHeight}px`;
 	};
 
-	toggleDropdown = () => {
-		this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+	const toggleDropdown = () => {
+		setIsOpen((prev) => !prev);
 	};
 
-	render() {
-		const { addTask, importance, isOpen } = this.state;
+	const options = [
+		{
+			value: "Priority",
+			label: getTranslation("priority"),
+			icon: <Flag theme='#CDCDCD' />,
+		},
+		{
+			value: "Low",
+			label: getTranslation("low"),
+			icon: <Flag theme='#5390F5' />,
+		},
+		{
+			value: "Medium",
+			label: getTranslation("medium"),
+			icon: <Flag theme='orange' />,
+		},
+		{
+			value: "High",
+			label: getTranslation("high"),
+			icon: <Flag theme='#FF6247' />,
+		},
+	];
 
-		const { getTranslation } = this.context;
-
-		const options = [
-			{
-				value: "Priority",
-				label: getTranslation("priority"),
-				icon: <Flag theme='#CDCDCD' />,
-			},
-			{
-				value: "Low",
-				label: getTranslation("low"),
-				icon: <Flag theme='#5390F5' />,
-			},
-			{
-				value: "Medium",
-				label: getTranslation("medium"),
-				icon: <Flag theme='orange' />,
-			},
-			{
-				value: "High",
-				label: getTranslation("high"),
-				icon: <Flag theme='#FF6247' />,
-			},
-		];
-
-		const { tasks, updateStateApp, allLabels, onTask, completedTasks } =
-			this.props;
-
-		return (
-			<div className='add-task'>
-				{addTask ? (
-					<>
-						<div className='add-task__overlay'></div>
-						<div className='add-task__form'>
-							<input
-								type='text'
-								className='add-task__form__input'
-								placeholder={getTranslation("taskName")}
-								onChange={(e) => this.updateState("task", e.target.value)}
-								ref={this.ref.inputTaskName}
-								onKeyDown={this.handleKeyDown}
-							/>
-							<textarea
-								className='add-task__form__textarea'
-								placeholder={getTranslation("description")}
-								onInput={this.autoResizeTextarea}
-								onChange={(e) =>
-									this.updateState("description", e.target.value)
-								}
-								ref={this.ref.textarea}
-							/>
-							<div className='add-task__form__importance'>
-								<div
-									className={`custom-select ${isOpen ? "active" : ""}`}
-									onClick={this.toggleDropdown}>
-									<div className='selected-option'>
-										{
-											options.find((option) => option.value === importance)
-												?.icon
-										}
-										<span>
-											{getTranslation(`${importance.toLocaleLowerCase()}`)}
-										</span>
-									</div>
-
-									<ul className='dropdown-list'>
-										{options.map((option) => (
-											<li
-												key={option.value}
-												onClick={(e) => [
-													this.updateState("importance", option.value),
-												]}
-												className='dropdown-item'>
-												{option.icon}
-												<span>{option.label}</span>
-											</li>
-										))}
-									</ul>
+	return (
+		<div className='add-task'>
+			{addTask ? (
+				<>
+					<div className='add-task__overlay'></div>
+					<div className='add-task__form'>
+						<input
+							type='text'
+							className='add-task__form__input'
+							placeholder={getTranslation("taskName")}
+							onChange={(e) => setTask(e.target.value)}
+							ref={inputTaskName}
+							onKeyDown={handleKeyDown}
+						/>
+						<textarea
+							className='add-task__form__textarea'
+							placeholder={getTranslation("description")}
+							onInput={autoResizeTextarea}
+							onChange={(e) => setDescription(e.target.value)}
+							ref={textarea}
+						/>
+						<div className='add-task__form__importance'>
+							<div
+								className={`custom-select ${isOpen ? "active" : ""}`}
+								onClick={toggleDropdown}>
+								<div className='selected-option'>
+									{options.find((option) => option.value === importance)?.icon}
+									<span>{getTranslation(importance.toLowerCase())}</span>
 								</div>
-							</div>
-
-							<Time
-								updateState={this.updateState}
-								resetSignal={this.state.resetSignal}
-							/>
-
-							<Label
-								tasks={tasks}
-								allLabels={allLabels}
-								currentLabel={this.state.currentLabel}
-								updateStateApp={updateStateApp}
-								chosenLabels={this.state.chosenLabels}
-								updateState={this.updateState}
-								completedTasks={completedTasks}
-							/>
-
-							<div className='add-task__form__buttons'>
-								<button
-									className='add-task__form__buttons__cancel'
-									onClick={() => this.updateState("addTask", false)}>
-									{getTranslation("cancel")}
-								</button>
-								<button
-									className='add-task__form__buttons__add'
-									onClick={() => [onTask(this.state), this.defaultState()]}>
-									{getTranslation("addTask")}
-								</button>
+								<ul className='dropdown-list'>
+									{options.map((option) => (
+										<li
+											key={option.value}
+											onClick={() => {
+												setImportance(option.value);
+												setIsOpen(false);
+											}}
+											className='dropdown-item'>
+											{option.icon}
+											<span>{option.label}</span>
+										</li>
+									))}
+								</ul>
 							</div>
 						</div>
-					</>
-				) : (
-					<div
-						className='add-task__button'
-						onClick={() => this.updateState("addTask", true)}>
-						<span></span>
-						<p>{getTranslation("addTask")}</p>
+						<Time
+							updateState={(prop, value) => setTime(value)}
+							resetSignal={resetSignal}
+						/>
+						<Label
+							currentLabel={currentLabel}
+							updateStateApp={updateStateApp}
+							chosenLabels={chosenLabels}
+							updateState={(prop, value) => setChosenLabels(value)}
+							completedTasks={completedTasks}
+						/>
+						<div className='add-task__form__buttons'>
+							<button
+								className='add-task__form__buttons__cancel'
+								onClick={() => setAddTask(false)}>
+								{getTranslation("cancel")}
+							</button>
+							<button
+								className='add-task__form__buttons__add'
+								onClick={() => {
+									onTask({ task, description, importance, chosenLabels, time });
+									defaultState();
+								}}>
+								{getTranslation("addTask")}
+							</button>
+						</div>
 					</div>
-				)}
-			</div>
-		);
-	}
-}
+				</>
+			) : (
+				<div
+					className='add-task__button'
+					onClick={() => setAddTask(true)}>
+					<span></span>
+					<p>{getTranslation("addTask")}</p>
+				</div>
+			)}
+		</div>
+	);
+};
 
 export default AddTask;

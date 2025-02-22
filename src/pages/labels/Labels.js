@@ -10,7 +10,6 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Labels = ({
-	allLabels,
 	updateStateApp,
 	onActionWithTask,
 	editTaskFunc,
@@ -20,7 +19,7 @@ const Labels = ({
 	completedTasks,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
-	const { menuOpen, tasksCount, tasks } = useContext(MyContext);
+	const { menuOpen, tasksCount, tasks, allLabels } = useContext(MyContext);
 	const [openLabel, setOpenLabel] = useState(null);
 
 	// Вызов updateStateApp при монтировании компонента
@@ -126,9 +125,7 @@ const Labels = ({
 												clazz={"tasks-list"}
 												tasks={filteredTasks}
 												allTasks={tasks}
-												allLabels={allLabels}
 												updateStateApp={updateStateApp}
-												onActionWithTask={onActionWithTask}
 												editTaskFunc={editTaskFunc}
 												onSaveTask={onSaveTask}
 												search={search}

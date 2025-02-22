@@ -7,8 +7,6 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Filters = ({
-	// tasks,
-	allLabels,
 	updateStateApp,
 	onActionWithTask,
 	editTaskFunc,
@@ -16,7 +14,6 @@ const Filters = ({
 	onOpenFilterLabel,
 	completedTasks,
 }) => {
-	// Получаем значения из контекста
 	const { getTranslation } = useContext(LanguageContext);
 	const { menuOpen, tasksCount } = useContext(MyContext);
 
@@ -35,8 +32,6 @@ const Filters = ({
 				<hr className='divider' />
 
 				<Filter
-					// tasks={tasks}
-					allLabels={allLabels}
 					updateStateApp={updateStateApp}
 					onActionWithTask={onActionWithTask}
 					editTaskFunc={editTaskFunc}

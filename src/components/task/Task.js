@@ -12,10 +12,8 @@ import MyContext from "../context/Context";
 const Task = ({
 	tasks,
 	clazz,
-	allLabels,
 	updateStateApp,
 	completedTasks,
-	onActionWithTask,
 	onSaveTask,
 	sortedBy,
 	search,
@@ -24,6 +22,7 @@ const Task = ({
 	const [editedTask, setEditedTask] = useState({});
 
 	const { translations } = useContext(LanguageContext);
+	const { allLabels, onActionWithTask } = useContext(MyContext);
 
 	useEffect(() => {
 		if (updateStateApp && sortedBy === "task") {

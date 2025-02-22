@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Label.scss";
 import { LanguageContext } from "../locales/LanguageContext";
+import MyContext from "../context/Context";
 
 const Label = ({
 	updateStateApp,
-	allLabels,
 	currentLabel,
-	tasks,
 	completedTasks,
 	chosenLabels,
 	updateState,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
+	const { allLabels, tasks } = useContext(MyContext);
 
 	const [checkedItems, setCheckedItems] = useState({});
 	const [isOpenLabels, setIsOpenLabels] = useState(false);

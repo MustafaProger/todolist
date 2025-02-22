@@ -3,7 +3,7 @@ import { Component, useContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
 import Completed from "../../pages/completed/Completed";
-import Filters from "../../pages/filter/Filters";
+import Filters from "../../pages/filters/Filters";
 import Labels from "../../pages/labels/Labels";
 import Menu from "../menu/Menu";
 
@@ -198,7 +198,7 @@ const App = () => {
 	};
 
 	return (
-		<MyContext.Provider value={{ menuOpen, tasksCount, tasks }}>
+		<MyContext.Provider value={{ menuOpen, tasksCount, tasks, allLabels, onActionWithTask }}>
 			<div className='App'>
 				{showPortal && (
 					<PortalTaskAddedSuccess>
@@ -224,9 +224,9 @@ const App = () => {
 										// menuOpen={menuOpen}
 										// tasksCount={tasksCount}
 										tasks={tasks}
-										allLabels={allLabels}
+										// allLabels={allLabels}
 										onTask={onTask}
-										onActionWithTask={onActionWithTask}
+										// onActionWithTask={onActionWithTask}
 										updateStateApp={updateStateApp}
 										onSaveTask={onSaveTask}
 										search={search}
@@ -242,7 +242,7 @@ const App = () => {
 										completedTasks={completedTasks}
 										completedTasksCount={completedTasksCount}
 										updateStateApp={updateStateApp}
-										onActionWithTask={onActionWithTask}
+										// onActionWithTask={onActionWithTask}
 									/>
 								}
 							/>
@@ -253,9 +253,9 @@ const App = () => {
 										// menuOpen={menuOpen}
 										// tasksCount={tasksCount}
 										// tasks={tasks}
-										allLabels={allLabels}
+										// allLabels={allLabels}
 										updateStateApp={updateStateApp}
-										onActionWithTask={onActionWithTask}
+										// onActionWithTask={onActionWithTask}
 										onSaveTask={onSaveTask}
 										completedTasks={completedTasks}
 									/>
@@ -269,9 +269,9 @@ const App = () => {
 										// menuOpen={menuOpen}
 										// tasksCount={tasksCount}
 										// tasks={tasks}
-										allLabels={allLabels}
+										// allLabels={allLabels}
 										updateStateApp={updateStateApp}
-										onActionWithTask={onActionWithTask}
+										// onActionWithTask={onActionWithTask}
 										onSaveTask={onSaveTask}
 										// onOpenFilterLabel={onOpenFilterLabel}
 										search={search}
