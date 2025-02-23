@@ -31,7 +31,6 @@ const Completed = ({
 				<Task
 					clazz={"completed-tasks-list"}
 					tasks={completedTasks}
-					onActionWithTask={onActionWithTask}
 				/>
 			</div>
 		</div>

@@ -120,6 +120,8 @@ const App = () => {
 
 	const onActionWithTask = (id, action) => {
 		setTasks((prevTasks) => {
+			console.log(id, action)
+			console.log(prevTasks);
 			const newArr = prevTasks.filter((item) => item.id !== id);
 			const completedTask = prevTasks.find((item) => item.id === id);
 			const newCompletedTasks = [...completedTasks];
@@ -198,7 +200,15 @@ const App = () => {
 	};
 
 	return (
-		<MyContext.Provider value={{ menuOpen, tasksCount, tasks, allLabels, onActionWithTask }}>
+		<MyContext.Provider
+			value={{
+				menuOpen,
+				tasksCount,
+				tasks,
+				allLabels,
+				onActionWithTask,
+				updateStateApp,
+			}}>
 			<div className='App'>
 				{showPortal && (
 					<PortalTaskAddedSuccess>
@@ -227,7 +237,7 @@ const App = () => {
 										// allLabels={allLabels}
 										onTask={onTask}
 										// onActionWithTask={onActionWithTask}
-										updateStateApp={updateStateApp}
+										// updateStateApp={updateStateApp}
 										onSaveTask={onSaveTask}
 										search={search}
 										completedTasks={completedTasks}
@@ -254,7 +264,7 @@ const App = () => {
 										// tasksCount={tasksCount}
 										// tasks={tasks}
 										// allLabels={allLabels}
-										updateStateApp={updateStateApp}
+										// updateStateApp={updateStateApp}
 										// onActionWithTask={onActionWithTask}
 										onSaveTask={onSaveTask}
 										completedTasks={completedTasks}
@@ -270,7 +280,7 @@ const App = () => {
 										// tasksCount={tasksCount}
 										// tasks={tasks}
 										// allLabels={allLabels}
-										updateStateApp={updateStateApp}
+										// updateStateApp={updateStateApp}
 										// onActionWithTask={onActionWithTask}
 										onSaveTask={onSaveTask}
 										// onOpenFilterLabel={onOpenFilterLabel}

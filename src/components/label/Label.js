@@ -4,14 +4,13 @@ import { LanguageContext } from "../locales/LanguageContext";
 import MyContext from "../context/Context";
 
 const Label = ({
-	updateStateApp,
 	currentLabel,
 	completedTasks,
 	chosenLabels,
 	updateState,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
-	const { allLabels, tasks } = useContext(MyContext);
+	const { allLabels, tasks, updateStateApp } = useContext(MyContext);
 
 	const [checkedItems, setCheckedItems] = useState({});
 	const [isOpenLabels, setIsOpenLabels] = useState(false);

@@ -10,8 +10,6 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Labels = ({
-	updateStateApp,
-	onActionWithTask,
 	editTaskFunc,
 	onSaveTask,
 	search,
@@ -19,10 +17,9 @@ const Labels = ({
 	completedTasks,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
-	const { menuOpen, tasksCount, tasks, allLabels } = useContext(MyContext);
+	const { menuOpen, tasksCount, tasks, allLabels, updateStateApp } = useContext(MyContext);
 	const [openLabel, setOpenLabel] = useState(null);
 
-	// Вызов updateStateApp при монтировании компонента
 	useEffect(() => {
 		updateStateApp("term", "");
 	}, [updateStateApp]);

@@ -13,7 +13,6 @@ const Task = ({
 	tasks,
 	clazz,
 	updateStateApp,
-	completedTasks,
 	onSaveTask,
 	sortedBy,
 	search,
@@ -126,7 +125,7 @@ const Task = ({
 										updateStateApp={updateStateApp}
 										tasks={tasks}
 										onSaveTask={onSaveTask}
-										completedTasks={completedTasks}
+										completedTasks={tasks}
 									/>
 								) : (
 									<div className='task-view'>

@@ -7,12 +7,11 @@ import { LanguageContext } from "../locales/LanguageContext";
 import MyContext from "../context/Context";
 
 const AddTask = ({
-	updateStateApp,
 	onTask,
 	completedTasks,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
-	const { tasks, allLabels } = useContext(MyContext);
+	const { tasks, allLabels, updateStateApp } = useContext(MyContext);
 
 	const [addTask, setAddTask] = useState(false);
 	const [task, setTask] = useState("");
@@ -143,7 +142,6 @@ const AddTask = ({
 						/>
 						<Label
 							currentLabel={currentLabel}
-							updateStateApp={updateStateApp}
 							chosenLabels={chosenLabels}
 							updateState={(prop, value) => setChosenLabels(value)}
 							completedTasks={completedTasks}
