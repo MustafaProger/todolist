@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import "./PortalTaskAddedSuccess.scss"; // Импорт стилей
+import "./PortalTaskAddedSuccess.scss";
 
 const PortalTaskAddedSuccess = ({ children }) => {
 	const [visible, setVisible] = useState(true);
@@ -20,7 +20,7 @@ const PortalTaskAddedSuccess = ({ children }) => {
 		};
 	}, [node]);
 
-	if (!visible) return null; // Не отображаем, если не видно
+	if (!visible) return null;
 
 	return ReactDOM.createPortal(children, node);
 };

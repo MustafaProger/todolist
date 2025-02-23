@@ -1,4 +1,10 @@
-import React, { createContext, Component } from "react";
+import React, {
+	createContext,
+	useState,
+	useEffect,
+	useCallback,
+	useRef,
+} from "react";
 
 const translations = {
 	en: {
@@ -167,43 +173,45 @@ const translations = {
 
 export const LanguageContext = createContext();
 
-class LanguageProvider extends Component {
-	state = {
-		language: this.props.language,
-	};
+const LanguageProvider = ({ updateStateApp, children }) => {
+	const [language, setLanguage] = useState("en");
 
-	componentDidMount() {
+	const isMounted = useRef(false);
+
+	useEffect(() => {
 		const appState = JSON.parse(localStorage.getItem("appState"));
-
-		if (appState && appState.language) {
-			this.setState({ language: appState.language });
-		} else {
-			this.setState({ language: "en" }); // Установка языка по умолчанию
+		if (appState?.language) {
+			setLanguage(appState.language);
 		}
-	}
+	}, []);
 
-	switchLanguage = (language) => {
-		this.setState({ language }, () =>
-			this.props.updateStateApp("language", language)
-		);
-	};
+	useEffect(() => {
+		if (isMounted.current) {
+			updateStateApp("language", language);
+		} else {
+			isMounted.current = true;
+		}
+	}, [language, updateStateApp]);
 
-	getTranslation = (key) => {
-		return translations[this.state.language][key] || key;
-	};
+	const switchLanguage = useCallback((newLanguage) => {
+		setLanguage(newLanguage);
+	}, []);
 
-	render() {
-		return (
-			<LanguageContext.Provider
-				value={{
-					language: this.state.language,
-					switchLanguage: this.switchLanguage,
-					getTranslation: this.getTranslation,
-				}}>
-				{this.props.children}
-			</LanguageContext.Provider>
-		);
-	}
-}
+	const getTranslation = useCallback(
+		(key) => translations[language][key] || key,
+		[language]
+	);
+
+	return (
+		<LanguageContext.Provider
+			value={{
+				language,
+				switchLanguage,
+				getTranslation,
+			}}>
+			{children}
+		</LanguageContext.Provider>
+	);
+};
 
 export default LanguageProvider;
