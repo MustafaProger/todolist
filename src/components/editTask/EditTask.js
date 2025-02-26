@@ -149,6 +149,7 @@ const EditTask = ({
 					updateStateApp={updateStateApp}
 					addLabel={addLabel}
 					currentLabel={currentLabel}
+					setCurrentLabel={setCurrentLabel}
 					allLabels={allLabels}
 					chosenLabels={chosenLabels}
 					updateState={setChosenLabels}
