@@ -87,6 +87,9 @@ const App = () => {
 			if (prop === "theme") setTheme(value);
 			if (prop === "language") setLanguage(value);
 			if (prop === "menuOpen") setMenuOpen(value);
+			if (prop === "allLabels") setAllLabels(value);
+			if (prop === "tasks") setTasks(value);
+
 		}
 	};
 
@@ -120,8 +123,8 @@ const App = () => {
 
 	const onActionWithTask = (id, action) => {
 		setTasks((prevTasks) => {
-			console.log(id, action)
-			console.log(prevTasks);
+			// console.log(id, action)
+			// console.log(prevTasks);
 			const newArr = prevTasks.filter((item) => item.id !== id);
 			const completedTask = prevTasks.find((item) => item.id === id);
 			const newCompletedTasks = [...completedTasks];

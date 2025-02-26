@@ -25,7 +25,7 @@ const EditTask = ({
 	const [task, setTask] = useState(initialTask);
 	const [description, setDescription] = useState(initialDescription);
 	const [importance, setImportance] = useState(initialImportance);
-	const [chosenLabels, setChosenLabels] = useState([...initialLabels]);
+	const [chosenLabels, setChosenLabels] = useState(initialLabels);
 	const [time, setTime] = useState(initialTime);
 	const [isOpenImportance, setIsOpenImportance] = useState(false);
 	const [isOpenLabels, setIsOpenLabels] = useState(false);
@@ -141,7 +141,6 @@ const EditTask = ({
 					</div>
 				</div>
 				<Time
-					updateStateApp={updateStateApp}
 					updateState={setTime}
 				/>
 				<Label

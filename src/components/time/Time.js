@@ -10,7 +10,7 @@ const Time = ({ updateState, resetSignal }) => {
 
 	const handleTimeChange = (newValue) => {
 		setTime(newValue);
-		updateState("time", newValue?.format("HH:mm"));
+		updateState(newValue?.format("HH:mm"));
 	};
 
 	useEffect(() => {

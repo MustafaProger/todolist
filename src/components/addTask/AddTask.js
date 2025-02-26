@@ -6,15 +6,12 @@ import Time from "../time/Time";
 import { LanguageContext } from "../locales/LanguageContext";
 import MyContext from "../context/Context";
 
-const AddTask = ({
-	onTask,
-	completedTasks,
-}) => {
+const AddTask = ({ onTask, completedTasks }) => {
 	const { getTranslation } = useContext(LanguageContext);
 	const { tasks, allLabels, updateStateApp } = useContext(MyContext);
 
 	const [addTask, setAddTask] = useState(false);
-	const [task, setTask] = useState("");
+	const [task, setTask] = useState("asdfasfasdf");
 	const [description, setDescription] = useState("");
 	const [importance, setImportance] = useState("Priority");
 	const [isOpen, setIsOpen] = useState(false);
@@ -33,11 +30,10 @@ const AddTask = ({
 	}, [addTask]);
 
 	useEffect(() => {
-		updateStateApp(
-			"tasks",
-			tasks.map((task) => task)
-		);
-	}, [allLabels, tasks, updateStateApp]);
+		if (tasks.length > 0 || allLabels.length > 0) {
+			updateStateApp("tasks", tasks);
+		}
+	}, [tasks, allLabels, updateStateApp]);
 
 	const handleKeyDown = (e) => {
 		if (e.key === "Enter" && document.activeElement === inputTaskName.current) {
@@ -91,6 +87,10 @@ const AddTask = ({
 		},
 	];
 
+	// useEffect(() => {
+	// 	console.log(chosenLabels)
+	// }, [chosenLabels])
+
 	return (
 		<div className='add-task'>
 			{addTask ? (
@@ -104,6 +104,7 @@ const AddTask = ({
 							onChange={(e) => setTask(e.target.value)}
 							ref={inputTaskName}
 							onKeyDown={handleKeyDown}
+							value={task}
 						/>
 						<textarea
 							className='add-task__form__textarea'
@@ -142,8 +143,9 @@ const AddTask = ({
 						/>
 						<Label
 							currentLabel={currentLabel}
+							setCurrentLabel={setCurrentLabel}
 							chosenLabels={chosenLabels}
-							updateState={(prop, value) => setChosenLabels(value)}
+							setChosenLabels={setChosenLabels}
 							completedTasks={completedTasks}
 						/>
 						<div className='add-task__form__buttons'>

@@ -20,7 +20,7 @@ const Task = ({
 	const [editingTaskId, setEditingTaskId] = useState(null);
 	const [editedTask, setEditedTask] = useState({});
 
-	const { translations } = useContext(LanguageContext);
+	const { getTranslation } = useContext(LanguageContext);
 	const { allLabels, onActionWithTask } = useContext(MyContext);
 
 	useEffect(() => {
@@ -197,7 +197,6 @@ const Task = ({
 												</div>
 											) : null}
 										</div>
-
 										<div className='task-time'>
 											{time ? (
 												<div className='task-time__container'>
@@ -240,11 +239,13 @@ const Task = ({
 					}
 				)}
 			</div>
-		) : (
-			<div className='no-task-found'>
-				<div className='no-task-found'>{translations}</div>;
-			</div>
-		);
+		) : clazz === "completed-tasks-list" ? (
+			<p
+				className='no-task-found'
+				style={{ color: "gray" }}>
+				{getTranslation("noCompletedTasksYet")}
+			</p>
+		) : null;
 	};
 
 	return renderItem();

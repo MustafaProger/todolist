@@ -19,7 +19,7 @@ const Tasks = ({
 	search,
 	completedTasks,
 }) => {
-	// Получаем значения из контекста
+	
 	const { getTranslation } = useContext(LanguageContext);
 	const { menuOpen, tasksCount, tasks } = useContext(MyContext);
 
@@ -43,11 +43,7 @@ const Tasks = ({
 				<Task
 					clazz={"tasks-list"}
 					tasks={tasks}
-					onActionWithTask={onActionWithTask}
-					editTaskFunc={editTaskFunc}
 					onSaveTask={onSaveTask}
-					updateStateApp={updateStateApp}
-					allLabels={allLabels}
 					search={search}
 					sortedBy={"task"}
 					completedTasks={completedTasks}
