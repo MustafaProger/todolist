@@ -6,14 +6,7 @@ import CurrentDate from "../../components/currentDate/CurrentDate";
 import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
-const Filters = ({
-	updateStateApp,
-	onActionWithTask,
-	editTaskFunc,
-	onSaveTask,
-	onOpenFilterLabel,
-	completedTasks,
-}) => {
+const Filters = () => {
 	const { getTranslation } = useContext(LanguageContext);
 	const { menuOpen, tasksCount } = useContext(MyContext);
 
@@ -31,14 +24,7 @@ const Filters = ({
 				<CurrentDate />
 				<hr className='divider' />
 
-				<Filter
-					updateStateApp={updateStateApp}
-					onActionWithTask={onActionWithTask}
-					editTaskFunc={editTaskFunc}
-					onSaveTask={onSaveTask}
-					onOpenFilterLabel={onOpenFilterLabel}
-					completedTasks={completedTasks}
-				/>
+				<Filter />
 			</div>
 		</div>
 	);

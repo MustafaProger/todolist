@@ -10,14 +10,12 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Labels = ({
-	editTaskFunc,
-	onSaveTask,
 	search,
-	theme,
 	completedTasks,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
 	const { menuOpen, tasksCount, tasks, allLabels, updateStateApp } = useContext(MyContext);
+	
 	const [openLabel, setOpenLabel] = useState(null);
 
 	useEffect(() => {
@@ -62,7 +60,6 @@ const Labels = ({
 
 				<Search
 					placeholder={getTranslation("searchLabel")}
-					updateStateApp={updateStateApp}
 				/>
 
 				<div className='labels__wrapper'>
@@ -122,12 +119,8 @@ const Labels = ({
 												clazz={"tasks-list"}
 												tasks={filteredTasks}
 												allTasks={tasks}
-												updateStateApp={updateStateApp}
-												editTaskFunc={editTaskFunc}
-												onSaveTask={onSaveTask}
 												search={search}
 												sortedBy={"label"}
-												completedTasks={completedTasks}
 											/>
 										) : (
 											<p className='no-task'>

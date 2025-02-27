@@ -4,6 +4,7 @@ import Flag from "../../assets/icon/flag";
 import Label from "../label/Label";
 import Time from "../time/Time";
 import { LanguageContext } from "../locales/LanguageContext";
+import MyContext from "../context/Context";
 
 const EditTask = ({
 	id,
@@ -12,15 +13,12 @@ const EditTask = ({
 	importance: initialImportance,
 	labels: initialLabels,
 	time: initialTime,
-	onSaveTask,
 	cancelEdit,
-	allLabels,
-	tasks,
 	addLabel,
-	updateStateApp,
-	completedTasks,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
+	const { allLabels, onSaveTask, tasks, completedTasks, updateStateApp } =
+		useContext(MyContext);
 
 	const [task, setTask] = useState(initialTask);
 	const [description, setDescription] = useState(initialDescription);
@@ -140,21 +138,16 @@ const EditTask = ({
 						</ul>
 					</div>
 				</div>
-				<Time
-					updateState={setTime}
-				/>
+				<Time updateState={setTime} />
 				<Label
 					tasks={tasks}
 					labels={initialLabels}
-					updateStateApp={updateStateApp}
 					addLabel={addLabel}
 					currentLabel={currentLabel}
 					setCurrentLabel={setCurrentLabel}
-					allLabels={allLabels}
 					chosenLabels={chosenLabels}
 					updateState={setChosenLabels}
 					isOpenLabels={isOpenLabels}
-					completedTasks={completedTasks}
 				/>
 				<div className='edit-task__form__buttons'>
 					<button

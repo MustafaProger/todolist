@@ -12,8 +12,6 @@ import MyContext from "../context/Context";
 const Task = ({
 	tasks,
 	clazz,
-	updateStateApp,
-	onSaveTask,
 	sortedBy,
 	search,
 }) => {
@@ -21,7 +19,7 @@ const Task = ({
 	const [editedTask, setEditedTask] = useState({});
 
 	const { getTranslation } = useContext(LanguageContext);
-	const { allLabels, onActionWithTask } = useContext(MyContext);
+	const {  onActionWithTask, updateStateApp } = useContext(MyContext);
 
 	useEffect(() => {
 		if (updateStateApp && sortedBy === "task") {
@@ -32,13 +30,6 @@ const Task = ({
 	const startEditing = (id, taskData) => {
 		setEditingTaskId(id);
 		setEditedTask({ ...taskData });
-	};
-
-	const handleEditChange = (field, value) => {
-		setEditedTask((prevState) => ({
-			...prevState,
-			[field]: value,
-		}));
 	};
 
 	const cancelEdit = () => {
@@ -121,11 +112,6 @@ const Task = ({
 										labels={labels}
 										time={time}
 										cancelEdit={cancelEdit}
-										allLabels={allLabels}
-										updateStateApp={updateStateApp}
-										tasks={tasks}
-										onSaveTask={onSaveTask}
-										completedTasks={tasks}
 									/>
 								) : (
 									<div className='task-view'>

@@ -8,12 +8,10 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Completed = ({
-	completedTasks,
 	completedTasksCount,
-	onActionWithTask,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
-	const { menuOpen } = useContext(MyContext);
+	const { menuOpen, completedTasks } = useContext(MyContext);
 
 	return (
 		<div className='done-tasks'>

@@ -1,4 +1,4 @@
-import { Component, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Tasks from "../../pages/tasks/Tasks";
@@ -7,11 +7,11 @@ import Filters from "../../pages/filters/Filters";
 import Labels from "../../pages/labels/Labels";
 import Menu from "../menu/Menu";
 
+import MyContext from "../context/Context";
 import LanguageProvider from "../locales/LanguageContext";
 import PortalTaskAddedSuccess from "../portal-taskAdded/PortalTaskAddedSuccess";
 
 import "./App.scss";
-import MyContext from "../context/Context";
 
 const App = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -89,7 +89,7 @@ const App = () => {
 			if (prop === "menuOpen") setMenuOpen(value);
 			if (prop === "allLabels") setAllLabels(value);
 			if (prop === "tasks") setTasks(value);
-
+			if (prop === "term") setTerm(value);
 		}
 	};
 
@@ -123,8 +123,6 @@ const App = () => {
 
 	const onActionWithTask = (id, action) => {
 		setTasks((prevTasks) => {
-			// console.log(id, action)
-			// console.log(prevTasks);
 			const newArr = prevTasks.filter((item) => item.id !== id);
 			const completedTask = prevTasks.find((item) => item.id === id);
 			const newCompletedTasks = [...completedTasks];
@@ -164,28 +162,6 @@ const App = () => {
 		);
 	};
 
-	const updateTask = () => {
-		setTasks((prevTasks) => [...prevTasks]);
-	};
-
-	// const onOpenFilterLabel = (label, clazz) => {
-	// 	setOpenLabel((prevLabel) => {
-	// 		const isSameLabel = prevLabel === label;
-
-	// 		const allTasks = document.querySelectorAll(`.${clazz}`);
-	// 		allTasks.forEach((task) => {
-	// 			task.style.maxHeight = "0px";
-	// 		});
-
-	// 		const content = document.querySelector(`.${clazz}-${label}`);
-	// 		if (content && !isSameLabel) {
-	// 			content.style.maxHeight = `${content.scrollHeight}px`;
-	// 		}
-
-	// 		return isSameLabel ? null : label;
-	// 	});
-	// };
-
 	const search = (tasks, nameSearch) => {
 		if (!term.length) return tasks;
 
@@ -211,6 +187,8 @@ const App = () => {
 				allLabels,
 				onActionWithTask,
 				updateStateApp,
+				completedTasks,
+				onSaveTask,
 			}}>
 			<div className='App'>
 				{showPortal && (
@@ -227,23 +205,15 @@ const App = () => {
 						<Menu
 							updateStateApp={updateStateApp}
 							menuOpen={menuOpen}
-							theme={theme}
 						/>
 						<Routes>
 							<Route
 								path='/'
 								element={
 									<Tasks
-										// menuOpen={menuOpen}
-										// tasksCount={tasksCount}
 										tasks={tasks}
-										// allLabels={allLabels}
 										onTask={onTask}
-										// onActionWithTask={onActionWithTask}
-										// updateStateApp={updateStateApp}
-										onSaveTask={onSaveTask}
 										search={search}
-										completedTasks={completedTasks}
 									/>
 								}
 							/>
@@ -251,46 +221,19 @@ const App = () => {
 								path='/completed'
 								element={
 									<Completed
-										// menuOpen={menuOpen}
-										completedTasks={completedTasks}
 										completedTasksCount={completedTasksCount}
 										updateStateApp={updateStateApp}
-										// onActionWithTask={onActionWithTask}
 									/>
 								}
 							/>
 							<Route
 								path='/filter'
-								element={
-									<Filters
-										// menuOpen={menuOpen}
-										// tasksCount={tasksCount}
-										// tasks={tasks}
-										// allLabels={allLabels}
-										// updateStateApp={updateStateApp}
-										// onActionWithTask={onActionWithTask}
-										onSaveTask={onSaveTask}
-										completedTasks={completedTasks}
-									/>
-								}
+								element={<Filters />}
 							/>
 
 							<Route
 								path='/labels'
-								element={
-									<Labels
-										// menuOpen={menuOpen}
-										// tasksCount={tasksCount}
-										// tasks={tasks}
-										// allLabels={allLabels}
-										// updateStateApp={updateStateApp}
-										// onActionWithTask={onActionWithTask}
-										onSaveTask={onSaveTask}
-										// onOpenFilterLabel={onOpenFilterLabel}
-										search={search}
-										completedTasks={completedTasks}
-									/>
-								}
+								element={<Labels search={search} />}
 							/>
 						</Routes>
 					</LanguageProvider>

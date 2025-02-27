@@ -10,18 +10,12 @@ import { LanguageContext } from "../../components/locales/LanguageContext";
 import MyContext from "../../components/context/Context";
 
 const Tasks = ({
-	updateStateApp,
 	onTask,
-	onActionWithTask,
-	editTaskFunc,
-	onSaveTask,
-	allLabels,
 	search,
-	completedTasks,
 }) => {
 	
 	const { getTranslation } = useContext(LanguageContext);
-	const { menuOpen, tasksCount, tasks } = useContext(MyContext);
+	const { menuOpen, tasksCount, tasks, completedTasks } = useContext(MyContext);
 
 	return (
 		<div className='tasks'>
@@ -38,21 +32,16 @@ const Tasks = ({
 				<hr className='divider' />
 				<Search
 					placeholder={getTranslation("searchTask")}
-					updateStateApp={updateStateApp}
 				/>
 				<Task
 					clazz={"tasks-list"}
 					tasks={tasks}
-					onSaveTask={onSaveTask}
 					search={search}
 					sortedBy={"task"}
 					completedTasks={completedTasks}
 				/>
 				<AddTask
-					tasks={tasks}
-					updateStateApp={updateStateApp}
 					onTask={onTask}
-					allLabels={allLabels}
 					completedTasks={completedTasks}
 				/>
 			</div>
