@@ -5,14 +5,13 @@ import MyContext from "../context/Context";
 
 const Label = ({
 	currentLabel,
-	completedTasks,
 	chosenLabels,
 	updateState,
 	setCurrentLabel,
 	setChosenLabels,
 }) => {
 	const { getTranslation } = useContext(LanguageContext);
-	const { allLabels, tasks, updateStateApp } = useContext(MyContext);
+	const { allLabels, tasks, updateStateApp, completedTasks } = useContext(MyContext);
 
 	const [checkedItems, setCheckedItems] = useState({});
 	const [isOpenLabels, setIsOpenLabels] = useState(false);
@@ -27,8 +26,6 @@ const Label = ({
 			return acc;
 		}, {});
 
-		// console.log(chosenLabelState);
-		// console.log(checkedItems);
 
 		setCheckedItems(initialCheckedState);
 	}, [allLabels, chosenLabels]);

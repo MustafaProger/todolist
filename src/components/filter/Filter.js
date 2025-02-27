@@ -5,20 +5,12 @@ import Task from "../task/Task";
 import { LanguageContext } from "../locales/LanguageContext";
 import MyContext from "../context/Context";
 
-const Filter = ({
-	onActionWithTask,
-	editTaskFunc,
-	onSaveTask,
-	updateStateApp,
-	allLabels,
-	completedTasks,
-}) => {
+const Filter = () => {
 	const [openCategory, setOpenCategory] = useState(null);
 	const [isOpen, setIsOpen] = useState(false);
 
 	const { getTranslation } = useContext(LanguageContext);
 	const { tasks } = useContext(MyContext);
-
 
 	const options = [
 		{ value: "High", icon: <Flag theme='#FF6247' /> },
@@ -94,12 +86,6 @@ const Filter = ({
 									clazz={"tasks-list"}
 									allTasks={tasks}
 									tasks={filteredTask}
-									onActionWithTask={onActionWithTask}
-									editTaskFunc={editTaskFunc}
-									onSaveTask={onSaveTask}
-									updateStateApp={updateStateApp}
-									allLabels={allLabels}
-									completedTasks={completedTasks}
 								/>
 							) : (
 								<p className='no-task'>

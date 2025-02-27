@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Search.scss";
+import MyContext from "../context/Context";
 
-const Search = ({ placeholder, updateStateApp }) => {
+const Search = ({ placeholder }) => {
+	const { updateStateApp } = useContext(MyContext);
+
 	const handleChange = (e) => {
 		updateStateApp("term", e.target.value);
 	};
@@ -22,8 +25,17 @@ const Search = ({ placeholder, updateStateApp }) => {
 							strokeLinecap='round'
 							strokeLinejoin='round'
 							className='feather feather-search'>
-							<circle cx='11' cy='11' r='8' />
-							<line x1='21' y1='21' x2='16.65' y2='16.65' />
+							<circle
+								cx='11'
+								cy='11'
+								r='8'
+							/>
+							<line
+								x1='21'
+								y1='21'
+								x2='16.65'
+								y2='16.65'
+							/>
 						</svg>
 					</div>
 					<div className='container__input'>

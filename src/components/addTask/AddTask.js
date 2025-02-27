@@ -87,10 +87,6 @@ const AddTask = ({ onTask, completedTasks }) => {
 		},
 	];
 
-	// useEffect(() => {
-	// 	console.log(chosenLabels)
-	// }, [chosenLabels])
-
 	return (
 		<div className='add-task'>
 			{addTask ? (

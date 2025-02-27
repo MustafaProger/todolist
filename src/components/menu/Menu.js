@@ -5,9 +5,11 @@ import "./Menu.scss";
 
 const Menu = ({ menuOpen, updateStateApp }) => {
 	const { switchLanguage, getTranslation } = useContext(LanguageContext);
+
 	const [isDark, setIsDark] = useState(
 		() => localStorage.getItem("theme") === "dark"
 	);
+	
 	const [isOpenLanguage, setIsOpenLanguage] = useState(false);
 
 	useEffect(() => {
